@@ -30,7 +30,7 @@ const Enemy = () => {
             setTimeout(() => {
                 dispatch(heroTakeDamage(10))
             dispatch(setPlayerTurn(true))
-            }, 1000);
+            }, 500);
             
         }
     }, [battleTurn])
