@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --body-bg-color: gray;
+  --attack-bg-color: red;
+}
+
+body {
+  background-color: var(--body-bg-color);
+}
+
+/* body {
+  height: 100vh;
+  background: linear-gradient(-45deg, #191970, #000000, #191970);
+  background-size: 400% 400%;
+  animation: mysterious 20s infinite linear;
+}
+
+@keyframes mysterious {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  75% {
+    background-position: 0% 100%;
+  }
+} */
