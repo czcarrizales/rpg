@@ -36,7 +36,7 @@ const WeaponRoom = () => {
     <div>
       <h1>Weapon Room</h1>
       <p>You found a {currentWeapon.name}!</p>
-      <button onClick={handleTakeWeapon}>Take Treasure</button>
+      <button onClick={handleTakeWeapon}>Take Weapon</button>
     </div>
   )
 }
