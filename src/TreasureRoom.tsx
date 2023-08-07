@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { takeTreasure } from './slices/heroSlice'
-import { goToMapRoom } from './slices/roomSlice'
+import { goToMapRoom, setInRoom } from './slices/roomSlice'
 
 const TreasureRoom = () => {
   const [currentTreasure, setCurrentTreasure] = useState('')
@@ -9,17 +9,27 @@ const TreasureRoom = () => {
   const handleTakeTreasure = () => {
     dispatch(takeTreasure(currentTreasure))
     dispatch(goToMapRoom())
+    dispatch(setInRoom())
   }
 
   useEffect(() => {
-    const randomTreasures = ['diamond', 'pearl', 'crown', 'necklace']
+    const randomTreasures = [
+      {
+        name: 'pearl',
+        money: 15
+      },
+      {
+        name: 'diamond',
+        money: 100
+      }
+    ]
     const randomIndex = Math.floor(Math.random() * randomTreasures.length)
     setCurrentTreasure(randomTreasures[randomIndex])
   }, [])
   return (
     <div>
       <h1>Treasure Room</h1>
-      <p>You found a {currentTreasure}!</p>
+      <p>You found a {currentTreasure.name}!</p>
       <button onClick={handleTakeTreasure}>Take Treasure</button>
     </div>
   )
