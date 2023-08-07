@@ -9,11 +9,12 @@ import { setPlayerTurn } from './slices/battleSlice'
 const Enemy = () => {
     const dispatch = useDispatch()
     const currentEnemy = useSelector(state => state.enemy.currentEnemy)
+    const currentWorld = useSelector(state => state.game.currentWorld)
     const battleTurn = useSelector(state => state.battle.playerTurn)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
 
     useEffect(() => {
-        dispatch(setEnemyType())
+        dispatch(setEnemyType(currentWorld))
         setEnemyTypeSet(true)
     }, [])
 
