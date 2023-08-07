@@ -1,7 +1,6 @@
 .board {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
   /* color: white; */
@@ -13,4 +12,19 @@
   border: 5px solid black;
   padding: 40px;
   text-align: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.square {
+  height: 50px;
+  width: 50px;
+  border: 1px solid green;
+}
+
+.square:hover {
+  background-color: gold;
 }
