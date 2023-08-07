@@ -25,12 +25,14 @@ const bosses = [
     {
         name: 'black knight',
         health: 200,
-        attack: 20
+        attack: 20,
+        experience: 100
     },
     {
         name: 'hazel witch',
         health: 400,
-        attack: 40
+        attack: 40,
+        experience: 200
     }
 ]
 
