@@ -5,6 +5,7 @@ import './RoomButton.css'
 
 const RoomButton = ({inRoom}) => {
     const gameState = useSelector(state => state.game)
+    const resettingRooms = useSelector(state => state.room.resettingRooms)
     const dispatch = useDispatch()
     const [visited, setVisited] = useState(false)
     const handleRandomRoom = () => {
@@ -23,6 +24,11 @@ const RoomButton = ({inRoom}) => {
         setVisited(false)
       }
     }, [gameState])
+    useEffect(() => {
+      if (resettingRooms == true) {
+        setVisited(false)
+      }
+    }, [resettingRooms])
   return (
     <div>
         <button onClick={() => {handleRandomRoom(), setVisited(true)}} disabled={visited || inRoom} className='room-button'>?</button>
