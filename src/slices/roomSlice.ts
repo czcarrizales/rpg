@@ -8,7 +8,8 @@ const roomSlice = createSlice({
         currentRoom: 'map',
         randomRooms: ['treasureRoom', 'healingRoom', 'weaponRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom'],
         bossBattle: false,
-        inRoom: false
+        inRoom: false,
+        resettingRooms: false
     },
     reducers: {
         goToEnemyRoom: (state) => {
@@ -35,6 +36,9 @@ const roomSlice = createSlice({
         setRandomRooms: (state) => {
             state.randomRooms = ['treasureRoom', 'healingRoom', 'weaponRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom']
         },
+        setResettingRooms: (state) => {
+            state.resettingRooms = !state.resettingRooms
+        },
         setInRoom: (state) => {
             state.inRoom = !state.inRoom
         },
@@ -44,5 +48,5 @@ const roomSlice = createSlice({
     }
 })
 
-export const {goToEnemyRoom, goToHealingRoom, goToMapRoom, goToTreasureRoom, goToBossRoom, goToRandomRoom, setRandomRooms, setInRoom, setBossBattle} = roomSlice.actions;
+export const {goToEnemyRoom, goToHealingRoom, goToMapRoom, goToTreasureRoom, goToBossRoom, goToRandomRoom, setRandomRooms, setResettingRooms, setInRoom, setBossBattle} = roomSlice.actions;
 export default roomSlice.reducer
