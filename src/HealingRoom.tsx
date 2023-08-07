@@ -1,13 +1,14 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { healToFull } from './slices/heroSlice'
-import { goToMapRoom } from './slices/roomSlice'
+import { goToMapRoom, setInRoom } from './slices/roomSlice'
 
 const HealingRoom = () => {
     const dispatch = useDispatch()
     const handleHealHeroToFull = () => {
         dispatch(healToFull())
         dispatch(goToMapRoom())
+        dispatch(setInRoom())
     }
   return (
     <div>
