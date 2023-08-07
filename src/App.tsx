@@ -12,11 +12,13 @@ import WeaponRoom from './WeaponRoom'
 import Backpack from './Backpack'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
-import { gainLevel, gainMaxHealth, healToFull, resetExperience } from './slices/heroSlice'
+import { gainLevel, gainMaxHealth, healToFull, resetExperience, resetHero } from './slices/heroSlice'
+import { resetGame } from './slices/gameSlice'
 
 function App() {
 
   const roomState = useSelector(state => state.room.currentRoom)
+  const gameState = useSelector(state => state.game)
   const randomRooms = useSelector(state => state.room.randomRooms)
   const bossBattle = useSelector(state => state.room.bossBattle)
   const inRoom = useSelector(state => state.room.inRoom)
@@ -54,6 +56,15 @@ function App() {
     }
     
   }, [randomRooms, inRoom])
+
+  useEffect(() => {
+    if (heroStats.health <= 0) {
+      dispatch(resetGame())
+      dispatch(resetHero())
+      dispatch(setInRoom())
+      console.log('hero is dead!')
+    }
+  }, [heroStats])
 
   return (
     <div className='board'>
