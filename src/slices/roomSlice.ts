@@ -33,10 +33,7 @@ const roomSlice = createSlice({
             
         },
         setRandomRooms: (state) => {
-            // for (let i = 0; i < 9; i++) {
-            //     const randomIndex = Math.floor(Math.random() * roomTypes.length)
-            //     state.randomRooms.push(roomTypes[randomIndex])
-            // }
+            state.randomRooms = ['treasureRoom', 'healingRoom', 'weaponRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom']
         },
         setInRoom: (state) => {
             state.inRoom = !state.inRoom
