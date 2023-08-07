@@ -1,0 +1,7 @@
+.room-button {
+    padding: 2rem;
+}
+
+.room-button:hover {
+    background-color: yellow;
+}
