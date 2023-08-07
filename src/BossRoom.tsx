@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setPlayerTurn } from './slices/battleSlice'
 import { setEnemyType, enemyReset, setBossType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage } from './slices/heroSlice'
-import { goToMapRoom, setInRoom } from './slices/roomSlice'
+import { goToMapRoom, setInRoom, setRandomRooms } from './slices/roomSlice'
 
 const BossRoom = () => {
   const dispatch = useDispatch()
@@ -24,6 +24,7 @@ const BossRoom = () => {
           dispatch(enemyReset())
           dispatch(goToMapRoom())
           dispatch(setInRoom())
+          dispatch(setRandomRooms())
       } else {
           console.log('enemy lives!')
       }
