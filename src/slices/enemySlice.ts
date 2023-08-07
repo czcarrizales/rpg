@@ -71,7 +71,7 @@ const enemySlice = createSlice({
             state.currentEnemy = getRandomEnemy()
         },
         setBossType: (state) => {
-            state.currentBoss = getRandomBoss()
+            state.currentEnemy = getRandomBoss()
         }
     }
 })

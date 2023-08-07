@@ -7,7 +7,7 @@ import { goToMapRoom, setInRoom } from './slices/roomSlice'
 
 const BossRoom = () => {
   const dispatch = useDispatch()
-  const currentBoss = useSelector(state => state.enemy.currentBoss)
+  const currentEnemy = useSelector(state => state.enemy.currentEnemy)
   const battleTurn = useSelector(state => state.battle.playerTurn)
   const [bossTypeSet, setBossTypeSet] = useState(false)
 
@@ -17,22 +17,22 @@ const BossRoom = () => {
   }, [])
 
   useEffect(() => {
-      if (bossTypeSet && currentBoss.health <= 0 ) {
+      if (bossTypeSet && currentEnemy.health <= 0 ) {
           console.log('boss is dead')
           setBossTypeSet(false)
-          dispatch(gainExperience(currentBoss.experience))
+          dispatch(gainExperience(currentEnemy.experience))
           dispatch(enemyReset())
           dispatch(goToMapRoom())
           dispatch(setInRoom())
       } else {
           console.log('enemy lives!')
       }
-  }, [currentBoss, bossTypeSet])
+  }, [currentEnemy, bossTypeSet])
 
   useEffect(() => {
-      if (battleTurn === false && currentBoss.health > 0) {
+      if (battleTurn === false && currentEnemy.health > 0) {
           setTimeout(() => {
-              dispatch(heroTakeDamage(currentBoss.attack))
+              dispatch(heroTakeDamage(currentEnemy.attack))
           dispatch(setPlayerTurn(true))
           }, 500);
           
@@ -43,9 +43,9 @@ const BossRoom = () => {
 
   return (
       <div id='enemy-container'>
-          <h1>{currentBoss.name}</h1>
-          <p>Health: {currentBoss.health}</p>
-          <p>Intent: Attack for {currentBoss.attack} damage!</p>
+          <h1>{currentEnemy.name}</h1>
+          <p>Health: {currentEnemy.health}</p>
+          <p>Intent: Attack for {currentEnemy.attack} damage!</p>
           {/* <p>Armor: {enemyArmor}</p> */}
       </div>
   )
