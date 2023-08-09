@@ -36,6 +36,7 @@ const Hero = ({ showEquipment, setShowEquipment, showBackpack, setShowBackpack }
   }
   return (
     <div id='hero-container'>
+      <div id="hero-stats">
       <h1>Hero</h1>
       <p>Current World: {currentWorld}</p>
       <p>Level: {heroLevel}</p>
@@ -45,6 +46,8 @@ const Hero = ({ showEquipment, setShowEquipment, showBackpack, setShowBackpack }
       <p>Weapon: {heroWeapon.name} (dmg: {heroWeapon.damage})</p>
       <p>Armor: {heroArmor.name ? heroArmor.name : 'None'} (defense: {heroArmor.defense ? heroArmor.defense : 0})</p>
       <p>Money: {heroMoney}</p>
+      </div>
+      
       <div id="hero-buttons">
       <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle}>Attack</button>
       {heroHealth == 0 && <p>Hero is dead!</p>}
