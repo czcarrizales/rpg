@@ -143,6 +143,8 @@ interface Enemy {
     name: string | null;
     health: number | null;
     attack: number | null;
+    experience: number | null;
+    world: number | null;
 }
 
 const getRandomEnemy = (world: number) => {
@@ -169,7 +171,9 @@ const enemySlice = createSlice({
         currentEnemy: {
             name: null,
             health: null,
-            attack: null
+            attack: null,
+            experience: null,
+            world: null
         },
         currentBoss: {
             name: null,
