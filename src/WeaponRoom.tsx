@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { takeWeapon } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
+import './WeaponRoom.css'
 
 const WeaponRoom = () => {
   const [currentWeapon, setCurrentWeapon] = useState({})
@@ -9,7 +10,7 @@ const WeaponRoom = () => {
   const handleTakeWeapon = () => {
     dispatch(takeWeapon(currentWeapon))
     dispatch(goToMapRoom())
-    dispatch(setInRoom())
+    dispatch(setInRoom(false))
   }
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const WeaponRoom = () => {
     setCurrentWeapon(randomWeapons[randomIndex])
   }, [])
   return (
-    <div>
+    <div id='weapon-room-container'>
       <h1>Weapon Room</h1>
       <p>You found {currentWeapon.name}!</p>
       <button onClick={handleTakeWeapon}>Take Weapon</button>
