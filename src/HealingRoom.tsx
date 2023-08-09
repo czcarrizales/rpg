@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { healToFull } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
+import './HealingRoom.css'
 
 const HealingRoom = () => {
     const dispatch = useDispatch()
@@ -11,7 +12,7 @@ const HealingRoom = () => {
         dispatch(setInRoom())
     }
   return (
-    <div>
+    <div id='healing-room-container'>
         <h1>Healing Room</h1>
         <button onClick={handleHealHeroToFull}>Heal to full!</button>
     </div>
