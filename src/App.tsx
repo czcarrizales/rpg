@@ -13,7 +13,9 @@ import Backpack from './Backpack'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
 import { gainLevel, gainMaxHealth, healToFull, resetExperience, resetHero } from './slices/heroSlice'
-import { resetGame } from './slices/gameSlice'
+import { resetCurrentWorld, resetGame, setGameOver } from './slices/gameSlice'
+import { GameOver } from './GameOver'
+import ArmorRoom from './ArmorRoom'
 
 function App() {
 
@@ -23,6 +25,10 @@ function App() {
   const bossBattle = useSelector(state => state.room.bossBattle)
   const inRoom = useSelector(state => state.room.inRoom)
   const heroStats = useSelector(state => state.hero)
+  const currentWorld = useSelector(state => state.game.currentWorld)
+  const currentEnemy = useSelector(state => state.enemy.currentEnemy)
+  const gameOver = useSelector(state => state.game.gameOver)
+  const resettingGame = useSelector(state => state.game.resettingGame)
   const [showEquipment, setShowEquipment] = useState(false)
   const [showBackpack, setShowBackpack] = useState(false)
   const [inBattle, setInBattle] = useState(false)
@@ -30,13 +36,19 @@ function App() {
 
   const handleBossRoom = () => {
     dispatch(goToBossRoom())
-    dispatch(setInRoom())
+    dispatch(setInRoom(true))
   }
 
   useEffect(() => {
     dispatch(setRandomRooms())
     console.log(randomRooms)
   }, [])
+
+  useEffect(() => {
+    if (resettingGame && gameOver) {
+      console.log('this is where we set the random rooms again')
+    }
+  }, [resettingGame, gameOver])
 
   useEffect(() => {
     console.log(heroStats)
@@ -51,7 +63,7 @@ function App() {
 
   useEffect(() => {
     if (randomRooms.length === 0 && !inRoom) {
-      dispatch(setBossBattle())
+      dispatch(setBossBattle(true))
       console.log('boss room shows!')
     }
     
@@ -59,30 +71,39 @@ function App() {
 
   useEffect(() => {
     if (heroStats.health <= 0) {
-      dispatch(resetGame())
-      dispatch(resetHero())
-      dispatch(setInRoom())
-      console.log('hero is dead!')
+      dispatch(setGameOver(true))
     }
   }, [heroStats])
 
+  useEffect(() => {
+    if (currentWorld == 5 && currentEnemy.health <= 0 && currentEnemy.health !== null && roomState === 'bossRoom') {
+      dispatch(resetGame(true))
+      dispatch(resetHero())
+      dispatch(resetCurrentWorld())
+      console.log('game is over')
+    }
+  }, [currentWorld, currentEnemy.health])
+
   return (
-    <div className='board'>
-        <div className='row'>
+    <div>
+       {
+      gameOver && <GameOver />
+     }
+     {
+      !gameOver && (
+<div className='board'>
+  <div className='map' style={{display: inRoom && 'none'}}>
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
-        </div>
-        <div className='row'>
           <RoomButton inRoom={inRoom} />
-          {bossBattle ? <button onClick={handleBossRoom} disabled={inRoom}>Boss</button> : <RoomButton inRoom={inRoom} />}
-          <RoomButton inRoom={inRoom} />
-        </div>
-        <div className='row'>
+          {bossBattle ? <button className='room-button boss-room-button' onClick={handleBossRoom} disabled={inRoom}>Boss</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
-        </div>
+          <RoomButton inRoom={inRoom} />
+  </div>
+        
      
      {
       inRoom &&
@@ -91,17 +112,22 @@ function App() {
       {roomState === 'treasureRoom' && <TreasureRoom />}
       {roomState === 'healingRoom' && <HealingRoom />}
       {roomState === 'weaponRoom' && <WeaponRoom />}
+      {roomState === 'armorRoom' && <ArmorRoom />}
       {roomState === 'bossRoom' && <BossRoom />}
       {roomState === 'spellRoom' && <SpellRoom />}
     </div>
      }
-     
       <div id='current-hero'>
         <Hero setShowEquipment={setShowEquipment} showEquipment={showEquipment} showBackpack={showBackpack} setShowBackpack={setShowBackpack} inBattle={inBattle} />
         {showEquipment && <Equipment />}
         {showBackpack && <Backpack />}
       </div>
     </div>
+      )
+     }
+    </div>
+   
+    
   )
 }
 
