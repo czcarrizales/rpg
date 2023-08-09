@@ -1,5 +1,37 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface Weapon {
+    type: string;
+    name: string;
+    damage: number;
+  }
+  
+  interface Armor {
+    type: string | null;
+    name: string | null;
+    defense: number | null;
+  }
+  
+  type EquipmentItem = Weapon | Armor;
+
+  interface Treasure {
+    name: string;
+    money: number;
+  }
+  
+  interface HeroState {
+    level: number;
+    experience: number;
+    health: number;
+    maxHealth: number;
+    mana: number;
+    money: number;
+    treasure: Treasure[]; // Update this type if necessary
+    weapon: Weapon;
+    armor: Armor;
+    equipment: EquipmentItem[];
+  }
+
 const heroSlice = createSlice({
     name: 'hero',
     initialState: {
@@ -19,14 +51,18 @@ const heroSlice = createSlice({
             type: null,
             name: null,
             defense: null
-        },
+        } ,
         equipment: [
 
         ]
-    },
+    } as HeroState,
     reducers: {
         heroTakeDamage: (state, action) => {
-            state.health -= action.payload - state.armor.defense
+            const armorDefense = state.armor.defense ?? 0;
+            const totalDamage = action.payload - armorDefense
+            if (totalDamage > 0) {
+                state.health -= totalDamage
+            }
         },
         lowerMana: (state, action) => {
             state.mana -= action.payload
@@ -47,9 +83,6 @@ const heroSlice = createSlice({
             state.equipment.push(state.weapon)
             state.weapon = action.payload
             state.equipment = state.equipment.filter(item => item.name !== action.payload.name)
-        },
-        dropWeapon: (state, action) => {
-            
         },
         takeArmor: (state, action) => {
             state.equipment.push(action.payload)
