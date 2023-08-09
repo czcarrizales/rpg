@@ -42,6 +42,34 @@ const enemyTypes = [
         attack: 30,
         experience: 60,
         world: 3
+    },
+    {
+        name: 'lava golem',
+        health: 200,
+        attack: 40,
+        experience: 80,
+        world: 4
+    },
+    {
+        name: 'fire wisp',
+        health: 200,
+        attack: 40,
+        experience: 80,
+        world: 4
+    },
+    {
+        name: 'vicious dog',
+        health: 250,
+        attack: 50,
+        experience: 100,
+        world: 5
+    },
+    {
+        name: 'shadow of doubt',
+        health: 250,
+        attack: 50,
+        experience: 100,
+        world: 5
     }
 ]
 
@@ -85,8 +113,29 @@ const bosses = [
         name: 'frozen overlord',
         health: 500,
         attack: 60,
-        experience: 300,
-        world: 3
+        experience: 400,
+        world: 4
+    },
+    {
+        name: 'blaze dragon',
+        health: 750,
+        attack: 80,
+        experience: 400,
+        world: 4
+    },
+    {
+        name: 'magma horror',
+        health: 750,
+        attack: 80,
+        experience: 400,
+        world: 4
+    },
+    {
+        name: 'the true mind',
+        health: 1000,
+        attack: 100,
+        experience: 500,
+        world: 5
     }
 ]
 
