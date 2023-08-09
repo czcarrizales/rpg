@@ -3,6 +3,7 @@
     color: white;
     text-align: center;
     border: 2px solid white;
+    padding: 20px;
 }
 
 .hero-button {
@@ -25,9 +26,15 @@
     opacity: 0.3;
 }
 
+#hero-stats {
+    border: 1px solid red;
+    padding: 20px;
+}
+
 #hero-buttons {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     justify-content: center;
+    border: 1px solid red;
 }
