@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const roomTypes = ['enemyRoom', 'treasureRoom', 'healingRoom', 'weaponRoom', 'armorRoom']
+
 
 const roomSlice = createSlice({
     name: 'room',
@@ -30,7 +30,7 @@ const roomSlice = createSlice({
         goToRandomRoom: (state) => {
                 const randomIndex = Math.floor(Math.random() * state.randomRooms.length)
                 state.currentRoom = state.randomRooms[randomIndex]
-                state.randomRooms = state.randomRooms.filter((room, index) => index !== randomIndex)
+                state.randomRooms = state.randomRooms.filter((_room, index) => index !== randomIndex)
             
         },
         setRandomRooms: (state) => {
