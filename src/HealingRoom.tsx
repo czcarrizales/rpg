@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import { healToFull } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
@@ -9,7 +8,7 @@ const HealingRoom = () => {
     const handleHealHeroToFull = () => {
         dispatch(healToFull())
         dispatch(goToMapRoom())
-        dispatch(setInRoom())
+        dispatch(setInRoom(false))
     }
   return (
     <div id='healing-room-container'>

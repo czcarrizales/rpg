@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { takeArmor } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './ArmorRoom.css'
 
+interface Armor {
+  type: string | null,
+  name: string | null,
+  defense: number | null
+}
+
 const ArmorRoom = () => {
-  const [currentArmor, setCurrentArmor] = useState({})
+  const [currentArmor, setCurrentArmor] = useState<Armor | null>(null)
   const dispatch = useDispatch()
   const handleTakeArmor = () => {
     dispatch(takeArmor(currentArmor))
@@ -37,7 +43,7 @@ const ArmorRoom = () => {
   return (
     <div id='armor-room-container'>
       <h1>Armor Room</h1>
-      <p>You found {currentArmor.name}!</p>
+      <p>You found {currentArmor?.name}!</p>
       <button onClick={handleTakeArmor}>Take Armor</button>
     </div>
   )

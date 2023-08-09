@@ -1,39 +1,35 @@
-import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { enemyTakeDamage } from './slices/enemySlice'
-import { lowerMana } from './slices/heroSlice'
 import './Hero.css'
 import { setPlayerTurn } from './slices/battleSlice'
+import { RootState } from './store'
 
-const Hero = ({ showEquipment, setShowEquipment, showBackpack, setShowBackpack }) => {
-  const heroLevel = useSelector(state => state.hero.level)
-  const heroExperience = useSelector(state => state.hero.experience)
-  const heroMaxHealth = useSelector(state => state.hero.maxHealth)
-  const heroHealth = useSelector(state => state.hero.health)
-  const heroMana = useSelector(state => state.hero.mana)
-  const heroMoney = useSelector(state => state.hero.money)
-  const heroTreasure = useSelector(state => state.hero.treasure)
-  const heroWeapon = useSelector(state => state.hero.weapon)
-  const heroArmor = useSelector(state => state.hero.armor)
-  const battleTurn = useSelector(state => state.battle.playerTurn)
-  const inBattle = useSelector(state => state.battle.inBattle)
-  const currentWorld = useSelector(state => state.game.currentWorld)
+interface HeroProps {
+  showEquipment: boolean;
+  setShowEquipment: React.Dispatch<React.SetStateAction<boolean>>;
+  showBackpack: boolean;
+  setShowBackpack: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Hero: React.FC<HeroProps> = ({ showEquipment, setShowEquipment, showBackpack, setShowBackpack }) => {
+  const heroLevel = useSelector((state: RootState) => state.hero.level)
+  const heroExperience = useSelector((state: RootState) => state.hero.experience)
+  const heroMaxHealth = useSelector((state: RootState) => state.hero.maxHealth)
+  const heroHealth = useSelector((state: RootState) => state.hero.health)
+  const heroMana = useSelector((state: RootState) => state.hero.mana)
+  const heroMoney = useSelector((state: RootState) => state.hero.money)
+  const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
+  const heroArmor = useSelector((state: RootState) => state.hero.armor)
+  const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
+  const inBattle = useSelector((state: RootState) => state.battle.inBattle)
+  const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const dispatch = useDispatch()
 
   const handleAttackEnemy = () => {
-    dispatch(enemyTakeDamage(heroWeapon.damage))
+    dispatch(enemyTakeDamage(heroWeapon.damage!))
     dispatch(setPlayerTurn(false))
   }
 
-  const handleFireBall = () => {
-    const requiredMana = 10;
-    if (heroMana >= requiredMana) {
-      dispatch(lowerMana(10))
-    } else {
-
-    }
-
-  }
   return (
     <div id='hero-container'>
       <div id="hero-stats">

@@ -1,11 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { goToRandomRoom, setInRoom } from './slices/roomSlice'
 import './RoomButton.css'
+import { RootState } from './store';
 
-const RoomButton = ({inRoom}) => {
-    const gameState = useSelector(state => state.game)
-    const resettingRooms = useSelector(state => state.room.resettingRooms)
+interface RoomButtonProps {
+  inRoom: boolean;
+}
+
+const RoomButton: React.FC<RoomButtonProps> = ({inRoom}) => {
+    const gameState = useSelector((state: RootState) => state.game)
+    const resettingRooms = useSelector((state: RootState) => state.room.resettingRooms)
     const dispatch = useDispatch()
     const [visited, setVisited] = useState(false)
     const handleRandomRoom = () => {

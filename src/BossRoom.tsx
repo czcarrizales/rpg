@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
-import { setEnemyType, enemyReset, setBossType } from './slices/enemySlice'
+import {  enemyReset, setBossType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
 import { setCurrentWorld, setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
+import { RootState } from './store'
 
 const BossRoom = () => {
   const dispatch = useDispatch()
-  const currentEnemy = useSelector(state => state.enemy.currentEnemy)
-  const currentWorld = useSelector(state => state.game.currentWorld)
-  const currentRoom = useSelector(state => state.room.currentRoom)
-  const battleTurn = useSelector(state => state.battle.playerTurn)
+  const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy) as any
+  const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
+  const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
+  const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const [bossTypeSet, setBossTypeSet] = useState(false)
 
   useEffect(() => {
@@ -32,7 +33,7 @@ const BossRoom = () => {
             dispatch(gainExperience(currentEnemy.experience))
             dispatch(enemyReset())
             dispatch(goToMapRoom())
-            dispatch(setInRoom())
+            dispatch(setInRoom(false))
             dispatch(setResettingRooms())
             dispatch(setRandomRooms())
             dispatch(setBossBattle(false))

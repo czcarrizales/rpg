@@ -1,4 +1,3 @@
-import React from 'react'
 import { resetGame, setGameOver } from './slices/gameSlice'
 import { useDispatch } from 'react-redux'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'

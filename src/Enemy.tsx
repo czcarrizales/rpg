@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import './Enemy.css'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import { enemyReset, setEnemyType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage } from './slices/heroSlice'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
+import { RootState } from './store'
 
 const Enemy = () => {
     const dispatch = useDispatch()
-    const currentEnemy = useSelector(state => state.enemy.currentEnemy)
-    const currentWorld = useSelector(state => state.game.currentWorld)
-    const currentRoom = useSelector(state => state.room.currentRoom)
-    const battleTurn = useSelector(state => state.battle.playerTurn)
+    const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy)
+    const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
+    const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
+    const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
 
     const handleSetInBattle = () => {
@@ -25,7 +26,7 @@ const Enemy = () => {
     }, [])
 
     useEffect(() => {
-        if (enemyTypeSet && currentEnemy.health <= 0 ) {
+        if (enemyTypeSet && currentEnemy.health! <= 0 ) {
             if (currentWorld == 5 && currentRoom == 'bossRoom') {
                 console.log('game is over!')
             } else {
@@ -33,7 +34,7 @@ const Enemy = () => {
                 dispatch(gainExperience(currentEnemy.experience))
                 dispatch(enemyReset())
                 dispatch(goToMapRoom())
-                dispatch(setInRoom())
+                dispatch(setInRoom(false))
                 dispatch(setInBattle(false))
             }
             
@@ -43,7 +44,7 @@ const Enemy = () => {
     }, [currentEnemy, enemyTypeSet])
 
     useEffect(() => {
-        if (battleTurn === false && currentEnemy.health > 0) {
+        if (battleTurn === false && currentEnemy.health! > 0) {
             setTimeout(() => {
                 dispatch(heroTakeDamage(currentEnemy.attack))
             dispatch(setPlayerTurn(true))

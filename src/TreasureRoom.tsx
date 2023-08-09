@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { takeTreasure } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './TreasureRoom.css'
 
 const TreasureRoom = () => {
-  const [currentTreasure, setCurrentTreasure] = useState('')
+  const [currentTreasure, setCurrentTreasure] = useState<any>('')
   const dispatch = useDispatch()
   const handleTakeTreasure = () => {
     dispatch(takeTreasure(currentTreasure))
     dispatch(goToMapRoom())
-    dispatch(setInRoom())
+    dispatch(setInRoom(false))
   }
 
   useEffect(() => {
@@ -25,7 +25,8 @@ const TreasureRoom = () => {
       }
     ]
     const randomIndex = Math.floor(Math.random() * randomTreasures.length)
-    setCurrentTreasure(randomTreasures[randomIndex])
+    const randomTreasure = randomTreasures[randomIndex]
+    setCurrentTreasure(randomTreasure)
   }, [])
   return (
     <div id='treasure-room-container'>

@@ -1,10 +1,11 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
+import './Backpack.css'
+import { RootState } from './store'
 
 const Backpack = () => {
-    const heroTreasure = useSelector(state => state.hero.treasure)
+    const heroTreasure = useSelector((state: RootState) => state.hero.treasure)
     return (
-        <div>
+        <div id='backpack-container'>
             <h1>Backpack</h1>
             {heroTreasure.map((item) => (
                 <div>
