@@ -4,28 +4,39 @@ import './Enemy.css'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import { enemyReset, setEnemyType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage } from './slices/heroSlice'
-import { setPlayerTurn } from './slices/battleSlice'
+import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 
 const Enemy = () => {
     const dispatch = useDispatch()
     const currentEnemy = useSelector(state => state.enemy.currentEnemy)
     const currentWorld = useSelector(state => state.game.currentWorld)
+    const currentRoom = useSelector(state => state.room.currentRoom)
     const battleTurn = useSelector(state => state.battle.playerTurn)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
+
+    const handleSetInBattle = () => {
+        dispatch(setInBattle(true))
+    }
 
     useEffect(() => {
         dispatch(setEnemyType(currentWorld))
         setEnemyTypeSet(true)
+        handleSetInBattle()
     }, [])
 
     useEffect(() => {
         if (enemyTypeSet && currentEnemy.health <= 0 ) {
-            console.log('enemy is dead')
-            setEnemyTypeSet(false)
-            dispatch(gainExperience(currentEnemy.experience))
-            dispatch(enemyReset())
-            dispatch(goToMapRoom())
-            dispatch(setInRoom())
+            if (currentWorld == 5 && currentRoom == 'bossRoom') {
+                console.log('game is over!')
+            } else {
+                setEnemyTypeSet(false)
+                dispatch(gainExperience(currentEnemy.experience))
+                dispatch(enemyReset())
+                dispatch(goToMapRoom())
+                dispatch(setInRoom())
+                dispatch(setInBattle(false))
+            }
+            
         } else {
             console.log('enemy lives!')
         }
