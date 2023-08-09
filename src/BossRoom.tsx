@@ -1,38 +1,48 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setPlayerTurn } from './slices/battleSlice'
+import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { setEnemyType, enemyReset, setBossType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
-import { setCurrentWorld } from './slices/gameSlice'
+import { setCurrentWorld, setGameOver } from './slices/gameSlice'
+import './BossRoom.css'
 
 const BossRoom = () => {
   const dispatch = useDispatch()
   const currentEnemy = useSelector(state => state.enemy.currentEnemy)
   const currentWorld = useSelector(state => state.game.currentWorld)
+  const currentRoom = useSelector(state => state.room.currentRoom)
   const battleTurn = useSelector(state => state.battle.playerTurn)
   const [bossTypeSet, setBossTypeSet] = useState(false)
 
   useEffect(() => {
       dispatch(setBossType(currentWorld))
       setBossTypeSet(true)
+      dispatch(setInBattle(true))
   }, [])
 
   useEffect(() => {
       if (bossTypeSet && currentEnemy.health <= 0 ) {
-          console.log('boss is dead')
-          setBossTypeSet(false)
-          dispatch(gainExperience(currentEnemy.experience))
-          dispatch(enemyReset())
-          dispatch(goToMapRoom())
-          dispatch(setInRoom())
-          dispatch(setResettingRooms())
-          dispatch(setRandomRooms())
-          dispatch(setBossBattle())
-          dispatch(setCurrentWorld())
-          setTimeout(() => {
+        if (currentWorld == 5 && currentRoom == 'bossRoom') {
+            dispatch(setGameOver(true))
+            console.log('game is over!')
+        } else {
+            console.log('boss is dead')
+            setBossTypeSet(false)
+            dispatch(gainExperience(currentEnemy.experience))
+            dispatch(enemyReset())
+            dispatch(goToMapRoom())
+            dispatch(setInRoom())
             dispatch(setResettingRooms())
-          }, 1000);
+            dispatch(setRandomRooms())
+            dispatch(setBossBattle(false))
+            dispatch(setCurrentWorld())
+            dispatch(setInBattle(false))
+            setTimeout(() => {
+              dispatch(setResettingRooms())
+            }, 1000);
+        }
+          
       } else {
           console.log('enemy lives!')
       }
@@ -51,7 +61,7 @@ const BossRoom = () => {
   }, [battleTurn])
 
   return (
-      <div id='enemy-container'>
+      <div id='boss-room-container'>
           <h1>{currentEnemy.name}</h1>
           <p>Health: {currentEnemy.health}</p>
           <p>Intent: Attack for {currentEnemy.attack} damage!</p>
