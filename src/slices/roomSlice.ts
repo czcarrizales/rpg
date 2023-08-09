@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const roomTypes = ['enemyRoom', 'treasureRoom', 'healingRoom', 'weaponRoom']
+const roomTypes = ['enemyRoom', 'treasureRoom', 'healingRoom', 'weaponRoom', 'armorRoom']
 
 const roomSlice = createSlice({
     name: 'room',
     initialState: {
         currentRoom: 'map',
-        randomRooms: ['treasureRoom', 'healingRoom', 'weaponRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom'],
+        randomRooms: ['treasureRoom', 'healingRoom', 'weaponRoom', 'armorRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom'],
         bossBattle: false,
         inRoom: false,
         resettingRooms: false
@@ -34,16 +34,16 @@ const roomSlice = createSlice({
             
         },
         setRandomRooms: (state) => {
-            state.randomRooms = ['treasureRoom', 'healingRoom', 'weaponRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom']
+            state.randomRooms = ['treasureRoom', 'healingRoom', 'weaponRoom', 'armorRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom']
         },
         setResettingRooms: (state) => {
             state.resettingRooms = !state.resettingRooms
         },
-        setInRoom: (state) => {
-            state.inRoom = !state.inRoom
+        setInRoom: (state, action) => {
+            state.inRoom = action.payload
         },
-        setBossBattle: (state) => {
-            state.bossBattle = !state.bossBattle
+        setBossBattle: (state, action) => {
+            state.bossBattle = action.payload
         }
     }
 })
