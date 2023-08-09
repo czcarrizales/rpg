@@ -10,7 +10,7 @@ const RoomButton = ({inRoom}) => {
     const [visited, setVisited] = useState(false)
     const handleRandomRoom = () => {
         dispatch(goToRandomRoom())
-        dispatch(setInRoom())
+        dispatch(setInRoom(true))
         setVisited(true)
       }
 
