@@ -16,6 +16,8 @@ const Equipment = () => {
     }
     const showAllEquipment = () => {
         return (
+            heroEquipment.length > 0
+            ?
             heroEquipment.map((item) => {
                 return (
                     <div>
@@ -29,6 +31,8 @@ const Equipment = () => {
     
             )
             })
+            :
+            <p>No equipment</p>
         )
     }
 
