@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { takeTreasure } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
+import './TreasureRoom.css'
 
 const TreasureRoom = () => {
   const [currentTreasure, setCurrentTreasure] = useState('')
@@ -27,7 +28,7 @@ const TreasureRoom = () => {
     setCurrentTreasure(randomTreasures[randomIndex])
   }, [])
   return (
-    <div>
+    <div id='treasure-room-container'>
       <h1>Treasure Room</h1>
       <p>You found a {currentTreasure.name}!</p>
       <button onClick={handleTakeTreasure}>Take Treasure</button>
