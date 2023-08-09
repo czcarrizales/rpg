@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const enemyTypes = [
     {
@@ -139,7 +139,13 @@ const bosses = [
     }
 ]
 
-const getRandomEnemy = (world) => {
+interface Enemy {
+    name: string | null;
+    health: number | null;
+    attack: number | null;
+}
+
+const getRandomEnemy = (world: number) => {
     const filteredEnemies = enemyTypes.filter((enemy) => {
         return enemy.world == world
     })
@@ -148,7 +154,7 @@ const getRandomEnemy = (world) => {
     return randomEnemy
 }
 
-const getRandomBoss = (world) => {
+const getRandomBoss = (world: number) => {
     const filteredBosses = bosses.filter((boss) => {
         return boss.world == world
     })
@@ -170,13 +176,15 @@ const enemySlice = createSlice({
             health: null,
             attack: null
         }
-    },
+    } as {currentEnemy: Enemy},
     reducers: {
-        enemyTakeDamage: (state, action) => {
-            state.currentEnemy.health -= action.payload
+        enemyTakeDamage: (state, action: PayloadAction<number>) => {
+            if (state.currentEnemy.health !== null) {
+                state.currentEnemy.health -= action.payload;
+              }
         },
         enemyReset: (state) => {
-            state.health = 100
+            state.currentEnemy.health = 100
         },
         setEnemyType: (state, action) => {
             state.currentEnemy = getRandomEnemy(action.payload)
