@@ -27,7 +27,7 @@
 }
 
 #hero-stats {
-    border: 1px solid red;
+
     padding: 20px;
 }
 
@@ -36,5 +36,5 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     justify-content: center;
-    border: 1px solid red;
+
 }
