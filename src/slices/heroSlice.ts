@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface Weapon {
-    type: string;
-    name: string;
-    damage: number;
+    type: string | null;
+    name: string | null;
+    damage: number | null;
   }
   
   interface Armor {
