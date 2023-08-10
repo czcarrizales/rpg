@@ -2,7 +2,7 @@ import  { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import {  enemyReset, setBossType } from './slices/enemySlice'
-import { gainExperience, heroTakeDamage } from './slices/heroSlice'
+import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
 import { setCurrentWorld, setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
@@ -14,6 +14,7 @@ const BossRoom = () => {
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
+  const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
   const [bossTypeSet, setBossTypeSet] = useState(false)
 
   useEffect(() => {
@@ -53,6 +54,23 @@ const BossRoom = () => {
       if (battleTurn === false && currentEnemy.health > 0) {
           setTimeout(() => {
               dispatch(heroTakeDamage(currentEnemy.attack))
+              setTimeout(() => {
+                dispatch(setHeroIsAttacked(true));
+                
+                setTimeout(() => {
+                  dispatch(setHeroIsAttacked(false));
+                  
+                  // Wait for 1 second before the second flash
+                  setTimeout(() => {
+                    dispatch(setHeroIsAttacked(true));
+                    
+                    setTimeout(() => {
+                      dispatch(setHeroIsAttacked(false));
+                    }, 100); // Second flash duration is 1 second
+                  }, 100); // Wait for 1 second before the second flash
+                  
+                }, 100); // Second flash start after 100 milliseconds
+              }, 100); // First flash duration is 100 milliseconds
           dispatch(setPlayerTurn(true))
           }, 500);
           
@@ -62,7 +80,7 @@ const BossRoom = () => {
   }, [battleTurn])
 
   return (
-      <div id='boss-room-container'>
+      <div className={`boss-room-container ${enemyIsAttacked ? 'enemy-attacked':''}`}>
           <h1>{currentEnemy.name}</h1>
           <p>Health: {currentEnemy.health}</p>
           <p>Intent: Attack for {currentEnemy.attack} damage!</p>
