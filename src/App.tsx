@@ -70,7 +70,9 @@ function App() {
 
   useEffect(() => {
     if (heroStats.health <= 0) {
+      dispatch(setInRoom(false))
       dispatch(setGameOver(true))
+      console.log('game is over because hero died')
     }
   }, [heroStats])
 
@@ -85,15 +87,15 @@ function App() {
 
   return (
     <div>
-       {
-      gameOver && <GameOver />
-     }
-     {
-      !gameOver && (
 <div className='board'>
   
-  <div className='map' style={{display: inRoom ? 'none' : undefined}}>
-          <RoomButton inRoom={inRoom} />
+  <div style={{display: inRoom ? 'none' : undefined}}>
+    {
+      !gameOver
+      ?
+      (
+        <div id='current-room' className='map'>
+<RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
@@ -102,6 +104,14 @@ function App() {
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
+          </div>
+      )
+          :
+          <div id='current-room'>
+            <GameOver />
+          </div>
+          
+    }
   </div>
      {
       inRoom &&
@@ -113,16 +123,16 @@ function App() {
       {roomState === 'armorRoom' && <ArmorRoom />}
       {roomState === 'bossRoom' && <BossRoom />}
       {roomState === 'spellRoom' && <SpellRoom />}
+      
     </div>
      }
       <div id='current-hero'>
+      
         <Hero setShowEquipment={setShowEquipment} showEquipment={showEquipment} showBackpack={showBackpack} setShowBackpack={setShowBackpack} />
         {showEquipment && <Equipment />}
         {showBackpack && <Backpack />}
       </div>
     </div>
-      )
-     }
     </div>
    
     
