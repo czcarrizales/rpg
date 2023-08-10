@@ -1,4 +1,4 @@
-#hero-container {
+.hero-container {
     background-color: rgb(0, 0, 88);
     color: white;
     text-align: center;
@@ -36,5 +36,14 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 5px;
     justify-content: center;
+}
 
+.hero-attacked {
+    background-color: rgb(197, 197, 197);
+}
+
+@media (max-width: 450px) {
+    #hero-buttons {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,8 +1,12 @@
-#boss-room-container {
+.boss-room-container {
     background-color: purple;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+.enemy-attacked {
+    background-color: rgb(197, 197, 197);
 }
