@@ -42,8 +42,24 @@
     background-color: rgb(197, 197, 197);
 }
 
+.hero-health-stat {
+    font-size: 20px;
+    color: rgb(0, 224, 0);
+}
+
+.hero-mana-stat {
+    font-size: 20px;
+    color: rgb(222, 173, 255);
+}
+
 @media (max-width: 450px) {
     #hero-buttons {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (hover: none) {
+    .hero-button {
+        background-color: darkblue;
     }
 }
