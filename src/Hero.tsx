@@ -3,15 +3,13 @@ import { enemyTakeDamage, setEnemyIsAttacked } from './slices/enemySlice'
 import './Hero.css'
 import { setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
+import Equipment from './Equipment'
+import Backpack from './Backpack'
+import { setShowBackpack, setShowEquipment, setShowSpells } from './slices/gameSlice'
+import Spells from './Spells'
+import { enemyTakeDamageFlash } from './utilities'
 
-interface HeroProps {
-  showEquipment: boolean;
-  setShowEquipment: React.Dispatch<React.SetStateAction<boolean>>;
-  showBackpack: boolean;
-  setShowBackpack: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-const Hero: React.FC<HeroProps> = ({ showEquipment, setShowEquipment, showBackpack, setShowBackpack }) => {
+const Hero = () => {
   // const heroLevel = useSelector((state: RootState) => state.hero.level)
   // const heroExperience = useSelector((state: RootState) => state.hero.experience)
   const heroMaxHealth = useSelector((state: RootState) => state.hero.maxHealth)
@@ -24,48 +22,68 @@ const Hero: React.FC<HeroProps> = ({ showEquipment, setShowEquipment, showBackpa
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const inBattle = useSelector((state: RootState) => state.battle.inBattle)
   // const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
+  const showEquipment = useSelector((state: RootState) => state.game.showEquipment)
+  const showBackpack = useSelector((state: RootState) => state.game.showBackpack)
+  const showSpells = useSelector((state: RootState) => state.game.showSpells)
   const dispatch = useDispatch()
 
   const handleAttackEnemy = () => {
     dispatch(enemyTakeDamage(heroWeapon.damage!))
-    dispatch(setEnemyIsAttacked(true));
-
-  setTimeout(() => {
-    dispatch(setEnemyIsAttacked(false));
-
-    // Wait for 1 second before the second flash
-    setTimeout(() => {
-      dispatch(setEnemyIsAttacked(true));
-
-      setTimeout(() => {
-        dispatch(setEnemyIsAttacked(false));
-      }, 100); // Second flash duration is 1 second
-    }, 100); // Wait for 1 second before the second flash
-  }, 100); // First flash duration is 1 second
+    enemyTakeDamageFlash(dispatch)
     dispatch(setPlayerTurn(false))
   }
 
   return (
-    <div className={`hero-container ${heroIsAttacked ? 'hero-attacked':''}`}>
-      <div id="hero-stats">
-      {/* <h1>Hero</h1>
+    <div className={`hero-container ${heroIsAttacked ? 'hero-attacked' : ''}`}>
+      {
+        !showEquipment && !showBackpack
+          ?
+          (
+            <div className='hero-content'>
+              <div id="hero-stats">
+                {/* <h1>Hero</h1>
       <p>Current World: {currentWorld}</p>
       <p>Level: {heroLevel}</p>
       <p>XP: {heroExperience}</p> */}
-      <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
-      <p className='hero-mana-stat'>Mana: {heroMana}</p>
-      {/* <p>Weapon: {heroWeapon.name} (dmg: {heroWeapon.damage})</p>
+                <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
+                <p className='hero-mana-stat'>Mana: {heroMana}</p>
+                {/* <p>Weapon: {heroWeapon.name} (dmg: {heroWeapon.damage})</p>
       <p>Armor: {heroArmor.name ? heroArmor.name : 'None'} (defense: {heroArmor.defense ? heroArmor.defense : 0})</p>
       <p>Money: {heroMoney}</p> */}
-      </div>
-      
-      <div id="hero-buttons">
-      <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle}>Attack</button>
-      <button className='hero-button'>Spells</button>
-      <button className='hero-button' onClick={() => setShowEquipment(!showEquipment)} disabled={!battleTurn}>Equipment</button>
-      <button className='hero-button' onClick={() => setShowBackpack(!showBackpack)} disabled={!battleTurn}>Backpack</button>
-      </div>
-      
+              </div>
+
+              {
+                !showSpells
+                ?
+                <div id="hero-buttons">
+                  <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle}>Attack</button>
+                <button className='hero-button' onClick={() => dispatch(setShowSpells(true))}>Spells</button>
+                <button className='hero-button' onClick={() => dispatch(setShowEquipment(true))} disabled={!battleTurn}>Equipment</button>
+                <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn}>Backpack</button>
+                </div>
+                :
+                  <Spells/>
+                
+              }
+            </div>
+          )
+          :
+          showBackpack
+          ?
+          <Backpack />
+          :
+          showEquipment
+          ?
+          <Equipment />
+          :
+          showSpells
+          ?
+          <Spells />
+          :
+          null
+      }
+
+
     </div>
   )
 }

@@ -6,6 +6,7 @@ import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/hero
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
 import './Enemy.css'
+import { heroTakeDamageFlash } from './utilities'
 
 const Enemy = () => {
     const dispatch = useDispatch()
@@ -47,28 +48,10 @@ const Enemy = () => {
     useEffect(() => {
         if (battleTurn === false && currentEnemy.health! > 0) {
             setTimeout(() => {
-              dispatch(heroTakeDamage(currentEnemy.attack));
-              setTimeout(() => {
-                dispatch(setHeroIsAttacked(true));
-                
-                setTimeout(() => {
-                  dispatch(setHeroIsAttacked(false));
-                  
-                  // Wait for 1 second before the second flash
-                  setTimeout(() => {
-                    dispatch(setHeroIsAttacked(true));
-                    
-                    setTimeout(() => {
-                      dispatch(setHeroIsAttacked(false));
-                    }, 100); // Second flash duration is 1 second
-                  }, 100); // Wait for 1 second before the second flash
-                  
-                }, 100); // Second flash start after 100 milliseconds
-              }, 100); // First flash duration is 100 milliseconds
-              
-              dispatch(setPlayerTurn(true));
-            }, 500); // First flash start after 500 milliseconds
-            
+                dispatch(heroTakeDamage(currentEnemy.attack))
+                heroTakeDamageFlash(dispatch)
+            dispatch(setPlayerTurn(true))
+            }, 500);
         } else {
             dispatch(setPlayerTurn(true))
         }
