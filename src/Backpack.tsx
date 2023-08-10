@@ -7,13 +7,19 @@ const Backpack = () => {
     return (
         <div id='backpack-container'>
             <h1>Backpack</h1>
-            {heroTreasure.map((item) => (
+            {
+            heroTreasure.length > 0
+            ?
+            heroTreasure.map((item) => (
                 <div>
                     <h2>{item.name}</h2>
                     <p>Value: {item.money}</p>
                 </div>
 
-            ))}
+            ))
+            :
+            <p>No items</p>
+            }
         </div>
     )
 }
