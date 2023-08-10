@@ -30,6 +30,7 @@ interface Weapon {
     weapon: Weapon;
     armor: Armor;
     equipment: EquipmentItem[];
+    heroIsAttacked: boolean;
   }
 
 const heroSlice = createSlice({
@@ -37,7 +38,7 @@ const heroSlice = createSlice({
     initialState: {
         level: 1,
         experience: 0,
-        health: 100,
+        health: 1,
         maxHealth: 100,
         mana: 100,
         money: 0,
@@ -54,7 +55,8 @@ const heroSlice = createSlice({
         } ,
         equipment: [
 
-        ]
+        ],
+        heroIsAttacked: false
     } as HeroState,
     reducers: {
         heroTakeDamage: (state, action) => {
@@ -124,9 +126,12 @@ const heroSlice = createSlice({
                 defense: null
             }
             state.equipment = []
+        },
+        setHeroIsAttacked: (state, action) => {
+            state.heroIsAttacked = action.payload
         }
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor, setHeroIsAttacked} = heroSlice.actions;
 export default heroSlice.reducer
