@@ -2,8 +2,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { equipArmor, equipWeapon } from './slices/heroSlice'
 import './Equipment.css'
 import { RootState } from './store'
+import { setShowEquipment } from './slices/gameSlice'
 
-const Equipment = () => {
+const Equipment = ({}) => {
     const heroEquipment = useSelector((state: RootState) => state.hero.equipment)
     console.log(heroEquipment)
     const dispatch = useDispatch()
@@ -38,7 +39,10 @@ const Equipment = () => {
 
     return (
         <div id='equipment-container'>
+            <div>
             <h1>Equipment</h1>
+            <button onClick={() => dispatch(setShowEquipment(false))}>Go Back</button>
+            </div> 
             {showAllEquipment()}
         </div>
     )
