@@ -6,7 +6,7 @@
 
 #current-room {
   text-align: center;
-  height: 300px;
+  height: 350px;
   margin-bottom: 8px;
 }
 
@@ -32,4 +32,19 @@
   justify-items: center;
   border: 2px solid white;
   margin-bottom: 10px;
+}
+
+.take-button {
+  padding: 16px;
+  background: white;
+  color: black;
+  font-weight: 600;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.take-button:hover {
+  cursor: pointer;
+  background-color: rgb(150, 150, 150);
 }
