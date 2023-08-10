@@ -12,18 +12,18 @@ interface HeroProps {
 }
 
 const Hero: React.FC<HeroProps> = ({ showEquipment, setShowEquipment, showBackpack, setShowBackpack }) => {
-  const heroLevel = useSelector((state: RootState) => state.hero.level)
-  const heroExperience = useSelector((state: RootState) => state.hero.experience)
+  // const heroLevel = useSelector((state: RootState) => state.hero.level)
+  // const heroExperience = useSelector((state: RootState) => state.hero.experience)
   const heroMaxHealth = useSelector((state: RootState) => state.hero.maxHealth)
   const heroHealth = useSelector((state: RootState) => state.hero.health)
   const heroMana = useSelector((state: RootState) => state.hero.mana)
-  const heroMoney = useSelector((state: RootState) => state.hero.money)
+  // const heroMoney = useSelector((state: RootState) => state.hero.money)
   const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
-  const heroArmor = useSelector((state: RootState) => state.hero.armor)
+  // const heroArmor = useSelector((state: RootState) => state.hero.armor)
   const heroIsAttacked = useSelector((state: RootState) => state.hero.heroIsAttacked)
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const inBattle = useSelector((state: RootState) => state.battle.inBattle)
-  const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
+  // const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const dispatch = useDispatch()
 
   const handleAttackEnemy = () => {
