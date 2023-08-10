@@ -4,12 +4,10 @@ import Hero from './Hero'
 import TreasureRoom from './TreasureRoom'
 import HealingRoom from './HealingRoom'
 import BossRoom from './BossRoom'
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { goToBossRoom, setBossBattle, setInRoom, setRandomRooms } from './slices/roomSlice'
-import Equipment from './Equipment'
 import WeaponRoom from './WeaponRoom'
-import Backpack from './Backpack'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
 import { gainLevel, gainMaxHealth, healToFull, resetExperience, resetHero } from './slices/heroSlice'
@@ -29,8 +27,6 @@ function App() {
   const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy)
   const gameOver = useSelector((state: RootState) => state.game.gameOver)
   const resettingGame = useSelector((state: RootState) => state.game.resettingGame)
-  const [showEquipment, setShowEquipment] = useState(false)
-  const [showBackpack, setShowBackpack] = useState(false)
   const dispatch = useDispatch()
 
   const handleBossRoom = () => {
@@ -128,9 +124,7 @@ function App() {
      }
       <div id='current-hero'>
       
-        <Hero setShowEquipment={setShowEquipment} showEquipment={showEquipment} showBackpack={showBackpack} setShowBackpack={setShowBackpack} />
-        {showEquipment && <Equipment />}
-        {showBackpack && <Backpack />}
+        <Hero />
       </div>
     </div>
     </div>
