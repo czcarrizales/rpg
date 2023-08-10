@@ -14,6 +14,13 @@ interface Weapon {
   
   type EquipmentItem = Weapon | Armor;
 
+  interface Spell {
+    type: string | null;
+    name: string | null;
+    number: number | null;
+    mana: number | null;
+  }
+
   interface Treasure {
     name: string;
     money: number;
@@ -31,6 +38,7 @@ interface Weapon {
     armor: Armor;
     equipment: EquipmentItem[];
     heroIsAttacked: boolean;
+    spells: Spell[];
   }
 
 const heroSlice = createSlice({
@@ -56,6 +64,14 @@ const heroSlice = createSlice({
         equipment: [
 
         ],
+        spells: [
+            {
+                type: 'healing',
+                name: 'small heal',
+                number: 20,
+                mana: 20
+            }
+        ],
         heroIsAttacked: false
     } as HeroState,
     reducers: {
@@ -68,6 +84,9 @@ const heroSlice = createSlice({
         },
         lowerMana: (state, action) => {
             state.mana -= action.payload
+        },
+        raiseHeroHealth: (state, action) => {
+            state.health += action.payload
         },
         healToFull: (state) => {
             state.health = state.maxHealth
@@ -129,9 +148,9 @@ const heroSlice = createSlice({
         },
         setHeroIsAttacked: (state, action) => {
             state.heroIsAttacked = action.payload
-        }
+        },
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor, setHeroIsAttacked} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth} = heroSlice.actions;
 export default heroSlice.reducer
