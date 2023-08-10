@@ -46,7 +46,7 @@ const heroSlice = createSlice({
     initialState: {
         level: 1,
         experience: 0,
-        health: 1,
+        health: 100,
         maxHealth: 100,
         mana: 100,
         money: 0,
