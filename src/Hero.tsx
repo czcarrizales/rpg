@@ -52,8 +52,8 @@ const Hero: React.FC<HeroProps> = ({ showEquipment, setShowEquipment, showBackpa
       <p>Current World: {currentWorld}</p>
       <p>Level: {heroLevel}</p>
       <p>XP: {heroExperience}</p> */}
-      <p>Health: {heroHealth}/{heroMaxHealth}</p>
-      <p>Mana: {heroMana}</p>
+      <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
+      <p className='hero-mana-stat'>Mana: {heroMana}</p>
       {/* <p>Weapon: {heroWeapon.name} (dmg: {heroWeapon.damage})</p>
       <p>Armor: {heroArmor.name ? heroArmor.name : 'None'} (defense: {heroArmor.defense ? heroArmor.defense : 0})</p>
       <p>Money: {heroMoney}</p> */}
