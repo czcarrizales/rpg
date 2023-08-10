@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
 import { setInBattle } from './slices/battleSlice'
 import { resetHero } from './slices/heroSlice'
+import './GameOver.css'
 
 export const GameOver = () => {
     const dispatch = useDispatch()
@@ -23,9 +24,9 @@ export const GameOver = () => {
     }
 
   return (
-    <div>
+    <div id='game-over-container'>
         <h1>Game Over!</h1>
-        <button onClick={handleNewGame}>New Game</button>
+        <button className='take-button' onClick={handleNewGame}>New Game</button>
     </div>
   )
 }
