@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
-import { enemyTakeDamage, setEnemyIsAttacked } from './slices/enemySlice'
+import { enemyTakeDamage } from './slices/enemySlice'
 import './Hero.css'
 import { setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'

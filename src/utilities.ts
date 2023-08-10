@@ -1,7 +1,10 @@
+import { useDispatch } from "react-redux";
 import { setEnemyIsAttacked } from "./slices/enemySlice";
 import { setHeroIsAttacked } from "./slices/heroSlice";
 
-export const enemyTakeDamageFlash = (dispatch) => {
+type DispatchFunction = ReturnType<typeof useDispatch>
+
+export const enemyTakeDamageFlash = (dispatch: DispatchFunction) => {
     setTimeout(() => {
         dispatch(setEnemyIsAttacked(true));
       
@@ -22,7 +25,7 @@ export const enemyTakeDamageFlash = (dispatch) => {
       }, 80); // Wait for 100 milliseconds before the first flash
 }
 
-export const heroTakeDamageFlash = (dispatch) => {
+export const heroTakeDamageFlash = (dispatch: DispatchFunction) => {
     setTimeout(() => {
         dispatch(setHeroIsAttacked(true));
       
