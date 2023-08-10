@@ -4,6 +4,8 @@ import './Spells.css'
 import { lowerMana, raiseHeroHealth } from './slices/heroSlice'
 import { RootState } from './store'
 import { enemyTakeDamage } from './slices/enemySlice'
+import { enemyTakeDamageFlash } from './utilities'
+import { setPlayerTurn } from './slices/battleSlice'
 
 const Spells = () => {
     const dispatch = useDispatch()
@@ -14,18 +16,23 @@ const Spells = () => {
         if (heroMana >= 20 && heroHealth + 20 <= heroMaxHealth) {
             dispatch(raiseHeroHealth(20))
             dispatch(lowerMana(20))
+            dispatch(setPlayerTurn(false))
         }
     }
     const fireball = () => {
         if (heroMana >= 20) {
             dispatch(enemyTakeDamage(20))
+            enemyTakeDamageFlash(dispatch)
             dispatch(lowerMana(20))
+            dispatch(setPlayerTurn(false))
         }
     }
     const lightningBolt = () => {
         if (heroMana >= 10) {
             dispatch(enemyTakeDamage(10))
+            enemyTakeDamageFlash(dispatch)
             dispatch(lowerMana(10))
+            dispatch(setPlayerTurn(false))
         }
     }
     return (
