@@ -13,7 +13,7 @@ const HealingRoom = () => {
   return (
     <div id='healing-room-container'>
         <h1>Healing Room</h1>
-        <button onClick={handleHealHeroToFull}>Heal to full!</button>
+        <button className='take-button' onClick={handleHealHeroToFull}>Heal to full!</button>
     </div>
   )
 }

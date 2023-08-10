@@ -32,7 +32,7 @@ const TreasureRoom = () => {
     <div id='treasure-room-container'>
       <h1>Treasure Room</h1>
       <p>You found a {currentTreasure.name}!</p>
-      <button onClick={handleTakeTreasure}>Take Treasure</button>
+      <button onClick={handleTakeTreasure} className='take-button'>Take Treasure</button>
     </div>
   )
 }

@@ -44,7 +44,7 @@ const ArmorRoom = () => {
     <div id='armor-room-container'>
       <h1>Armor Room</h1>
       <p>You found {currentArmor?.name}!</p>
-      <button onClick={handleTakeArmor}>Take Armor</button>
+      <button className='take-button' onClick={handleTakeArmor}>Take Armor</button>
     </div>
   )
 }

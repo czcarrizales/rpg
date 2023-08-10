@@ -54,7 +54,7 @@ const WeaponRoom = () => {
     <div id='weapon-room-container'>
       <h1>Weapon Room</h1>
       <p>You found {currentWeapon?.name}!</p>
-      <button onClick={handleTakeWeapon}>Take Weapon</button>
+      <button className='take-button' onClick={handleTakeWeapon}>Take Weapon</button>
     </div>
   )
 }
