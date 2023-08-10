@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { delay } from "@reduxjs/toolkit/dist/utils";
 
 const enemyTypes = [
     {
