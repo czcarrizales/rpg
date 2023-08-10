@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { delay } from "@reduxjs/toolkit/dist/utils";
 
 const enemyTypes = [
     {
@@ -165,6 +166,8 @@ const getRandomBoss = (world: number) => {
     return randomBoss
 }
 
+
+
 const enemySlice = createSlice({
     name: 'enemy',
     initialState: {
@@ -174,13 +177,17 @@ const enemySlice = createSlice({
             attack: null,
             experience: null,
             world: null
-        },
+        } as Enemy,
         currentBoss: {
             name: null,
             health: null,
-            attack: null
-        }
-    } as {currentEnemy: Enemy},
+            attack: null,
+            experience: null,
+            world: null
+        },
+        enemyIsAttacked: false,
+        bossIsAttacked: false
+    },
     reducers: {
         enemyTakeDamage: (state, action: PayloadAction<number>) => {
             if (state.currentEnemy.health !== null) {
@@ -195,9 +202,17 @@ const enemySlice = createSlice({
         },
         setBossType: (state, action) => {
             state.currentEnemy = getRandomBoss(action.payload)
+        },
+        setEnemyIsAttacked: (state, action) => {
+            state.enemyIsAttacked = action.payload
+        },
+        setBossIsAttacked: (state, action) => {
+            state.bossIsAttacked = action.payload
         }
     }
 })
 
-export const {enemyTakeDamage, enemyReset, setEnemyType, setBossType} = enemySlice.actions;
+
+
+export const {enemyTakeDamage, enemyReset, setEnemyType, setBossType, setEnemyIsAttacked, setBossIsAttacked} = enemySlice.actions;
 export default enemySlice.reducer
