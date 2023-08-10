@@ -12,6 +12,8 @@ const Spells = () => {
     const heroMana = useSelector((state: RootState) => state.hero.mana)
     const heroHealth = useSelector((state: RootState) => state.hero.health)
     const heroMaxHealth = useSelector((state: RootState) => state.hero.maxHealth)
+    const inBattle = useSelector((state: RootState) => state.battle.inBattle)
+    const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
     const healHero = () => {
         if (heroMana >= 20 && heroHealth + 20 <= heroMaxHealth) {
             dispatch(raiseHeroHealth(20))
@@ -38,15 +40,15 @@ const Spells = () => {
     return (
         <div id='spell-buttons'>
             <button onClick={() => dispatch(setShowSpells(false))}>Go Back</button>
-            <button onClick={() => healHero()}>
+            <button onClick={() => healHero()} disabled={!battleTurn || !inBattle}>
                 <div>Cure</div>
                 <div>(Mana: 20 / Heal: 20)</div>
                 </button>
-            <button onClick={() => fireball()}>
+            <button onClick={() => fireball()} disabled={!battleTurn || !inBattle}>
                 <div>Fireball</div>
                 <div>(Mana: 20 / Damage: 20)</div>
                 </button>
-            <button onClick={() => lightningBolt()}>
+            <button onClick={() => lightningBolt()} disabled={!battleTurn || !inBattle}>
                 <div>Lightning Bolt</div>
                 <div>(Mana: 10 / Damage: 10)</div>
                 </button>
