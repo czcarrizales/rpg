@@ -29,6 +29,7 @@ interface Weapon {
   interface HeroState {
     level: number;
     experience: number;
+    experienceToLevelUp: number;
     health: number;
     maxHealth: number;
     mana: number;
@@ -45,7 +46,8 @@ const heroSlice = createSlice({
     name: 'hero',
     initialState: {
         level: 1,
-        experience: 0,
+        experience: 90,
+        experienceToLevelUp: 100,
         health: 100,
         maxHealth: 100,
         mana: 100,
@@ -122,6 +124,9 @@ const heroSlice = createSlice({
         resetExperience: (state) => {
             state.experience = 0
         },
+        setExperienceToLevelUp: (state, action) => {
+            state.experienceToLevelUp = action.payload
+        },
         gainLevel: (state) => {
             state.level += 1
         },
@@ -137,7 +142,7 @@ const heroSlice = createSlice({
             state.weapon = {
                 type: 'weapon',
                 name: 'fists',
-                damage: 5
+                damage: 10
             }
             state.armor = {
                 type: null,
@@ -152,5 +157,5 @@ const heroSlice = createSlice({
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth} = heroSlice.actions;
 export default heroSlice.reducer
