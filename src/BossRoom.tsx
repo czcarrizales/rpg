@@ -80,8 +80,9 @@ const BossRoom = () => {
   }, [battleTurn])
 
   return (
-      <div className={`boss-room-container ${enemyIsAttacked ? 'enemy-attacked':''}`}>
+      <div className={`boss-room-container`}>
           <h1>{currentEnemy.name}</h1>
+          <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
           <p>Health: {currentEnemy.health}</p>
           <p>Intent: Attack for {currentEnemy.attack} damage!</p>
           {/* <p>Armor: {enemyArmor}</p> */}
