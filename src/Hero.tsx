@@ -47,6 +47,7 @@ const Hero = () => {
       <p>XP: {heroExperience}</p> */}
                 <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
                 <p className='hero-mana-stat'>Mana: {heroMana}</p>
+                <button className='hero-button stats-button'>Stats</button>
                 {/* <p>Weapon: {heroWeapon.name} (dmg: {heroWeapon.damage})</p>
       <p>Armor: {heroArmor.name ? heroArmor.name : 'None'} (defense: {heroArmor.defense ? heroArmor.defense : 0})</p>
       <p>Money: {heroMoney}</p> */}
@@ -56,7 +57,10 @@ const Hero = () => {
                 !showSpells
                 ?
                 <div id="hero-buttons">
-                  <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle}>Attack</button>
+                  <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle}>
+                    <p>Attack</p>
+                    <p>({heroWeapon.damage} dmg)</p>
+                    </button>
                 <button className='hero-button' onClick={() => dispatch(setShowSpells(true))}>Spells</button>
                 <button className='hero-button' onClick={() => dispatch(setShowEquipment(true))} disabled={!battleTurn}>Equipment</button>
                 <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn}>Backpack</button>
