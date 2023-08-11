@@ -26,19 +26,19 @@ const WeaponRoom = () => {
             type: 'weapon',
             name: 'basic sword',
             damage: 10,
-            image: '/images/basic-sword.png'
+            image: '/images/weapons/basic-sword.png'
         },
         {
             type: 'weapon',
             name: 'excalibur',
             damage: 50,
-            image: '/images/basic-sword.png'
+            image: '/images/weapons/basic-sword.png'
         },
         {
             type: 'weapon',
             name: 'keyblade',
             damage: 30,
-            image: '/images/basic-sword.png'
+            image: '/images/weapons/basic-sword.png'
         }
     ]
     const randomIndex = Math.floor(Math.random() * randomWeapons.length)
@@ -59,7 +59,7 @@ const WeaponRoom = () => {
   return (
     <div id='weapon-room-container'>
       <h1>Weapon Room</h1>
-      <p>You found {currentWeapon?.name}!</p>
+      <p>You found a {currentWeapon?.name}!</p>
       <img className='weapon-room-image' src={currentWeapon?.image} alt=" " />
       <button className='take-button' onClick={handleTakeWeapon}>Take Weapon</button>
     </div>
