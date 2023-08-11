@@ -60,7 +60,7 @@ const Enemy = () => {
     return (
         <div className={`enemy-container }`}>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
-            <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
+            <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image!} alt="" />
             <div className='enemy-details'>
             <p>Health: {currentEnemy.health}</p>
             <p>Intent: Attack for {currentEnemy.attack} damage!</p>
