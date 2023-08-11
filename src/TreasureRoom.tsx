@@ -16,8 +16,9 @@ const TreasureRoom = () => {
   useEffect(() => {
     const randomTreasures = [
       {
-        name: 'pearl',
-        money: 15
+        name: 'ruby',
+        money: 15,
+        image: '/images/ruby.png'
       },
       {
         name: 'diamond',
@@ -31,6 +32,7 @@ const TreasureRoom = () => {
   return (
     <div id='treasure-room-container'>
       <h1>Treasure Room</h1>
+      <img className='treasure-room-image' src={currentTreasure.image} alt="" />
       <p>You found a {currentTreasure.name}!</p>
       <button onClick={handleTakeTreasure} className='take-button'>Take Treasure</button>
     </div>
