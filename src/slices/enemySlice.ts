@@ -2,32 +2,36 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const enemyTypes = [
     {
-        name: 'rat',
+        name: 'blob',
         health: 20,
         attack: 5,
         experience: 10,
-        world: 1
+        world: 1,
+        image: '/images/blob.png'
     },
     {
-        name: 'wolf',
+        name: 'goblin',
         health: 40,
         attack: 10,
         experience: 20,
-        world: 1
+        world: 1,
+        image: '/images/goblin.png'
     },
     {
-        name: 'card knight',
+        name: 'skeleton',
         health: 100,
         attack: 20,
         experience: 50,
-        world: 2
+        world: 2,
+        image: '/images/skeleton.png'
     },
     {
-        name: 'little witch',
+        name: 'witch',
         health: 100,
         attack: 20,
         experience: 50,
-        world: 2
+        world: 2,
+        image: '/images/witch.png'
     },
     {
         name: 'frost spider',
@@ -75,18 +79,20 @@ const enemyTypes = [
 
 const bosses = [
     {
-        name: 'plant king',
+        name: 'giant spider',
         health: 100,
         attack: 20,
         experience: 100,
-        world: 1
+        world: 1,
+        image: '/images/spider-boss.png'
     },
     {
-        name: 'misguided knight',
+        name: 'minotaur',
         health: 100,
         attack: 20,
         experience: 100,
-        world: 1
+        world: 1,
+        image: '/images/minotaur-boss.png'
     },
     {
         name: 'jester',
@@ -96,7 +102,7 @@ const bosses = [
         world: 2
     },
     {
-        name: 'hazel witch',
+        name: 'witch',
         health: 200,
         attack: 40,
         experience: 200,
@@ -145,6 +151,7 @@ interface Enemy {
     attack: number | null;
     experience: number | null;
     world: number | null;
+    image: string | null;
 }
 
 const getRandomEnemy = (world: number) => {
@@ -175,14 +182,16 @@ const enemySlice = createSlice({
             health: null,
             attack: null,
             experience: null,
-            world: null
+            world: null,
+            image: null
         } as Enemy,
         currentBoss: {
             name: null,
             health: null,
             attack: null,
             experience: null,
-            world: null
+            world: null,
+            image: null
         },
         enemyIsAttacked: false,
         bossIsAttacked: false
