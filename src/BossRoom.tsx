@@ -15,6 +15,7 @@ const BossRoom = () => {
   const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
+  const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
   const [bossTypeSet, setBossTypeSet] = useState(false)
 
   useEffect(() => {
@@ -29,26 +30,28 @@ const BossRoom = () => {
             dispatch(setGameOver(true))
             console.log('game is over!')
         } else {
-            console.log('boss is dead')
-            setBossTypeSet(false)
-            dispatch(gainExperience(currentEnemy.experience))
-            dispatch(enemyReset())
-            dispatch(goToMapRoom())
-            dispatch(setInRoom(false))
-            dispatch(setResettingRooms())
-            dispatch(setRandomRooms())
-            dispatch(setBossBattle(false))
-            dispatch(setCurrentWorld())
-            dispatch(setInBattle(false))
-            setTimeout(() => {
-              dispatch(setResettingRooms())
-            }, 1000);
+            if (!inAnimation) {
+                setBossTypeSet(false)
+                dispatch(gainExperience(currentEnemy.experience))
+                dispatch(enemyReset())
+                dispatch(goToMapRoom())
+                dispatch(setInRoom(false))
+                dispatch(setResettingRooms())
+                dispatch(setRandomRooms())
+                dispatch(setBossBattle(false))
+                dispatch(setCurrentWorld())
+                dispatch(setInBattle(false))
+                setTimeout(() => {
+                  dispatch(setResettingRooms())
+                }, 1000);
+            }
+            
         }
           
       } else {
           console.log('enemy lives!')
       }
-  }, [currentEnemy, bossTypeSet])
+  }, [currentEnemy, bossTypeSet, inAnimation])
 
   useEffect(() => {
       if (battleTurn === false && currentEnemy.health > 0) {
