@@ -25,8 +25,8 @@ const Equipment = ({}) => {
                         <h2>{item.name} ({item.type})</h2>
                         {item.type === 'weapon' && 'damage' in item && <p>Damage: {item.damage}</p>}
                         {item.type === 'armor' && 'defense' in item &&  <p>Defense: {item.defense}</p>}
-                        {item.type == 'weapon' && <button onClick={() => handleWeaponEquip(item)}>Equip</button>}
-                        {item.type == 'armor' && <button onClick={() => handleArmorEquip(item)}>Equip</button>}
+                        {item.type == 'weapon' && <button className='hero-button' onClick={() => handleWeaponEquip(item)}>Equip</button>}
+                        {item.type == 'armor' && <button className='hero-button' onClick={() => handleArmorEquip(item)}>Equip</button>}
                         
                     </div>
     
@@ -41,7 +41,7 @@ const Equipment = ({}) => {
         <div id='equipment-container'>
             <div>
             <h1>Equipment</h1>
-            <button onClick={() => dispatch(setShowEquipment(false))}>Go Back</button>
+            <button className='hero-button' onClick={() => dispatch(setShowEquipment(false))}>Go Back</button>
             </div> 
             {showAllEquipment()}
         </div>
