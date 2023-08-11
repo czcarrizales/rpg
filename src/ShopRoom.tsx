@@ -1,4 +1,4 @@
-const Shop = () => {
+const ShopRoom = () => {
   // const shopItems = [
   //   {
   //     type: 'potion',
@@ -19,4 +19,4 @@ const Shop = () => {
   )
 }
 
-export default Shop
+export default ShopRoom
