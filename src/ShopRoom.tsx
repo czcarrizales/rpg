@@ -1,4 +1,12 @@
+import { useDispatch } from 'react-redux'
+import './ShopRoom.css'
+import { goToMapRoom, setInRoom } from './slices/roomSlice'
 const ShopRoom = () => {
+  const dispatch = useDispatch()
+  const goBack = () => {
+    dispatch(goToMapRoom())
+    dispatch(setInRoom(false))
+  }
   // const shopItems = [
   //   {
   //     type: 'potion',
@@ -12,8 +20,9 @@ const ShopRoom = () => {
   //   }
   // ]
   return (
-    <div>
+    <div className='shop-room-container'>
         <h1>Shop</h1>
+        <button onClick={() => goBack()}>go back</button>
         {}
     </div>
   )
