@@ -7,7 +7,8 @@ import './ArmorRoom.css'
 interface Armor {
   type: string | null,
   name: string | null,
-  defense: number | null
+  defense: number | null,
+  image: string | null
 }
 
 const ArmorRoom = () => {
@@ -23,19 +24,20 @@ const ArmorRoom = () => {
     const randomArmor = [
         {
             type: 'armor',
-            name: 'rusty helmet',
-            defense: 10
+            name: 'wooden shield',
+            defense: 10,
+            image: '/images/armor/wooden-shield.png'
         },
-        {
-            type: 'armor',
-            name: 'leather suit',
-            defense: 20
-        },
-        {
-            type: 'armor',
-            name: 'holy shield',
-            defense: 50
-        }
+        // {
+        //     type: 'armor',
+        //     name: 'leather suit',
+        //     defense: 20
+        // },
+        // {
+        //     type: 'armor',
+        //     name: 'holy shield',
+        //     defense: 50
+        // }
     ]
     const randomIndex = Math.floor(Math.random() * randomArmor.length)
     setCurrentArmor(randomArmor[randomIndex])
@@ -43,7 +45,8 @@ const ArmorRoom = () => {
   return (
     <div id='armor-room-container'>
       <h1>Armor Room</h1>
-      <p>You found {currentArmor?.name}!</p>
+      <img className='armor-room-image' src={currentArmor?.image!} alt="" />
+      <p>You found a {currentArmor?.name}!</p>
       <button className='take-button' onClick={handleTakeArmor}>Take Armor</button>
     </div>
   )

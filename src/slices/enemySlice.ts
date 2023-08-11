@@ -7,7 +7,7 @@ const enemyTypes = [
         attack: 5,
         experience: 10,
         world: 1,
-        image: '/images/blob.png'
+        image: '/images/enemies/blob.png'
     },
     {
         name: 'goblin',
@@ -15,7 +15,7 @@ const enemyTypes = [
         attack: 10,
         experience: 20,
         world: 1,
-        image: '/images/goblin.png'
+        image: '/images/enemies/goblin.png'
     },
     {
         name: 'skeleton',
@@ -23,7 +23,7 @@ const enemyTypes = [
         attack: 20,
         experience: 50,
         world: 2,
-        image: '/images/skeleton.png'
+        image: '/images/enemies/skeleton.png'
     },
     {
         name: 'witch',
@@ -31,7 +31,7 @@ const enemyTypes = [
         attack: 20,
         experience: 50,
         world: 2,
-        image: '/images/witch.png'
+        image: '/images/enemies/witch.png'
     },
     {
         name: 'frost spider',
@@ -90,7 +90,7 @@ const bosses = [
         attack: 20,
         experience: 100,
         world: 1,
-        image: '/images/spider-boss.png'
+        image: '/images/bosses/spider-boss.png'
     },
     {
         name: 'minotaur',
@@ -98,7 +98,7 @@ const bosses = [
         attack: 20,
         experience: 100,
         world: 1,
-        image: '/images/minotaur-boss.png'
+        image: '/images/bosses/minotaur-boss.png'
     },
     {
         name: 'jester',

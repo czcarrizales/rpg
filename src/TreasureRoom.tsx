@@ -18,7 +18,7 @@ const TreasureRoom = () => {
       {
         name: 'ruby',
         money: 15,
-        image: '/images/ruby.png'
+        image: '/images/treasure/ruby.png'
       },
       {
         name: 'diamond',
