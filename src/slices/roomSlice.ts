@@ -27,11 +27,13 @@ const roomSlice = createSlice({
         goToBossRoom: (state) => {
             state.currentRoom = 'bossRoom'
         },
+        goToShopRoom: (state) => {
+            state.currentRoom = 'shopRoom'
+        },
         goToRandomRoom: (state) => {
                 const randomIndex = Math.floor(Math.random() * state.randomRooms.length)
                 state.currentRoom = state.randomRooms[randomIndex]
                 state.randomRooms = state.randomRooms.filter((_room, index) => index !== randomIndex)
-            
         },
         setRandomRooms: (state) => {
             state.randomRooms = ['treasureRoom', 'healingRoom', 'weaponRoom', 'armorRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom']
@@ -48,5 +50,5 @@ const roomSlice = createSlice({
     }
 })
 
-export const {goToEnemyRoom, goToHealingRoom, goToMapRoom, goToTreasureRoom, goToBossRoom, goToRandomRoom, setRandomRooms, setResettingRooms, setInRoom, setBossBattle} = roomSlice.actions;
+export const {goToEnemyRoom, goToHealingRoom, goToMapRoom, goToTreasureRoom, goToBossRoom, goToShopRoom, goToRandomRoom, setRandomRooms, setResettingRooms, setInRoom, setBossBattle} = roomSlice.actions;
 export default roomSlice.reducer
