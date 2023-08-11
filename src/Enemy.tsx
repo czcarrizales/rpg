@@ -5,8 +5,8 @@ import { enemyReset, setEnemyType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage} from './slices/heroSlice'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
-import './Enemy.css'
 import { heroTakeDamageFlash } from './utilities'
+import './Enemy.css'
 
 const Enemy = () => {
     const dispatch = useDispatch()
@@ -58,10 +58,14 @@ const Enemy = () => {
     }, [battleTurn])
 
     return (
-        <div className={`enemy-container ${enemyIsAttacked ? 'enemy-attacked':''}`}>
-            <h1>{currentEnemy.name}</h1>
+        <div className={`enemy-container }`}>
+            <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
+            <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
+            <div className='enemy-details'>
             <p>Health: {currentEnemy.health}</p>
             <p>Intent: Attack for {currentEnemy.attack} damage!</p>
+            </div>
+            
             {/* <p>Armor: {enemyArmor}</p> */}
         </div>
     )

@@ -5,4 +5,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image: url('/images/healingFountain.jpg');
+    background-size: cover;
+    color: white;
+}
+
+.healing-room-title {
+    background-color: rgb(0,0,0,.5);
+    padding: 20px;
+}
+
+.healing-room-button {
+    background-color: rgb(0, 172, 0);
 }

@@ -68,7 +68,12 @@
     justify-content: space-between;
   }
 
-  
+  .stats-button {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    align-self: center;
+  }
 
 @media (hover: none) {
     .hero-button {
