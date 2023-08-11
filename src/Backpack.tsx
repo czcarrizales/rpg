@@ -10,7 +10,7 @@ const Backpack = () => {
         <div id='backpack-container'>
             <div>
             <h1>Backpack</h1>
-            <button onClick={() => dispatch(setShowBackpack(false))}>Go Back</button>
+            <button className='hero-button' onClick={() => dispatch(setShowBackpack(false))}>Go Back</button>
             </div>
             
             {
