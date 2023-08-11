@@ -5,7 +5,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('/images/healingFountain.jpg');
+    background-image: url('/images/backgrounds/healingFountain.jpg');
     background-size: cover;
     color: white;
 }
