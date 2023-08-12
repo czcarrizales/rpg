@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import { enemyReset, setEnemyType } from './slices/enemySlice'
-import { gainExperience, heroTakeDamage} from './slices/heroSlice'
+import { gainExperience, gainMoney, heroTakeDamage} from './slices/heroSlice'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
 import { heroTakeDamageFlash } from './utilities'
@@ -20,6 +20,14 @@ const Enemy = () => {
     const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
     const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
+    const [randomMoney, setRandomMoney] = useState(0)
+
+    const handleRandomMoney = (x) => {
+        const min = 5;
+        const multiplier = 10;
+        const randomNumber = Math.floor(Math.random() * (multiplier - min) + min);
+        setRandomMoney(randomNumber * x)
+    }
 
     const handleSetInBattle = () => {
         dispatch(setInBattle(true))
@@ -29,6 +37,7 @@ const Enemy = () => {
         dispatch(setEnemyType(currentWorld))
         setEnemyTypeSet(true)
         handleSetInBattle()
+        handleRandomMoney(currentWorld)
     }, [])
 
     useEffect(() => {
@@ -40,6 +49,7 @@ const Enemy = () => {
                     dispatch(setAfterBattle(true))
                     console.log(afterBattle, 'after animation ends')
                     dispatch(gainExperience(currentEnemy.experience))
+                    dispatch(gainMoney(randomMoney))
                     dispatch(setInBattle(false))
             }
         } else {
@@ -79,7 +89,7 @@ const Enemy = () => {
             </div>
         </div>
         :
-        <AfterBattle name={currentEnemy.name} xp={currentEnemy.experience} />
+        <AfterBattle name={currentEnemy.name} xp={currentEnemy.experience} money={randomMoney} />
     )
 }
 
