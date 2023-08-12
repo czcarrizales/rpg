@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface Weapon {
     type: string | null;
@@ -22,9 +22,19 @@ interface Weapon {
   }
 
   interface Treasure {
+    type: string;
     name: string;
     money: number;
   }
+
+  interface Potion {
+    type: string;
+    name: string;
+    money: number;
+    points: number;
+  }
+
+  type BackpackItem = Treasure | Potion;
   
   interface HeroState {
     level: number;
@@ -33,8 +43,10 @@ interface Weapon {
     health: number;
     maxHealth: number;
     mana: number;
+    attack: number;
+    defense: number;
     money: number;
-    treasure: Treasure[]; // Update this type if necessary
+    backpack: BackpackItem[];
     weapon: Weapon;
     armor: Armor;
     equipment: EquipmentItem[];
@@ -46,17 +58,19 @@ const heroSlice = createSlice({
     name: 'hero',
     initialState: {
         level: 1,
-        experience: 90,
-        experienceToLevelUp: 100,
-        health: 100,
-        maxHealth: 100,
+        experience: 0,
+        experienceToLevelUp: 50,
+        health: 50,
+        maxHealth: 50,
         mana: 100,
+        attack: 5,
+        defense: 0,
         money: 0,
-        treasure: [],
+        backpack: [],
         weapon: {
-            type: 'weapon',
-            name: 'fists',
-            damage: 10
+            type: null,
+            name: null,
+            damage: null
         },
         armor: {
             type: null,
@@ -96,14 +110,16 @@ const heroSlice = createSlice({
         gainMaxHealth: (state) => {
             state.maxHealth += 50
         },
-        takeTreasure: (state, action) => {
-            state.treasure.push(action.payload)
+        takeTreasure: (state, action: PayloadAction<Treasure>) => {
+            state.backpack.push(action.payload)
         },
         takeWeapon: (state, action) => {
             state.equipment.push(action.payload)
         },
         equipWeapon: (state, action) => {
-            state.equipment.push(state.weapon)
+            if (state.weapon.name) {
+                state.equipment.push(state.weapon)
+            }
             state.weapon = action.payload
             state.equipment = state.equipment.filter(item => item.name !== action.payload.name)
         },
@@ -111,10 +127,9 @@ const heroSlice = createSlice({
             state.equipment.push(action.payload)
         },
         equipArmor: (state, action) => {
-            if (state.armor.name !== null) {
+            if (state.armor.name) {
             state.equipment.push(state.armor)
             }
-            
             state.armor = action.payload
             state.equipment = state.equipment.filter(item => item.name !== action.payload.name)
         },
@@ -127,18 +142,22 @@ const heroSlice = createSlice({
         setExperienceToLevelUp: (state, action) => {
             state.experienceToLevelUp = action.payload
         },
+        gainMoney: (state, action) => {
+            state.money += action.payload
+        },
         gainLevel: (state) => {
             state.level += 1
         },
-        buyItem: (state, action) => {
-            state.money -= action.payload
-            state.equipment.push(action.payload)
+        buyItemForBackpack: (state, action) => {
+            const {money, item} = action.payload;
+            state.money -= money
+            state.backpack.push(item)
         },
         resetHero: (state) => {
             state.level = 1
             state.health = 100
             state.maxHealth = 100
-            state.treasure = []
+            state.backpack = []
             state.weapon = {
                 type: 'weapon',
                 name: 'fists',
@@ -157,5 +176,5 @@ const heroSlice = createSlice({
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack} = heroSlice.actions;
 export default heroSlice.reducer
