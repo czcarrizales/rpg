@@ -4,6 +4,7 @@ import enemyReducer from './slices/enemySlice'
 import roomReducer from './slices/roomSlice'
 import battleReducer from './slices/battleSlice'
 import gameReducer from './slices/gameSlice'
+import shopReducer from './slices/shopSlice'
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         enemy: enemyReducer,
         room: roomReducer,
         battle: battleReducer,
-        game: gameReducer
+        game: gameReducer,
+        shop: shopReducer
     }
 })
 
