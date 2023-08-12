@@ -8,7 +8,10 @@ const gameSlice = createSlice({
         gameOver: false,
         showEquipment: false,
         showBackpack: false,
-        showSpells: false
+        showSpells: false,
+        showStats: false,
+        inAnimation: false,
+        afterBattle: false
     },
     reducers: {
         resetGame: (state, action) => {
@@ -31,9 +34,18 @@ const gameSlice = createSlice({
         },
         setShowSpells: (state, action) => {
             state.showSpells = action.payload
+        },
+        setInAnimation: (state, action) => {
+            state.inAnimation = action.payload
+        },
+        setAfterBattle: (state, action) => {
+            state.afterBattle = action.payload
+        },
+        setShowStats: (state, action) => {
+            state.showStats = action.payload
         }
     }
 })
 
-export const {resetGame, setCurrentWorld, resetCurrentWorld, setGameOver, setShowEquipment, setShowBackpack, setShowSpells} = gameSlice.actions;
+export const {resetGame, setCurrentWorld, resetCurrentWorld, setGameOver, setShowEquipment, setShowBackpack, setShowSpells, setInAnimation, setAfterBattle, setShowStats} = gameSlice.actions;
 export default gameSlice.reducer
