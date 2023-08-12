@@ -4,19 +4,21 @@ import { RootState } from './store'
 import { setShowBackpack } from './slices/gameSlice'
 
 const Backpack = () => {
-    const heroTreasure = useSelector((state: RootState) => state.hero.treasure)
+    const heroBackpack = useSelector((state: RootState) => state.hero.backpack)
+    const heroMoney = useSelector((state: RootState) => state.hero.money)
     const dispatch = useDispatch()
     return (
         <div id='backpack-container'>
             <div>
             <h1>Backpack</h1>
             <button className='hero-button' onClick={() => dispatch(setShowBackpack(false))}>Go Back</button>
+            Money: {heroMoney}
             </div>
             
             {
-            heroTreasure.length > 0
+            heroBackpack.length > 0
             ?
-            heroTreasure.map((item) => (
+            heroBackpack.map((item) => (
                 <div>
                     <h2>{item.name}</h2>
                     <p>Value: {item.money}</p>
