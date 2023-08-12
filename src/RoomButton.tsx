@@ -20,10 +20,6 @@ const RoomButton: React.FC<RoomButtonProps> = ({inRoom}) => {
       }
 
     useEffect(() => {
-        console.log(visited)
-    }, [visited])
-
-    useEffect(() => {
       if (gameState.resettingGame == true) {
         console.log('resetting game is true!')
         setVisited(false)
