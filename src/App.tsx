@@ -6,15 +6,16 @@ import HealingRoom from './HealingRoom'
 import BossRoom from './BossRoom'
 import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { goToBossRoom, setBossBattle, setInRoom, setRandomRooms } from './slices/roomSlice'
+import { goToBossRoom, goToShopRoom, setBossBattle, setInRoom, setRandomRooms } from './slices/roomSlice'
 import WeaponRoom from './WeaponRoom'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
-import { gainLevel, gainMaxHealth, healToFull, resetExperience, resetHero } from './slices/heroSlice'
+import { gainLevel, gainMaxHealth, healToFull, resetExperience, resetHero, setExperienceToLevelUp } from './slices/heroSlice'
 import { resetCurrentWorld, resetGame, setGameOver } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
+import ShopRoom from './ShopRoom'
 
 function App() {
 
@@ -34,9 +35,13 @@ function App() {
     dispatch(setInRoom(true))
   }
 
+  const handleShopRoom = () => {
+    dispatch(goToShopRoom())
+    dispatch(setInRoom(true))
+  }
+
   useEffect(() => {
     dispatch(setRandomRooms())
-    console.log(randomRooms)
   }, [])
 
   useEffect(() => {
@@ -46,15 +51,18 @@ function App() {
   }, [resettingGame, gameOver])
 
   useEffect(() => {
-    console.log(heroStats)
-    if(heroStats.experience >= 100) {
-      dispatch(resetExperience())
+    if(heroStats.experience >= heroStats.experienceToLevelUp) {
       dispatch(gainLevel())
+      dispatch(resetExperience())
       dispatch(gainMaxHealth())
       dispatch(healToFull())
       console.log('hero levels up!')
     }
   }, [heroStats.experience])
+
+  useEffect(() => {
+    dispatch(setExperienceToLevelUp(heroStats.level * heroStats.experienceToLevelUp))
+  }, [heroStats.level])
 
   useEffect(() => {
     if (randomRooms.length === 0 && !inRoom) {
@@ -98,7 +106,7 @@ function App() {
           {bossBattle ? <button className='room-button boss-room-button' onClick={handleBossRoom} disabled={inRoom}>Boss</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
-          <RoomButton inRoom={inRoom} />
+          {bossBattle ? <button onClick={handleShopRoom} className='room-button'>Shop</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           </div>
       )
@@ -119,11 +127,11 @@ function App() {
       {roomState === 'armorRoom' && <ArmorRoom />}
       {roomState === 'bossRoom' && <BossRoom />}
       {roomState === 'spellRoom' && <SpellRoom />}
+      {roomState === 'shopRoom' && <ShopRoom />}
       
     </div>
      }
       <div id='current-hero'>
-      
         <Hero />
       </div>
     </div>
