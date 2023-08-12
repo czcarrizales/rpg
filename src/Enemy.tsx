@@ -22,7 +22,7 @@ const Enemy = () => {
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
     const [randomMoney, setRandomMoney] = useState(0)
 
-    const handleRandomMoney = (x) => {
+    const handleRandomMoney = (x: number) => {
         const min = 5;
         const multiplier = 10;
         const randomNumber = Math.floor(Math.random() * (multiplier - min) + min);
