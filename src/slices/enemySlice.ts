@@ -3,7 +3,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 const enemyTypes = [
     {
         name: 'slime',
-        health: 20,
+        health: 10,
         attack: 5,
         experience: 10,
         world: 1,
@@ -11,7 +11,7 @@ const enemyTypes = [
     },
     {
         name: 'goblin',
-        health: 40,
+        health: 20,
         attack: 10,
         experience: 20,
         world: 1,
