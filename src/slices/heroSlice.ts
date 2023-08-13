@@ -27,11 +27,12 @@ interface Weapon {
     money: number;
   }
 
-  interface Potion {
+  export interface Potion {
     type: string;
     name: string;
     money: number;
     points: number;
+    use: () => void;
   }
 
   type BackpackItem = Treasure | Potion;
@@ -43,6 +44,7 @@ interface Weapon {
     health: number;
     maxHealth: number;
     mana: number;
+    maxMana: number;
     attack: number;
     defense: number;
     money: number;
@@ -59,10 +61,11 @@ const heroSlice = createSlice({
     initialState: {
         level: 1,
         experience: 0,
-        experienceToLevelUp: 50,
-        health: 50,
+        experienceToLevelUp: 10,
+        health: 1,
         maxHealth: 50,
-        mana: 100,
+        mana: 20,
+        maxMana: 20,
         attack: 5,
         defense: 0,
         money: 0,
@@ -101,14 +104,20 @@ const heroSlice = createSlice({
         lowerMana: (state, action) => {
             state.mana -= action.payload
         },
+        raiseMana: (state, action) => {
+            state.mana += action.payload
+        },
         raiseHeroHealth: (state, action) => {
             state.health += action.payload
         },
         healToFull: (state) => {
             state.health = state.maxHealth
         },
-        gainMaxHealth: (state) => {
-            state.maxHealth += 50
+        gainMaxHealth: (state, action) => {
+            state.maxHealth += action.payload
+        },
+        gainMaxMana: (state, action) => {
+            state.maxMana += action.payload
         },
         takeTreasure: (state, action: PayloadAction<Treasure>) => {
             state.backpack.push(action.payload)
@@ -148,20 +157,33 @@ const heroSlice = createSlice({
         gainLevel: (state) => {
             state.level += 1
         },
+        gainAttack: (state, action) => {
+            state.attack += action.payload
+        },
+        gainDefense: (state, action) => {
+            state.defense += action.payload
+        },
         buyItemForBackpack: (state, action) => {
             const {money, item} = action.payload;
             state.money -= money
             state.backpack.push(item)
         },
+        sellItemFromBackpack: (state, action) => {
+            state.backpack = state.backpack.filter(item => item.name !== action.payload.name)
+        },
         resetHero: (state) => {
             state.level = 1
-            state.health = 100
-            state.maxHealth = 100
+            state.health = 50
+            state.maxHealth = 50
+            state.mana = 20
+            state.maxMana = 20
+            state.attack = 5
+            state.defense = 0
             state.backpack = []
             state.weapon = {
-                type: 'weapon',
-                name: 'fists',
-                damage: 10
+                type: null,
+                name: null,
+                damage: null
             }
             state.armor = {
                 type: null,
@@ -176,5 +198,5 @@ const heroSlice = createSlice({
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, sellItemFromBackpack} = heroSlice.actions;
 export default heroSlice.reducer
