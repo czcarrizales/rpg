@@ -3,6 +3,8 @@ import './ShopRoom.css'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import { RootState } from './store'
 import { buyItemForBackpack } from './slices/heroSlice'
+import { useEffect } from 'react'
+import { setInShop } from './slices/shopSlice'
 const ShopRoom = () => {
   const dispatch = useDispatch()
   const shopItems = useSelector((state: RootState) => state.shop.shopItems)
@@ -10,13 +12,17 @@ const ShopRoom = () => {
   const goBack = () => {
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
+    dispatch(setInShop(false))
   }
   const buyItem = (money: any, item: any) => {
     if (heroMoney - money >= 0) {
       dispatch(buyItemForBackpack({money: money, item: item}))
     }
-    
   }
+
+  useEffect(() => {
+    dispatch(setInShop(true))
+  }, [])
   return (
     <div className='shop-room-container'>
         <h1>Shop</h1>
@@ -24,7 +30,7 @@ const ShopRoom = () => {
         {shopItems.map(item => (
           <div>
             <p>{item.name}</p>
-            <p>{item.money}</p>
+            <p>Cost: {item.money}</p>
             <button onClick={() => buyItem(item.money, item)}>Buy</button>
             </div>
         ))}
