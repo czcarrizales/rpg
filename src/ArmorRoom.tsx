@@ -1,8 +1,9 @@
 import  { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { takeArmor } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './ArmorRoom.css'
+import { RootState } from './store'
 
 interface Armor {
   type: string | null,
@@ -13,6 +14,7 @@ interface Armor {
 
 const ArmorRoom = () => {
   const [currentArmor, setCurrentArmor] = useState<Armor | null>(null)
+  const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const dispatch = useDispatch()
   const handleTakeArmor = () => {
     dispatch(takeArmor(currentArmor))
@@ -22,25 +24,38 @@ const ArmorRoom = () => {
 
   useEffect(() => {
     const randomArmor = [
-        {
-            type: 'armor',
-            name: 'wooden shield',
-            defense: 10,
-            image: '/images/armor/wooden-shield.png'
-        },
-        // {
-        //     type: 'armor',
-        //     name: 'leather suit',
-        //     defense: 20
-        // },
-        // {
-        //     type: 'armor',
-        //     name: 'holy shield',
-        //     defense: 50
-        // }
+      {
+        type: 'armor',
+        name: 'paper armor',
+        defense: 5,
+        world: 1,
+        image: null
+      },
+      {
+        type: 'armor',
+        name: 'rusty armor',
+        defense: 10,
+        world: 1,
+        image: '/images/armor/wooden-shield.png'
+      },
+      {
+        type: 'armor',
+        name: 'fur armor',
+        defense: 15,
+        world: 2,
+        image: null
+      },
+      {
+        type: 'armor',
+        name: 'iron armor',
+        defense: 20,
+        world: 2,
+        image: null
+      }
     ]
-    const randomIndex = Math.floor(Math.random() * randomArmor.length)
-    setCurrentArmor(randomArmor[randomIndex])
+    const currentWorldArmorPool = randomArmor.filter(item => item.world == currentWorld)
+    const randomIndex = Math.floor(Math.random() * currentWorldArmorPool.length)
+    setCurrentArmor(currentWorldArmorPool[randomIndex])
   }, [])
   return (
     <div id='armor-room-container'>
