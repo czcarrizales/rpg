@@ -4,55 +4,63 @@ const enemyTypes = [
     {
         name: 'slime',
         health: 10,
-        attack: 5,
-        experience: 10,
+        minAttack: 1,
+        maxAttack: 5,
+        experience: 5,
         world: 1,
         image: '/images/enemies/slime.png'
     },
     {
         name: 'goblin',
         health: 20,
+        minAttack: 5,
+        maxAttack: 10,
         attack: 10,
-        experience: 20,
+        experience: 10,
         world: 1,
         image: '/images/enemies/goblin.png'
     },
     {
+        name: 'pumpkin',
+        health: 30,
+        minAttack: 10,
+        maxAttack: 15,
+        experience: 15,
+        world: 2,
+        image: '/images/enemies/pumpkinEnemy.png'
+    },
+    {
         name: 'skeleton',
-        health: 100,
-        attack: 20,
-        experience: 50,
+        health: 40,
+        minAttack: 15,
+        maxAttack: 20,
+        experience: 20,
         world: 2,
         image: '/images/enemies/skeleton.png'
     },
     {
-        name: 'witch',
-        health: 100,
-        attack: 20,
-        experience: 50,
-        world: 2,
-        image: '/images/enemies/witch.png'
-    },
-    {
-        name: 'frost spider',
+        name: 'ice wolf',
         health: 150,
-        attack: 30,
+        minAttack: 20,
+        maxAttack: 25,
         experience: 60,
         world: 3,
-        image: null
+        image: '/images/enemies/iceWolf.png'
     },
     {
-        name: 'ice picker',
+        name: 'frost orc',
         health: 150,
-        attack: 30,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 60,
         world: 3,
-        image: null
+        image: '/images/enemies/iceOrc.png'
     },
     {
         name: 'lava golem',
         health: 200,
-        attack: 40,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 80,
         world: 4,
         image: null
@@ -60,82 +68,92 @@ const enemyTypes = [
     {
         name: 'fire wisp',
         health: 200,
-        attack: 40,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 80,
         world: 4,
         image: null
     },
     {
-        name: 'vicious dog',
+        name: 'disciple',
         health: 250,
-        attack: 50,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 100,
         world: 5,
-        image: null
+        image: '/images/enemies/disciple.png'
     },
     {
-        name: 'shadow of doubt',
+        name: 'agony',
         health: 250,
-        attack: 50,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 100,
         world: 5,
-        image: null
+        image: '/images/enemies/agony.png'
     }
 ]
 
 const bosses = [
     {
-        name: 'giant spider',
-        health: 100,
-        attack: 20,
-        experience: 100,
+        name: 'dragon',
+        health: 50,
+        minAttack: 25,
+        maxAttack: 30,
+        experience: 30,
         world: 1,
-        image: '/images/bosses/spider-boss.png'
+        image: '/images/bosses/dragon.png'
     },
     {
         name: 'minotaur',
-        health: 100,
-        attack: 20,
-        experience: 100,
+        health: 50,
+        minAttack: 25,
+        maxAttack: 30,
+        experience: 30,
         world: 1,
         image: '/images/bosses/minotaur-boss.png'
     },
     {
-        name: 'jester',
-        health: 200,
-        attack: 40,
-        experience: 100,
+        name: 'witch',
+        health: 100,
+        minAttack: 25,
+        maxAttack: 30,
+        experience: 60,
         world: 2,
-        image: null
+        image: '/images/bosses/witch.png'
     },
     {
-        name: 'witch',
-        health: 200,
-        attack: 40,
+        name: 'giant spider',
+        health: 100,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 200,
         world: 2,
-        image: null
+        image: '/images/bosses/spider-boss.png'
     },
     {
-        name: 'great yeti',
-        health: 500,
-        attack: 60,
+        name: 'ice dancer',
+        health: 150,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 300,
         world: 3,
-        image: null
+        image: '/images/bosses/iceDancer.png'
     },
     {
-        name: 'frozen overlord',
-        health: 500,
-        attack: 60,
-        experience: 400,
+        name: 'ice golem',
+        health: 150,
+        minAttack: 25,
+        maxAttack: 30,
+        experience: 300,
         world: 4,
-        image: null
+        image: '/images/bosses/iceGolem.png'
     },
     {
         name: 'blaze dragon',
         health: 750,
-        attack: 80,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 400,
         world: 4,
         image: null
@@ -143,25 +161,28 @@ const bosses = [
     {
         name: 'magma horror',
         health: 750,
-        attack: 80,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 400,
         world: 4,
         image: null
     },
     {
-        name: 'the true mind',
-        health: 1000,
-        attack: 100,
+        name: 'Oblivion',
+        health: 300,
+        minAttack: 25,
+        maxAttack: 30,
         experience: 500,
         world: 5,
-        image: null
+        image: '/images/bosses/finalBoss.png'
     }
 ]
 
 interface Enemy {
     name: string | null;
     health: number | null;
-    attack: number | null;
+    minAttack: number | null;
+    maxAttack: number | null;
     experience: number | null;
     world: number | null;
     image: string | null;
@@ -193,7 +214,8 @@ const enemySlice = createSlice({
         currentEnemy: {
             name: null,
             health: null,
-            attack: null,
+            minAttack: null,
+            maxAttack: null,
             experience: null,
             world: null,
             image: null
@@ -207,7 +229,8 @@ const enemySlice = createSlice({
             image: null
         },
         enemyIsAttacked: false,
-        bossIsAttacked: false
+        bossIsAttacked: false,
+        randomEnemyDamage: 0
     },
     reducers: {
         enemyTakeDamage: (state, action: PayloadAction<number>) => {
@@ -229,11 +252,14 @@ const enemySlice = createSlice({
         },
         setBossIsAttacked: (state, action) => {
             state.bossIsAttacked = action.payload
+        },
+        setRandomEnemyDamage: (state, action) => {
+            state.randomEnemyDamage = action.payload
         }
     }
 })
 
 
 
-export const {enemyTakeDamage, enemyReset, setEnemyType, setBossType, setEnemyIsAttacked, setBossIsAttacked} = enemySlice.actions;
+export const {enemyTakeDamage, enemyReset, setEnemyType, setBossType, setEnemyIsAttacked, setBossIsAttacked, setRandomEnemyDamage} = enemySlice.actions;
 export default enemySlice.reducer
