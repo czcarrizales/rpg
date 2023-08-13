@@ -4,9 +4,10 @@ import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import {  enemyReset, setBossType } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
-import { setCurrentWorld, setGameOver } from './slices/gameSlice'
+import { setAfterBattle, setCurrentWorld, setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
 import { RootState } from './store'
+import AfterBattle from './AfterBattle'
 
 const BossRoom = () => {
   const dispatch = useDispatch()
@@ -16,12 +17,22 @@ const BossRoom = () => {
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
   const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
+  const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
   const [bossTypeSet, setBossTypeSet] = useState(false)
+  const [randomMoney, setRandomMoney] = useState(0)
+
+  const handleRandomMoney = (x: number) => {
+    const min = 25;
+    const multiplier = 30;
+    const randomNumber = Math.floor(Math.random() * (multiplier - min) + min);
+    setRandomMoney(randomNumber * x)
+}
 
   useEffect(() => {
       dispatch(setBossType(currentWorld))
       setBossTypeSet(true)
       dispatch(setInBattle(true))
+      handleRandomMoney(currentWorld)
   }, [])
 
   useEffect(() => {
@@ -31,11 +42,8 @@ const BossRoom = () => {
             console.log('game is over!')
         } else {
             if (!inAnimation) {
-                setBossTypeSet(false)
+                dispatch(setAfterBattle(true))
                 dispatch(gainExperience(currentEnemy.experience))
-                dispatch(enemyReset())
-                dispatch(goToMapRoom())
-                dispatch(setInRoom(false))
                 dispatch(setResettingRooms())
                 dispatch(setRandomRooms())
                 dispatch(setBossBattle(false))
@@ -45,17 +53,15 @@ const BossRoom = () => {
                   dispatch(setResettingRooms())
                 }, 1000);
             }
-            
         }
           
       } else {
-          console.log('enemy lives!')
+          console.log('boss lives!')
       }
-  }, [currentEnemy, bossTypeSet, inAnimation])
+  }, [currentEnemy, inAnimation])
 
   useEffect(() => {
       if (battleTurn === false && currentEnemy.health > 0) {
-          setTimeout(() => {
               dispatch(heroTakeDamage(currentEnemy.attack))
               setTimeout(() => {
                 dispatch(setHeroIsAttacked(true));
@@ -75,21 +81,40 @@ const BossRoom = () => {
                 }, 100); // Second flash start after 100 milliseconds
               }, 100); // First flash duration is 100 milliseconds
           dispatch(setPlayerTurn(true))
-          }, 500);
           
       } else {
           dispatch(setPlayerTurn(true))
       }
   }, [battleTurn])
 
+  useEffect(() => {
+    console.log('afterBattle changed')
+    console.log(bossTypeSet, 'bosstypeset')
+    console.log(afterBattle, 'afterbattle')
+    console.log(currentEnemy.health, 'currentenemy health')
+    if (bossTypeSet && afterBattle === false && currentEnemy.health! <= 0) {
+        console.log('should go to map now')
+        setBossTypeSet(false)
+        dispatch(goToMapRoom())
+        dispatch(setInRoom(false))
+        dispatch(enemyReset())
+    }
+}, [afterBattle])
+
   return (
+    !afterBattle
+    ?
       <div className={`boss-room-container`}>
-          <h1>{currentEnemy.name}</h1>
+          <h1 className='boss-room-name'>{currentEnemy.name}</h1>
           <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
+          <div className='boss-room-details'>
           <p>Health: {currentEnemy.health}</p>
           <p>Intent: Attack for {currentEnemy.attack} damage!</p>
-          {/* <p>Armor: {enemyArmor}</p> */}
+          </div>
+          
       </div>
+      :
+      <AfterBattle name={currentEnemy.name} xp={currentEnemy.experience} money={randomMoney} />
   )
 }
 
