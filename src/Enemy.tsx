@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
-import { enemyReset, setEnemyType } from './slices/enemySlice'
+import { enemyReset, setEnemyType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, gainMoney, heroTakeDamage} from './slices/heroSlice'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
@@ -19,6 +19,7 @@ const Enemy = () => {
     const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
     const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
     const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
+    const randomEnemyDamage = useSelector((state: RootState) => state.enemy.randomEnemyDamage)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
     const [randomMoney, setRandomMoney] = useState(0)
 
@@ -27,6 +28,11 @@ const Enemy = () => {
         const multiplier = 10;
         const randomNumber = Math.floor(Math.random() * (multiplier - min) + min);
         setRandomMoney(randomNumber * x)
+    }
+
+    const handleRandomDamage = () => {
+        const randomDamageNumber = Math.floor(Math.random() * (currentEnemy.maxAttack! - currentEnemy.minAttack! + 1)) + currentEnemy.minAttack!;
+        return randomDamageNumber
     }
 
     const handleSetInBattle = () => {
@@ -38,10 +44,14 @@ const Enemy = () => {
         setEnemyTypeSet(true)
         handleSetInBattle()
         handleRandomMoney(currentWorld)
+        
     }, [])
 
     useEffect(() => {
-        console.log('setting up useeffect')
+        dispatch(setRandomEnemyDamage(handleRandomDamage()))
+    }, [currentEnemy.name])
+
+    useEffect(() => {
         if (enemyTypeSet && currentEnemy.health! <= 0 ) {
             if (currentWorld == 5 && currentRoom == 'bossRoom') {
                 console.log('game is over!')
@@ -58,7 +68,6 @@ const Enemy = () => {
     }, [currentEnemy, inAnimation])
 
     useEffect(() => {
-        console.log('afterBattle changed')
         if (enemyTypeSet && afterBattle === false && currentEnemy.health! <= 0) {
             setEnemyTypeSet(false)
             dispatch(goToMapRoom())
@@ -69,9 +78,13 @@ const Enemy = () => {
 
     useEffect(() => {
         if (battleTurn === false && currentEnemy.health! > 0) {
-                dispatch(heroTakeDamage(currentEnemy.attack))
+                dispatch(heroTakeDamage(randomEnemyDamage))
                 heroTakeDamageFlash(dispatch)
-            dispatch(setPlayerTurn(true))
+                setTimeout(() => {
+                    dispatch(setPlayerTurn(true))
+                    dispatch(setRandomEnemyDamage(handleRandomDamage()))
+                }, 500);
+                
         } else {
             dispatch(setPlayerTurn(true))
         }
@@ -85,7 +98,7 @@ const Enemy = () => {
             <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image!} alt="" />
             <div className='enemy-details'>
             <p>Health: {currentEnemy.health}</p>
-            <p>Intent: Attack for {currentEnemy.attack} damage!</p>
+            <p>Intent: Attack for {randomEnemyDamage} damage!</p>
             </div>
         </div>
         :
