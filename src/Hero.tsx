@@ -16,13 +16,16 @@ const Hero = () => {
   const heroMaxHealth = useSelector((state: RootState) => state.hero.maxHealth)
   const heroHealth = useSelector((state: RootState) => state.hero.health)
   const heroMana = useSelector((state: RootState) => state.hero.mana)
+  const heroMaxMana = useSelector((state: RootState) => state.hero.maxMana)
   const heroAttack = useSelector((state: RootState) => state.hero.attack)
   const heroDefense = useSelector((state: RootState) => state.hero.defense)
+  const heroMoney = useSelector((state: RootState) => state.hero.money)
   const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
   const heroArmor = useSelector((state: RootState) => state.hero.armor)
   const heroIsAttacked = useSelector((state: RootState) => state.hero.heroIsAttacked)
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const inBattle = useSelector((state: RootState) => state.battle.inBattle)
+  const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
   const showEquipment = useSelector((state: RootState) => state.game.showEquipment)
   const showBackpack = useSelector((state: RootState) => state.game.showBackpack)
   const showSpells = useSelector((state: RootState) => state.game.showSpells)
@@ -52,17 +55,20 @@ const Hero = () => {
                   <>
                   <h2>Stats</h2>
                   <p>Health: {heroHealth}/{heroMaxHealth}</p>
-                  <p>Mana: {heroMana}</p>
+                  <p>Mana: {heroMana}/{heroMaxMana}</p>
                   <p>Attack: {heroAttack} {heroWeapon.damage && `(+${heroWeapon.damage})` }</p>
                   <p>Defense: {heroDefense} {heroArmor.defense && `(+${heroArmor.defense})`}</p>
                   <button onClick={() => dispatch(setShowStats(false))}>Go back</button>
                   </>
                   :
                   <>
-                  <p>xp: {heroExperience} / {heroExperienceToLevelUp}</p>
-                <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
-                <p className='hero-mana-stat'>Mana: {heroMana}</p>
-                <button className='hero-button stats-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
+                  <div className="stats-grid">
+                  <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
+                <p className='hero-mana-stat'>Mana: {heroMana}/{heroMaxMana}</p>
+                <p className='hero-money-stat'>Money: {heroMoney}</p>
+                <p className='hero-xp-stat'>XP: {heroExperience} / {heroExperienceToLevelUp}</p>
+                  </div>
+                
                 </>
                 }
                 
@@ -72,13 +78,14 @@ const Hero = () => {
                 !showSpells
                 ?
                 <div id="hero-buttons">
-                  <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle}>
+                  <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle || inAnimation}>
                     <p>Attack</p>
-                    <p>({heroAttack + heroWeapon.damage!} dmg)</p>
+                    
                     </button>
-                <button className='hero-button' onClick={() => dispatch(setShowSpells(true))}>Spells</button>
-                <button className='hero-button' onClick={() => dispatch(setShowEquipment(true))} disabled={!battleTurn}>Equipment</button>
-                <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn}>Backpack</button>
+                <button className='hero-button' onClick={() => dispatch(setShowSpells(true))} disabled={!battleTurn || inAnimation}>Spells</button>
+                <button className='hero-button' onClick={() => dispatch(setShowEquipment(true))} disabled={!battleTurn || inAnimation}>Equipment</button>
+                <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn || inAnimation}>Backpack</button>
+                <button className='hero-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
                 </div>
                 :
                   <Spells/>
