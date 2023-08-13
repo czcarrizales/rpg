@@ -10,8 +10,8 @@ import { goToBossRoom, goToShopRoom, setBossBattle, setInRoom, setRandomRooms } 
 import WeaponRoom from './WeaponRoom'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
-import { gainLevel, gainMaxHealth, healToFull, resetExperience, resetHero, setExperienceToLevelUp } from './slices/heroSlice'
-import { resetCurrentWorld, resetGame, setGameOver } from './slices/gameSlice'
+import { gainLevel, healToFull, resetExperience, resetHero, setExperienceToLevelUp } from './slices/heroSlice'
+import { resetCurrentWorld, resetGame, setGameOver, setLevelingUp } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
@@ -53,8 +53,8 @@ function App() {
   useEffect(() => {
     if(heroStats.experience >= heroStats.experienceToLevelUp) {
       dispatch(gainLevel())
+      dispatch(setLevelingUp(true))
       dispatch(resetExperience())
-      dispatch(gainMaxHealth())
       dispatch(healToFull())
       console.log('hero levels up!')
     }
