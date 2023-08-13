@@ -5,8 +5,8 @@
 }
 
 #current-room {
+  height: 40vh;
   text-align: center;
-  height: 350px;
   margin-bottom: 8px;
   border: 2px solid white;
 }
@@ -29,10 +29,12 @@
 .map {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: 5px;
-  justify-items: center;
+  justify-items: stretch;
   border: 2px solid white;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .take-button {

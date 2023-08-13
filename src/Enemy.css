@@ -12,11 +12,11 @@
 
 .enemy-name {
     background-color: rgb(0, 0, 0, 0.7);
-    padding: 8px;
+    font-size: 1.4rem;
 }
 .enemy-details {
     background-color: rgb(0, 0, 0, 0.7);
-    padding: 8px;
+    padding: .5em;
 }
 
 .enemy-attacked {
@@ -24,7 +24,7 @@
 }
 
 .enemy-image {
-    max-height: 200px;
     margin-top: 8px;
+    max-height: 150px;
     margin-bottom: 8px;
 }
