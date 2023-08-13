@@ -24,19 +24,19 @@ const WeaponRoom = () => {
     const randomWeapons = [
         {
             type: 'weapon',
-            name: 'basic sword',
+            name: 'wooden sword',
+            damage: 5,
+            image: '/images/weapons/basic-sword.png'
+        },
+        {
+            type: 'weapon',
+            name: 'rusty sword',
             damage: 10,
             image: '/images/weapons/basic-sword.png'
         },
         {
             type: 'weapon',
-            name: 'excalibur',
-            damage: 50,
-            image: '/images/weapons/basic-sword.png'
-        },
-        {
-            type: 'weapon',
-            name: 'keyblade',
+            name: 'iron sword',
             damage: 30,
             image: '/images/weapons/basic-sword.png'
         }
