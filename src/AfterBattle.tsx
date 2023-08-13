@@ -3,7 +3,7 @@ import { setAfterBattle, setLevelingUp } from "./slices/gameSlice"
 import './AfterBattle.css'
 import { useState } from "react"
 import { RootState } from "./store"
-import { gainAttack, gainDefense, gainMaxHealth, gainMaxMana } from "./slices/heroSlice"
+import { gainAttack, gainDefense, gainMaxHealth, gainMaxMana, healToFull, resetExperience, setExperienceToLevelUp } from "./slices/heroSlice"
 
 const AfterBattle = (props: any) => {
   const dispatch = useDispatch()
@@ -12,6 +12,7 @@ const AfterBattle = (props: any) => {
   const [manaPoints, setManaPoints] = useState(0)
   const [attackPoints, setAttackPoints] = useState(0)
   const [defensePoints, setDefensePoints] = useState(0)
+  const heroStats = useSelector((state: RootState) => state.hero)
   const levelingUp = useSelector((state: RootState) => state.game.levelingUp)
 
   const handlePointsChange = (type: any, value: any) => {
@@ -63,6 +64,9 @@ const AfterBattle = (props: any) => {
       dispatch(gainDefense(defense))
       dispatch(setAfterBattle(false))
       dispatch(setLevelingUp(false))
+      dispatch(healToFull())
+      dispatch(resetExperience())
+      dispatch(setExperienceToLevelUp(heroStats.experienceToLevelUp + 10))
     } else {
       dispatch(setAfterBattle(false))
     }
@@ -81,12 +85,12 @@ const AfterBattle = (props: any) => {
           <h2>Level Up!</h2>
           <h3>Level Up Points Left: {levelUpPoints}</h3>
           <div className="level-up-stat">
-            <p>Health: +{healthPoints}</p>
+            <p>Max Health: +{healthPoints}</p>
             <button onClick={() => handlePointsChange('health', -1)}>-</button>
             <button onClick={() => handlePointsChange('health', 1)}>+</button>
           </div>
           <div className="level-up-stat">
-            <p>Mana: +{manaPoints}</p>
+            <p>Max Mana: +{manaPoints}</p>
             <button onClick={() => handlePointsChange('mana', -1)}>-</button>
             <button onClick={() => handlePointsChange('mana', 1)}>+</button>
           </div>
