@@ -9,9 +9,6 @@ import { setPlayerTurn } from './slices/battleSlice'
 
 const Spells = () => {
     const dispatch = useDispatch()
-    const heroMana = useSelector((state: RootState) => state.hero.mana)
-    const heroHealth = useSelector((state: RootState) => state.hero.health)
-    const heroMaxHealth = useSelector((state: RootState) => state.hero.maxHealth)
     const inBattle = useSelector((state: RootState) => state.battle.inBattle)
     const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
     const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)

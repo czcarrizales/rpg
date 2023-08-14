@@ -3,7 +3,6 @@ import { equipArmor, equipWeapon } from './slices/heroSlice'
 import './Equipment.css'
 import { RootState } from './store'
 import { setShowEquipment } from './slices/gameSlice'
-import { useState } from 'react'
 
 const Equipment = ({}) => {
     const heroEquipment = useSelector((state: RootState) => state.hero.equipment)
@@ -11,7 +10,6 @@ const Equipment = ({}) => {
     const heroArmor = useSelector((state: RootState) => state.hero.armor)
     console.log(heroEquipment)
     const dispatch = useDispatch()
-    const [showingAllEquipment, setShowingAllEquipment] = useState(false)
     const handleWeaponEquip = (weapon: any) => {
         dispatch(equipWeapon(weapon))
     }
