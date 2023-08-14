@@ -26,31 +26,45 @@ const ArmorRoom = () => {
     const randomArmor = [
       {
         type: 'armor',
-        name: 'paper armor',
-        defense: 5,
-        world: 1,
-        image: null
-      },
-      {
-        type: 'armor',
-        name: 'rusty armor',
-        defense: 10,
+        name: 'wooden shield',
+        defense: 2,
         world: 1,
         image: '/images/armor/wooden-shield.png'
       },
       {
         type: 'armor',
-        name: 'fur armor',
-        defense: 15,
-        world: 2,
-        image: null
+        name: 'bronze shield',
+        defense: 4,
+        world: 1,
+        image: '/images/armor/bronze-shield.png'
       },
       {
         type: 'armor',
-        name: 'iron armor',
-        defense: 20,
+        name: 'iron shield',
+        defense: 6,
         world: 2,
-        image: null
+        image: '/images/armor/iron-shield.png'
+      },
+      {
+        type: 'armor',
+        name: 'marble shield',
+        defense: 8,
+        world: 2,
+        image: '/images/armor/marble-shield.png'
+      },
+      {
+        type: 'armor',
+        name: 'obsidian shield',
+        defense: 10,
+        world: 2,
+        image: '/images/armor/obsidian-shield.png'
+      },
+      {
+        type: 'armor',
+        name: 'gold shield',
+        defense: 12,
+        world: 2,
+        image: '/images/armor/gold-shield.png'
       }
     ]
     const currentWorldArmorPool = randomArmor.filter(item => item.world == currentWorld)
