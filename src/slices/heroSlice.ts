@@ -4,34 +4,40 @@ interface Weapon {
     type: string | null;
     name: string | null;
     damage: number | null;
+    image: string | undefined;
   }
   
   interface Armor {
     type: string | null;
     name: string | null;
     defense: number | null;
+    image: string | undefined;
   }
   
   type EquipmentItem = Weapon | Armor;
 
-  interface Spell {
+  export interface Spell {
     type: string | null;
     name: string | null;
-    number: number | null;
+    points: number | null;
     mana: number | null;
   }
 
   interface Treasure {
+    id: string;
     type: string;
     name: string;
     money: number;
+    image: string;
   }
 
   export interface Potion {
+    id: string;
     type: string;
     name: string;
     money: number;
     points: number;
+    image: string;
     use: () => void;
   }
 
@@ -62,7 +68,7 @@ const heroSlice = createSlice({
         level: 1,
         experience: 0,
         experienceToLevelUp: 10,
-        health: 1,
+        health: 50,
         maxHealth: 50,
         mana: 20,
         maxMana: 20,
@@ -73,23 +79,20 @@ const heroSlice = createSlice({
         weapon: {
             type: null,
             name: null,
-            damage: null
+            damage: null,
+            image: undefined
         },
         armor: {
             type: null,
             name: null,
-            defense: null
+            defense: null,
+            image: undefined
         } ,
         equipment: [
 
         ],
         spells: [
-            {
-                type: 'healing',
-                name: 'small heal',
-                number: 20,
-                mana: 20
-            }
+            
         ],
         heroIsAttacked: false
     } as HeroState,
@@ -106,6 +109,9 @@ const heroSlice = createSlice({
         },
         raiseMana: (state, action) => {
             state.mana += action.payload
+        },
+        setMana: (state, action) => {
+            state.mana = action.payload
         },
         raiseHeroHealth: (state, action) => {
             state.health += action.payload
@@ -163,13 +169,16 @@ const heroSlice = createSlice({
         gainDefense: (state, action) => {
             state.defense += action.payload
         },
+        learnSpell: (state, action) => {
+            state.spells.push(action.payload)
+        },
         buyItemForBackpack: (state, action) => {
             const {money, item} = action.payload;
             state.money -= money
             state.backpack.push(item)
         },
         sellItemFromBackpack: (state, action) => {
-            state.backpack = state.backpack.filter(item => item.name !== action.payload.name)
+            state.backpack = state.backpack.filter(item => item.id !== action.payload.id)
         },
         resetHero: (state) => {
             state.level = 1
@@ -183,12 +192,14 @@ const heroSlice = createSlice({
             state.weapon = {
                 type: null,
                 name: null,
-                damage: null
+                damage: null,
+                image: undefined
             }
             state.armor = {
                 type: null,
                 name: null,
-                defense: null
+                defense: null,
+                image: undefined
             }
             state.equipment = []
         },
@@ -198,5 +209,5 @@ const heroSlice = createSlice({
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, sellItemFromBackpack} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, sellItemFromBackpack, setMana, learnSpell} = heroSlice.actions;
 export default heroSlice.reducer
