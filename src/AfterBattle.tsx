@@ -81,30 +81,42 @@ const AfterBattle = (props: any) => {
       {
         levelingUp
         &&
-        <>
-          <h2>Level Up!</h2>
-          <h3>Level Up Points Left: {levelUpPoints}</h3>
+        <div id="level-up-container">
+          {/* <h2>Level Up!</h2>
+          <h3>Level Up Points Left: {levelUpPoints}</h3> */}
           <div className="level-up-stat">
-            <p>Max Health: +{healthPoints}</p>
+            <p className="level-up-name">Max Health: +{healthPoints}</p>
+            <div className="level-up-buttons">
             <button onClick={() => handlePointsChange('health', -1)}>-</button>
             <button onClick={() => handlePointsChange('health', 1)}>+</button>
+            </div>
+            
           </div>
           <div className="level-up-stat">
-            <p>Max Mana: +{manaPoints}</p>
+            <p className="level-up-name">Max Mana: +{manaPoints}</p>
+            <div className="level-up-buttons">
             <button onClick={() => handlePointsChange('mana', -1)}>-</button>
             <button onClick={() => handlePointsChange('mana', 1)}>+</button>
+            </div>
+            
           </div>
           <div className="level-up-stat">
-            <p>Attack: +{attackPoints}</p>
+            <p className="level-up-name">Attack: +{attackPoints}</p>
+            <div className="level-up-buttons">
             <button onClick={() => handlePointsChange('attack', -1)}>-</button>
             <button onClick={() => handlePointsChange('attack', 1)}>+</button>
+            </div>
+            
           </div>
           <div className="level-up-stat">
             <p>Defense: +{defensePoints}</p>
+            <div className="level-up-buttons">
             <button onClick={() => handlePointsChange('defense', -1)}>-</button>
             <button onClick={() => handlePointsChange('defense', 1)}>+</button>
+            </div>
+            
           </div>
-        </>
+        </div>
       }
       <button disabled={levelingUp && levelUpPoints > 0} onClick={() => handleLevelUp(healthPoints, manaPoints, attackPoints, defensePoints)}>Continue</button>
     </div>
