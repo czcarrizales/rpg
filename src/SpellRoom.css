@@ -1,0 +1,9 @@
+#spell-room-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    height: 100%;
+    background: radial-gradient(circle, hsla(238, 46%, 48%, 1) 0%, hsla(229, 44%, 13%, 1) 100%);
+}

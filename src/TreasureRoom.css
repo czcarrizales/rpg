@@ -3,7 +3,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: yellow;
+    background: radial-gradient(circle, hsla(44, 59%, 59%, 1) 0%, hsla(10, 78%, 18%, 1) 100%);
+    color: white;
     height: 100%;
 }
 

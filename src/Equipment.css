@@ -6,3 +6,37 @@
     margin-top: 4px;
     margin-bottom: 4px;
 }
+
+.equipment-details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.equipment-detail-image {
+    width: 40px;
+}
+
+#current-weapon {
+    margin-top: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#current-armor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+}
+
+#current-weapon img {
+    width: 40px;
+    margin-left: 8px;
+}
+
+#current-armor img {
+    width: 40px;
+    margin-left: 8px;
+}

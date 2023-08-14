@@ -1,15 +1,38 @@
 .after-battle-container {
     background-color: black;
     color: white;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     height: 100%;
     border: 1px solid red;
     padding: 40px;
 }
 
 .level-up-stat {
-    display: flex;
+    display: grid;
+  grid-template-columns: 1fr auto; /* Two columns: first takes available space, second auto sizes */
+  align-items: center;
+  column-gap: 10px; /* Adjust spacing between columns */
+}
+
+.level-up-name {
+    text-align: left;
+}
+
+#level-up-container {
+    display: flexbox;
+    flex-direction: column;
+    border: 1px solid red;
+}
+
+.level-up-stat button {
+    padding: 4px;
+    margin-left: 4px;
+}
+
+.level-up-buttons {
+    border: 1px solid green;
+    text-align: right;
 }

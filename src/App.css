@@ -2,13 +2,14 @@
   padding: 40px;
   max-width: 500px;
   margin: auto;
+  
 }
 
 #current-room {
   height: 40vh;
   text-align: center;
   margin-bottom: 8px;
-  border: 2px solid white;
+  border: 5px solid rgb(255, 254, 254);
 }
 
 .row {
@@ -35,6 +36,8 @@
   border: 2px solid white;
   margin-bottom: 10px;
   padding: 10px;
+  background-color: #3a342a;
+  border-radius: 10px;
 }
 
 .take-button {
@@ -50,4 +53,12 @@
 .take-button:hover {
   cursor: pointer;
   background-color: rgb(150, 150, 150);
+}
+
+#map-healing-room-button {
+  background-color: green;
+}
+
+#map-shop-room-button {
+  background-color: rgb(218, 124, 2);
 }

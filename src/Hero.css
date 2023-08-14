@@ -1,11 +1,13 @@
 .hero-container {
-    background-color: rgb(0, 0, 88);
+    background: linear-gradient(180deg, hsla(229, 51%, 51%, 1) 2%, hsla(249, 84%, 7%, 1) 100%);
+    border: 5px solid #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
     color: white;
     text-align: center;
-    border: 2px solid white;
     padding: 20px;
     display: flex;
     justify-content: center;
+    border-radius: 10px;
 }
 
 .hero-button {
@@ -48,17 +50,17 @@
 
 .hero-health-stat {
     font-weight: 600;
-    color: rgb(0, 224, 0);
+
 }
 
 .hero-mana-stat {
     font-weight: 600;
-    color: rgb(222, 173, 255);
+
 }
 
 .hero-money-stat {
     font-weight: 600;
-    color: rgb(245, 220, 78);
+
 }
 
 .hero-xp-stat {
