@@ -2,7 +2,7 @@
   padding: 40px;
   max-width: 500px;
   margin: auto;
-  
+  border: 1px solid purple;
 }
 
 #current-room {

@@ -85,7 +85,6 @@ function App() {
   }, [currentWorld, currentEnemy.health])
 
   return (
-    <div>
 <div className='board'>
   
   <div style={{display: inRoom ? 'none' : undefined}}>
@@ -129,7 +128,6 @@ function App() {
       <div id='current-hero'>
         <Hero />
       </div>
-    </div>
     </div>
    
     
