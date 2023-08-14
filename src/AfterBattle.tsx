@@ -109,7 +109,7 @@ const AfterBattle = (props: any) => {
             
           </div>
           <div className="level-up-stat">
-            <p>Defense: +{defensePoints}</p>
+            <p className="level-up-name">Defense: +{defensePoints}</p>
             <div className="level-up-buttons">
             <button onClick={() => handlePointsChange('defense', -1)}>-</button>
             <button onClick={() => handlePointsChange('defense', 1)}>+</button>
