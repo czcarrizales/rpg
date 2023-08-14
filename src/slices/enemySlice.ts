@@ -6,35 +6,35 @@ const enemyTypes = [
         health: 10,
         minAttack: 1,
         maxAttack: 5,
-        experience: 5,
+        experience:2,
         world: 1,
         image: '/images/enemies/slime.png'
     },
     {
         name: 'goblin',
         health: 20,
-        minAttack: 5,
-        maxAttack: 10,
+        minAttack: 3,
+        maxAttack: 6,
         attack: 10,
-        experience: 10,
+        experience: 4,
         world: 1,
         image: '/images/enemies/goblin.png'
     },
     {
         name: 'pumpkin',
         health: 30,
-        minAttack: 10,
-        maxAttack: 15,
-        experience: 15,
+        minAttack: 7,
+        maxAttack: 10,
+        experience: 8,
         world: 2,
         image: '/images/enemies/pumpkinEnemy.png'
     },
     {
         name: 'skeleton',
         health: 40,
-        minAttack: 15,
-        maxAttack: 20,
-        experience: 20,
+        minAttack: 11,
+        maxAttack: 14,
+        experience: 12,
         world: 2,
         image: '/images/enemies/skeleton.png'
     },
@@ -97,18 +97,18 @@ const enemyTypes = [
 const bosses = [
     {
         name: 'dragon',
-        health: 50,
-        minAttack: 25,
-        maxAttack: 30,
-        experience: 30,
+        health: 60,
+        minAttack: 12,
+        maxAttack: 15,
+        experience: 40,
         world: 1,
         image: '/images/bosses/dragon.png'
     },
     {
         name: 'minotaur',
         health: 50,
-        minAttack: 25,
-        maxAttack: 30,
+        minAttack: 10,
+        maxAttack: 13,
         experience: 30,
         world: 1,
         image: '/images/bosses/minotaur-boss.png'
