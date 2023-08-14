@@ -1,5 +1,4 @@
 .enemy-container {
-    background-image: url('/images/backgrounds/forestBackground.png');
     background-size: cover;
     height: 100%;
     width: 100%;
@@ -27,4 +26,24 @@
     margin-top: 8px;
     max-height: 150px;
     margin-bottom: 8px;
+}
+
+.world-1-enemy-background {
+    background-image: url('/images/backgrounds/grassBackground.png');
+}
+
+.world-2-enemy-background {
+    background-image: url('/images/backgrounds/scaryBackground.png');
+}
+
+.world-3-enemy-background {
+    background-image: url('/images/backgrounds/snowyBackground.png');
+}
+
+.world-4-enemy-background {
+    background-image: url('/images/backgrounds/fireBackground.png');
+}
+
+.world-5-enemy-background {
+    background-image: url('images/backgrounds/testBackground.png');
 }
