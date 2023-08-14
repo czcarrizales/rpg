@@ -2,13 +2,13 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 const enemyTypes = [
     {
-        name: 'slime',
+        name: 'plant',
         health: 10,
         minAttack: 1,
         maxAttack: 5,
         experience:2,
         world: 1,
-        image: '/images/enemies/world1/slime.png'
+        image: '/images/enemies/world1/plant.png'
     },
     {
         name: 'goblin',
