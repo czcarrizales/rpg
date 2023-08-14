@@ -3,12 +3,15 @@ import { equipArmor, equipWeapon } from './slices/heroSlice'
 import './Equipment.css'
 import { RootState } from './store'
 import { setShowEquipment } from './slices/gameSlice'
+import { useState } from 'react'
 
 const Equipment = ({}) => {
     const heroEquipment = useSelector((state: RootState) => state.hero.equipment)
+    const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
+    const heroArmor = useSelector((state: RootState) => state.hero.armor)
     console.log(heroEquipment)
     const dispatch = useDispatch()
-
+    const [showingAllEquipment, setShowingAllEquipment] = useState(false)
     const handleWeaponEquip = (weapon: any) => {
         dispatch(equipWeapon(weapon))
     }
@@ -21,12 +24,13 @@ const Equipment = ({}) => {
             ?
             heroEquipment.map((item) => {
                 return (
-                    <div>
-                        <h2>{item.name} ({item.type})</h2>
-                        {item.type === 'weapon' && 'damage' in item && <p>Damage: {item.damage}</p>}
-                        {item.type === 'armor' && 'defense' in item &&  <p>Defense: {item.defense}</p>}
-                        {item.type == 'weapon' && <button className='hero-button' onClick={() => handleWeaponEquip(item)}>Equip</button>}
-                        {item.type == 'armor' && <button className='hero-button' onClick={() => handleArmorEquip(item)}>Equip</button>}
+                    <div className='equipment-details'>
+                        <img className='equipment-detail-image' src={item.image} alt="" />
+                        <p>{item.name}</p>
+                        {item.type === 'weapon' && 'damage' in item && <p>({item.damage} DMG)</p>}
+                        {item.type === 'armor' && 'defense' in item &&  <p>({item.defense} DEF)</p>}
+                        {item.type == 'weapon' && <button  onClick={() => handleWeaponEquip(item)}>Equip</button>}
+                        {item.type == 'armor' && <button onClick={() => handleArmorEquip(item)}>Equip</button>}
                         
                     </div>
     
@@ -42,8 +46,17 @@ const Equipment = ({}) => {
             <div>
             <h1>Equipment</h1>
             <button className='hero-button' onClick={() => dispatch(setShowEquipment(false))}>Go Back</button>
-            </div> 
+            <div id='current-weapon'>
+                <p>Weapon: {heroWeapon.name ? heroWeapon.name : 'None'}</p>
+                {heroWeapon.image && <img src={heroWeapon.image} alt="" />}
+                </div>
+                <div id="current-armor">
+                    <p>Shield: {heroArmor.name ? heroArmor.name : 'None'}</p>
+                    {heroArmor.image && <img src={heroArmor.image} alt="" />}
+                </div>
             {showAllEquipment()}
+            </div>
+            
         </div>
     )
 }
