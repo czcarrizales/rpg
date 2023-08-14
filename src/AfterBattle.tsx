@@ -118,7 +118,7 @@ const AfterBattle = (props: any) => {
           </div>
         </div>
       }
-      <button disabled={levelingUp && levelUpPoints > 0} onClick={() => handleLevelUp(healthPoints, manaPoints, attackPoints, defensePoints)}>Continue</button>
+      <button disabled={levelingUp && levelUpPoints > 0} onClick={() => handleLevelUp(healthPoints, manaPoints, attackPoints, defensePoints)} className="continue-button">Continue</button>
     </div>
   )
 }
