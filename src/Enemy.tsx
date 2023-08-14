@@ -93,7 +93,7 @@ const Enemy = () => {
     return (
         !afterBattle
         ?
-        <div className={`enemy-container }`}>
+        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'world-2-enemy-background'} ${currentWorld === 3 && 'world-3-enemy-background'} ${currentWorld === 4 && 'world-4-enemy-background'} ${currentWorld === 5 && 'world-5-enemy-background'} }`}>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
             <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image!} alt="" />
             <div className='enemy-details'>
