@@ -8,7 +8,7 @@ const enemyTypes = [
         maxAttack: 5,
         experience:2,
         world: 1,
-        image: '/images/enemies/slime.png'
+        image: '/images/enemies/world1/slime.png'
     },
     {
         name: 'goblin',
@@ -18,7 +18,27 @@ const enemyTypes = [
         attack: 10,
         experience: 4,
         world: 1,
-        image: '/images/enemies/goblin.png'
+        image: '/images/enemies/world1/goblin.png'
+    },
+    {
+        name: 'forest wolf',
+        health: 20,
+        minAttack: 3,
+        maxAttack: 6,
+        attack: 10,
+        experience: 4,
+        world: 1,
+        image: '/images/enemies/world1/basicWolf.png'
+    },
+    {
+        name: 'snake',
+        health: 20,
+        minAttack: 3,
+        maxAttack: 6,
+        attack: 10,
+        experience: 4,
+        world: 1,
+        image: '/images/enemies/world1/snake.png'
     },
     {
         name: 'pumpkin',
@@ -27,16 +47,34 @@ const enemyTypes = [
         maxAttack: 10,
         experience: 8,
         world: 2,
-        image: '/images/enemies/pumpkinEnemy.png'
+        image: '/images/enemies/world2/pumpkinEnemy.png'
     },
     {
-        name: 'skeleton',
+        name: 'reaper',
         health: 40,
         minAttack: 11,
         maxAttack: 14,
         experience: 12,
         world: 2,
-        image: '/images/enemies/skeleton.png'
+        image: '/images/enemies/world2/reaper.png'
+    },
+    {
+        name: 'zombie',
+        health: 40,
+        minAttack: 11,
+        maxAttack: 14,
+        experience: 12,
+        world: 2,
+        image: '/images/enemies/world2/zombie.png'
+    },
+    {
+        name: 'twin eyes',
+        health: 40,
+        minAttack: 11,
+        maxAttack: 14,
+        experience: 12,
+        world: 2,
+        image: '/images/enemies/world2/eyes.png'
     },
     {
         name: 'ice wolf',
@@ -45,7 +83,7 @@ const enemyTypes = [
         maxAttack: 25,
         experience: 60,
         world: 3,
-        image: '/images/enemies/iceWolf.png'
+        image: '/images/enemies/world3/iceWolf.png'
     },
     {
         name: 'frost orc',
@@ -54,25 +92,43 @@ const enemyTypes = [
         maxAttack: 30,
         experience: 60,
         world: 3,
-        image: '/images/enemies/iceOrc.png'
+        image: '/images/enemies/world3/iceOrc.png'
     },
     {
-        name: 'lava golem',
+        name: 'demon',
         health: 200,
         minAttack: 25,
         maxAttack: 30,
         experience: 80,
         world: 4,
-        image: null
+        image: '/images/enemies/world4/demon.png'
     },
     {
-        name: 'fire wisp',
+        name: 'fire blob',
         health: 200,
         minAttack: 25,
         maxAttack: 30,
         experience: 80,
         world: 4,
-        image: null
+        image: '/images/enemies/world4/fireBlob.png'
+    },
+    {
+        name: 'lava bird',
+        health: 200,
+        minAttack: 25,
+        maxAttack: 30,
+        experience: 80,
+        world: 4,
+        image: '/images/enemies/world4/lavaBird.png'
+    },
+    {
+        name: 'hell soul',
+        health: 200,
+        minAttack: 25,
+        maxAttack: 30,
+        experience: 80,
+        world: 4,
+        image: '/images/enemies/world4/soul.png'
     },
     {
         name: 'disciple',
@@ -81,7 +137,7 @@ const enemyTypes = [
         maxAttack: 30,
         experience: 100,
         world: 5,
-        image: '/images/enemies/disciple.png'
+        image: '/images/enemies/world5/disciple.png'
     },
     {
         name: 'agony',
@@ -90,7 +146,7 @@ const enemyTypes = [
         maxAttack: 30,
         experience: 100,
         world: 5,
-        image: '/images/enemies/agony.png'
+        image: '/images/enemies/world5/agony.png'
     }
 ]
 
