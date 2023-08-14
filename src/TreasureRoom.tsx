@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { takeTreasure } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
+import {v4 as uuidv4} from 'uuid';
 import './TreasureRoom.css'
 
 const TreasureRoom = () => {
@@ -16,13 +17,16 @@ const TreasureRoom = () => {
   useEffect(() => {
     const randomTreasures = [
       {
+        id: uuidv4(),
         name: 'ruby',
         money: 15,
         image: '/images/treasure/ruby.png'
       },
       {
+        id: uuidv4(),
         name: 'diamond',
-        money: 100
+        money: 100,
+        image: '/images/treasure/diamond.png'
       }
     ]
     const randomIndex = Math.floor(Math.random() * randomTreasures.length)
