@@ -1,5 +1,5 @@
 .after-battle-container {
-    background-color: black;
+    background: linear-gradient(180deg, hsla(229, 51%, 51%, 1) 2%, hsla(249, 84%, 7%, 1) 100%);
     color: white;
     /* display: flex;
     flex-direction: column;
@@ -28,8 +28,13 @@
 }
 
 .level-up-stat button {
-    padding: 4px;
+    padding: .2rem .8rem;
     margin-left: 4px;
+    font-size: 1.6rem;
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    font-weight: 600;
 }
 
 .level-up-buttons {

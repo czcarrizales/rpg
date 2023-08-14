@@ -7,6 +7,7 @@
     align-items: center;
     justify-content: center;
     color: rgb(255, 255, 255);
+    padding: 2rem;
 }
 
 .enemy-name {
@@ -24,7 +25,8 @@
 
 .enemy-image {
     margin-top: 8px;
-    max-height: 150px;
+    width: 50%;
+    max-height: 200px;
     margin-bottom: 8px;
 }
 

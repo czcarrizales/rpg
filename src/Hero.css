@@ -81,6 +81,11 @@
     align-self: center;
   }
 
+  .new-equipment {
+    border-color: yellow;
+    color: yellow;
+  }
+
 @media (hover: none) {
     .hero-button {
         background-color: darkblue;
