@@ -4,7 +4,7 @@ import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import { RootState } from './store'
 import { buyItemForBackpack } from './slices/heroSlice'
 import { useEffect } from 'react'
-import { setInShop } from './slices/shopSlice'
+import { removeFromShop, setInShop } from './slices/shopSlice'
 const ShopRoom = () => {
   const dispatch = useDispatch()
   const shopItems = useSelector((state: RootState) => state.shop.shopItems)
@@ -17,6 +17,7 @@ const ShopRoom = () => {
   const buyItem = (money: any, item: any) => {
     if (heroMoney - money >= 0) {
       dispatch(buyItemForBackpack({money: money, item: item}))
+      dispatch(removeFromShop(item.id))
     }
   }
 
@@ -28,7 +29,8 @@ const ShopRoom = () => {
         <h1>Shop</h1>
         <button onClick={() => goBack()}>go back</button>
         {shopItems.map(item => (
-          <div>
+          <div className='shop-item-details'>
+            <img className='shop-item-image' src={item.image} alt="" />
             <p>{item.name}</p>
             <p>Cost: {item.money}</p>
             <button onClick={() => buyItem(item.money, item)}>Buy</button>
