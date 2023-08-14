@@ -1,7 +1,6 @@
 .board {
   padding: 20px;
   margin: auto;
-  border: 1px solid purple;
   flex-shrink: 0;
   max-width: 500px;
 }
@@ -14,7 +13,6 @@
 }
 
 #current-hero {
-  border: 2px solid red;
   height: 45vh;
 }
 
