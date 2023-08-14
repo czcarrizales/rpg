@@ -56,14 +56,14 @@ const ArmorRoom = () => {
         type: 'armor',
         name: 'obsidian shield',
         defense: 10,
-        world: 2,
+        world: 3,
         image: '/images/armor/obsidian-shield.png'
       },
       {
         type: 'armor',
         name: 'gold shield',
         defense: 12,
-        world: 2,
+        world: 3,
         image: '/images/armor/gold-shield.png'
       }
     ]
