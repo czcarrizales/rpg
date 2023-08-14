@@ -11,13 +11,15 @@
   --attack-bg-color: red;
 }
 
+
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: var(--body-bg-color);
   border: 1px solid red;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
 }
 
