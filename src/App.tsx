@@ -6,11 +6,11 @@ import HealingRoom from './HealingRoom'
 import BossRoom from './BossRoom'
 import { useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { goToBossRoom, goToShopRoom, setBossBattle, setInRoom, setRandomRooms } from './slices/roomSlice'
+import { goToBossRoom, goToHealingRoom, goToShopRoom, setBossBattle, setInRoom, setRandomRooms } from './slices/roomSlice'
 import WeaponRoom from './WeaponRoom'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
-import { gainLevel, healToFull, resetExperience, resetHero, setExperienceToLevelUp } from './slices/heroSlice'
+import { gainLevel, resetHero } from './slices/heroSlice'
 import { resetCurrentWorld, resetGame, setGameOver, setLevelingUp } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
@@ -27,7 +27,6 @@ function App() {
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy)
   const gameOver = useSelector((state: RootState) => state.game.gameOver)
-  const resettingGame = useSelector((state: RootState) => state.game.resettingGame)
   const dispatch = useDispatch()
 
   const handleBossRoom = () => {
@@ -40,29 +39,22 @@ function App() {
     dispatch(setInRoom(true))
   }
 
+  const handleHealingRoom = () => {
+    dispatch(goToHealingRoom())
+    dispatch(setInRoom(true))
+  }
+
   useEffect(() => {
     dispatch(setRandomRooms())
   }, [])
 
   useEffect(() => {
-    if (resettingGame && gameOver) {
-      console.log('this is where we set the random rooms again')
-    }
-  }, [resettingGame, gameOver])
-
-  useEffect(() => {
     if(heroStats.experience >= heroStats.experienceToLevelUp) {
       dispatch(gainLevel())
       dispatch(setLevelingUp(true))
-      dispatch(resetExperience())
-      dispatch(healToFull())
       console.log('hero levels up!')
     }
   }, [heroStats.experience])
-
-  useEffect(() => {
-    dispatch(setExperienceToLevelUp(heroStats.level * heroStats.experienceToLevelUp))
-  }, [heroStats.level])
 
   useEffect(() => {
     if (randomRooms.length === 0 && !inRoom) {
@@ -83,6 +75,9 @@ function App() {
   useEffect(() => {
     if (currentWorld == 5 && currentEnemy.health! <= 0 && currentEnemy.health !== null && roomState === 'bossRoom') {
       dispatch(resetGame(true))
+      setTimeout(() => {
+        dispatch(resetGame(false))
+      }, 100);
       dispatch(resetHero())
       dispatch(resetCurrentWorld())
       console.log('game is over')
@@ -100,13 +95,13 @@ function App() {
       (
         <div id='current-room' className='map'>
 <RoomButton inRoom={inRoom} />
-          <RoomButton inRoom={inRoom} />
+          {bossBattle ? <button id='map-healing-room-button' className='room-button' onClick={handleHealingRoom} disabled={inRoom}>Rest</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
           {bossBattle ? <button className='room-button boss-room-button' onClick={handleBossRoom} disabled={inRoom}>Boss</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           <RoomButton inRoom={inRoom} />
-          {bossBattle ? <button onClick={handleShopRoom} className='room-button'>Shop</button> : <RoomButton inRoom={inRoom} />}
+          {bossBattle ? <button onClick={handleShopRoom} id='map-shop-room-button' className='room-button'>Shop</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           </div>
       )
