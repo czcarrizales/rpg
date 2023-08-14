@@ -4,6 +4,7 @@ import { takeArmor } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './ArmorRoom.css'
 import { RootState } from './store'
+import { setNewEquipment } from './slices/gameSlice'
 
 interface Armor {
   type: string | null,
@@ -20,6 +21,7 @@ const ArmorRoom = () => {
     dispatch(takeArmor(currentArmor))
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
+    dispatch(setNewEquipment(true))
   }
 
   useEffect(() => {

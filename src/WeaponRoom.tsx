@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import { takeWeapon } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './WeaponRoom.css'
+import { setNewEquipment } from './slices/gameSlice'
 
 interface Weapon {
   type: string;
@@ -18,6 +19,7 @@ const WeaponRoom = () => {
     dispatch(takeWeapon(currentWeapon))
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
+    dispatch(setNewEquipment(true))
   }
 
   useEffect(() => {
