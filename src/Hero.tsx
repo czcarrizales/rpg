@@ -8,6 +8,7 @@ import Backpack from './Backpack'
 import { setInAnimation, setNewEquipment, setShowBackpack, setShowEquipment, setShowSpells, setShowStats } from './slices/gameSlice'
 import Spells from './Spells'
 import { enemyTakeDamageFlash } from './utilities'
+import Stats from './Stats'
 
 const Hero = () => {
   // const heroLevel = useSelector((state: RootState) => state.hero.level)
@@ -18,10 +19,8 @@ const Hero = () => {
   const heroMana = useSelector((state: RootState) => state.hero.mana)
   const heroMaxMana = useSelector((state: RootState) => state.hero.maxMana)
   const heroAttack = useSelector((state: RootState) => state.hero.attack)
-  const heroDefense = useSelector((state: RootState) => state.hero.defense)
   const heroMoney = useSelector((state: RootState) => state.hero.money)
   const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
-  const heroArmor = useSelector((state: RootState) => state.hero.armor)
   const heroIsAttacked = useSelector((state: RootState) => state.hero.heroIsAttacked)
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const inBattle = useSelector((state: RootState) => state.battle.inBattle)
@@ -45,42 +44,29 @@ const Hero = () => {
   return (
     <div className={`hero-container ${heroIsAttacked ? 'hero-attacked' : ''}`}>
       {
-        !showEquipment && !showBackpack
+        !showEquipment && !showBackpack && !showSpells && !showStats
           ?
           (
-            <div className='hero-content'>
+            <div>
               <div id="hero-stats">
-                {
-                  showStats
-                  ?
-                  <>
+                  {/* <>
                   <h2>Stats</h2>
                   <p>Health: {heroHealth}/{heroMaxHealth}</p>
                   <p>Mana: {heroMana}/{heroMaxMana}</p>
                   <p>Attack: {heroAttack} {heroWeapon.damage && `(+${heroWeapon.damage})` }</p>
                   <p>Defense: {heroDefense} {heroArmor.defense && `(+${heroArmor.defense})`}</p>
                   <button onClick={() => dispatch(setShowStats(false))}>Go back</button>
-                  </>
-                  :
-                  <>
+                  </> */}
                   <div className="stats-grid">
                   <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
                 <p className='hero-mana-stat'>Mana: {heroMana}/{heroMaxMana}</p>
                 <p className='hero-money-stat'>Money: {heroMoney}</p>
                 <p className='hero-xp-stat'>XP: {heroExperience} / {heroExperienceToLevelUp}</p>
                   </div>
-                
-                </>
-                }
-                
               </div>
-
-              {
-                !showSpells
-                ?
                 <div id="hero-buttons">
                   <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle || inAnimation}>
-                    <p>Attack ({heroAttack} DMG)</p>
+                    <p>Attack</p>
                     
                     </button>
                 <button className='hero-button' onClick={() => dispatch(setShowSpells(true))} disabled={!battleTurn || inAnimation}>Spells</button>
@@ -88,10 +74,6 @@ const Hero = () => {
                 <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn || inAnimation}>Backpack</button>
                 <button className='hero-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
                 </div>
-                :
-                  <Spells/>
-                
-              }
             </div>
           )
           :
@@ -106,6 +88,10 @@ const Hero = () => {
           showSpells
           ?
           <Spells />
+          :
+          showStats
+          ?
+          <Stats />
           :
           null
       }
