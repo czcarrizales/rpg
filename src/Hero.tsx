@@ -5,7 +5,7 @@ import { setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
 import Equipment from './Equipment'
 import Backpack from './Backpack'
-import { setInAnimation, setShowBackpack, setShowEquipment, setShowSpells, setShowStats } from './slices/gameSlice'
+import { setInAnimation, setNewEquipment, setShowBackpack, setShowEquipment, setShowSpells, setShowStats } from './slices/gameSlice'
 import Spells from './Spells'
 import { enemyTakeDamageFlash } from './utilities'
 
@@ -30,6 +30,7 @@ const Hero = () => {
   const showBackpack = useSelector((state: RootState) => state.game.showBackpack)
   const showSpells = useSelector((state: RootState) => state.game.showSpells)
   const showStats = useSelector((state: RootState) => state.game.showStats)
+  const newEquipment = useSelector((state: RootState) => state.game.newEquipment)
   const dispatch = useDispatch()
 
   const handleAttackEnemy = async ()  => {
@@ -79,11 +80,11 @@ const Hero = () => {
                 ?
                 <div id="hero-buttons">
                   <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle || inAnimation}>
-                    <p>Attack</p>
+                    <p>Attack ({heroAttack} DMG)</p>
                     
                     </button>
                 <button className='hero-button' onClick={() => dispatch(setShowSpells(true))} disabled={!battleTurn || inAnimation}>Spells</button>
-                <button className='hero-button' onClick={() => dispatch(setShowEquipment(true))} disabled={!battleTurn || inAnimation}>Equipment</button>
+                <button className={`hero-button ${newEquipment && 'new-equipment'}`} onClick={() => {dispatch(setShowEquipment(true)), dispatch(setNewEquipment(false))}} disabled={!battleTurn || inAnimation}>Equipment</button>
                 <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn || inAnimation}>Backpack</button>
                 <button className='hero-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
                 </div>
