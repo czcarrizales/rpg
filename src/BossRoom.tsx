@@ -1,13 +1,14 @@
 import  { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInBattle, setPlayerTurn } from './slices/battleSlice'
-import {  enemyReset, setBossType } from './slices/enemySlice'
+import {  enemyReset, setBossType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
 import { setAfterBattle, setCurrentWorld, setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
 import { RootState } from './store'
 import AfterBattle from './AfterBattle'
+import { resetIdOnAllShopItems, restockShop } from './slices/shopSlice'
 
 const BossRoom = () => {
   const dispatch = useDispatch()
@@ -18,6 +19,7 @@ const BossRoom = () => {
   const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
   const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
   const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
+  const randomEnemyDamage = useSelector((state: RootState) => state.enemy.randomEnemyDamage)
   const [bossTypeSet, setBossTypeSet] = useState(false)
   const [randomMoney, setRandomMoney] = useState(0)
 
@@ -28,12 +30,22 @@ const BossRoom = () => {
     setRandomMoney(randomNumber * x)
 }
 
-  useEffect(() => {
-      dispatch(setBossType(currentWorld))
-      setBossTypeSet(true)
-      dispatch(setInBattle(true))
-      handleRandomMoney(currentWorld)
-  }, [])
+const handleRandomDamage = () => {
+    const randomDamageNumber = Math.floor(Math.random() * (currentEnemy.maxAttack! - currentEnemy.minAttack! + 1)) + currentEnemy.minAttack!;
+    return randomDamageNumber
+}
+useEffect(() => {
+    dispatch(setBossType(currentWorld))
+    setBossTypeSet(true)
+    dispatch(setInBattle(true))
+    handleRandomMoney(currentWorld)
+}, [])
+
+useEffect(() => {
+    dispatch(setRandomEnemyDamage(handleRandomDamage()))
+}, [currentEnemy.name])
+
+  
 
   useEffect(() => {
       if (bossTypeSet && currentEnemy.health <= 0 ) {
@@ -49,6 +61,8 @@ const BossRoom = () => {
                 dispatch(setBossBattle(false))
                 dispatch(setCurrentWorld())
                 dispatch(setInBattle(false))
+                dispatch(restockShop())
+                dispatch(resetIdOnAllShopItems())
                 setTimeout(() => {
                   dispatch(setResettingRooms())
                 }, 1000);
@@ -62,7 +76,7 @@ const BossRoom = () => {
 
   useEffect(() => {
       if (battleTurn === false && currentEnemy.health > 0) {
-              dispatch(heroTakeDamage(currentEnemy.attack))
+              dispatch(heroTakeDamage(randomEnemyDamage))
               setTimeout(() => {
                 dispatch(setHeroIsAttacked(true));
                 
@@ -109,7 +123,7 @@ const BossRoom = () => {
           <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
           <div className='boss-room-details'>
           <p>Health: {currentEnemy.health}</p>
-          <p>Intent: Attack for {currentEnemy.attack} damage!</p>
+          <p>Intent: Attack for {randomEnemyDamage} damage!</p>
           </div>
           
       </div>
