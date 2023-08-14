@@ -26,19 +26,37 @@ const WeaponRoom = () => {
             type: 'weapon',
             name: 'wooden sword',
             damage: 5,
-            image: '/images/weapons/basic-sword.png'
+            image: '/images/weapons/wooden-sword.png'
         },
         {
             type: 'weapon',
-            name: 'rusty sword',
+            name: 'bronze sword',
             damage: 10,
-            image: '/images/weapons/basic-sword.png'
+            image: '/images/weapons/bronze-sword.png'
         },
         {
             type: 'weapon',
             name: 'iron sword',
             damage: 30,
-            image: '/images/weapons/basic-sword.png'
+            image: '/images/weapons/iron-sword.png'
+        },
+        {
+          type: 'weapon',
+            name: 'marble sword',
+            damage: 40,
+            image: '/images/weapons/marble-sword.png'
+        },
+        {
+          type: 'weapon',
+            name: 'obsidian sword',
+            damage: 50,
+            image: '/images/weapons/obsidian-sword.png'
+        },
+        {
+          type: 'weapon',
+            name: 'gold sword',
+            damage: 60,
+            image: '/images/weapons/gold-sword.png'
         }
     ]
     const randomIndex = Math.floor(Math.random() * randomWeapons.length)
