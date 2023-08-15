@@ -57,7 +57,7 @@ const SpellRoom = () => {
     <div id="spell-room-container">
       <h1>Spell Room</h1>
       <p>{randomSpell.name}</p>
-      <button onClick={handleLearnSpell}>Learn</button>
+      <button className="take-button" onClick={handleLearnSpell}>Learn</button>
     </div>
   )
 }
