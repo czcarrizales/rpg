@@ -15,7 +15,6 @@ import { resetCurrentWorld, resetGame, setGameOver, setLevelingUp } from './slic
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
-import {Howl} from 'howler'
 import adventure from '../public/music/delightful_adventure.mp3'
 import ShopRoom from './ShopRoom'
 
@@ -33,7 +32,7 @@ function App() {
   const dispatch = useDispatch()
 
   const playMusic = () => {
-    const audio = new Audio('/music/delightful_adventure.mp3')
+    const audio = new Audio(adventure)
     audio.loop = true;
     audio.play()
   }
