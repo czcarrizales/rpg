@@ -87,7 +87,7 @@ function App() {
   return (
 <div className='board'>
   
-  <div style={{display: inRoom ? 'none' : undefined}}>
+  <div className='inRoom-display' style={{display: inRoom ? 'none' : undefined}}>
     {
       !gameOver
       ?
@@ -108,6 +108,7 @@ function App() {
           <div id='current-room'>
             <GameOver />
           </div>
+          
           
     }
   </div>
