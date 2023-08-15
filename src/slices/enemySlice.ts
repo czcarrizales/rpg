@@ -202,7 +202,7 @@ const bosses = [
         minAttack: 25,
         maxAttack: 30,
         experience: 300,
-        world: 4,
+        world: 3,
         image: '/images/bosses/iceGolem.png'
     },
     {
