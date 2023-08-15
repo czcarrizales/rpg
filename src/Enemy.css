@@ -1,5 +1,7 @@
 .enemy-container {
     background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     height: 100%;
     width: 100%;
     display: flex;
@@ -13,6 +15,7 @@
 .enemy-name {
     background-color: rgb(0, 0, 0, 0.7);
     font-size: 1.4rem;
+    padding: 8px;
 }
 .enemy-details {
     background-color: rgb(0, 0, 0, 0.7);
@@ -26,7 +29,8 @@
 .enemy-image {
     margin-top: 8px;
     width: 50%;
-    max-height: 200px;
+    max-width: 120px;
+    max-height: auto;
     margin-bottom: 8px;
 }
 
