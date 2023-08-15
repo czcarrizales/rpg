@@ -34,6 +34,7 @@ function App() {
   const playMusic = () => {
     const audio = new Audio(adventure)
     audio.loop = true;
+    audio.volume = 0.1
     audio.play()
   }
 
