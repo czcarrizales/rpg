@@ -32,13 +32,14 @@ function App() {
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
   const dispatch = useDispatch()
 
-  const sound = new Howl({
-    src: adventure,
-    preload: true,
-    volume: 0.5
-  })
+  
 
   const playMusic = () => {
+    const sound = new Howl({
+      src: adventure,
+      preload: true,
+      volume: 0.2
+    })
     sound.play()
   }
 
@@ -98,7 +99,9 @@ function App() {
   }, [currentWorld, currentEnemy.health])
 
   useEffect(() => {
-    playMusic()
+    if (playingMusic) {
+      playMusic()
+    }
   }, [playingMusic])
 
   return (
