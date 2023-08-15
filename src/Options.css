@@ -1,0 +1,10 @@
+.options-container-top {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.options-container-back-button  {
+    padding:  .6rem 1rem;
+    margin-left: auto;
+}
