@@ -43,10 +43,17 @@ const Spells = () => {
       }
   
     return (
-        <div id='spell-buttons'>
-            <button className='hero-button' onClick={() => dispatch(setShowSpells(false))}>Back</button>
+        <div>
+            <div className="spells-container-top">
+                <h1>Spells</h1>
+            <button className='hero-button spells-container-back-button' onClick={() => dispatch(setShowSpells(false))}>Back</button>
+            </div>
+<div id='spell-buttons'>
+            
             {heroSpells.map(spell => (<button className='hero-button' onClick={() => handleSpellUse(spell)} disabled={!battleTurn || !inBattle || inAnimation}>{spell.name}</button>))}
         </div>
+        </div>
+        
 
     )
 }
