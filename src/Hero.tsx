@@ -64,6 +64,7 @@ const Hero = () => {
                 <button className={`hero-button ${newEquipment && 'new-equipment'}`} onClick={() => {dispatch(setShowEquipment(true)), dispatch(setNewEquipment(false))}} disabled={!battleTurn || inAnimation}>Equipment</button>
                 <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn || inAnimation}>Backpack</button>
                 <button className='hero-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
+                <button className='hero-button'>Options</button>
                 </div>
                 )
                 :
