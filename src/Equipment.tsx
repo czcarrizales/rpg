@@ -41,20 +41,24 @@ const Equipment = ({}) => {
 
     return (
         <div id='equipment-container'>
-            <div>
-            <h1>Equipment</h1>
-            <button className='hero-button' onClick={() => dispatch(setShowEquipment(false))}>Go Back</button>
+                <div className='equipment-container-top'>
+                    <h1 className='equipment-container-title'>Equipment</h1>
+                    <button className='equipment-container-back-button hero-button' onClick={() => dispatch(setShowEquipment(false))}>Back</button>
+                </div>
+            {/* <h1>Equipment</h1>
+            <button className='hero-button' onClick={() => dispatch(setShowEquipment(false))}>Go Back</button> */}
+            <div className="current-equipment">
             <div id='current-weapon'>
-                <p>Weapon: {heroWeapon.name ? heroWeapon.name : 'None'}</p>
+                <p>Weapon: {heroWeapon.name ? `${heroWeapon.name} (${heroWeapon.damage} DMG)` : 'None'}</p>
                 {heroWeapon.image && <img src={heroWeapon.image} alt="" />}
                 </div>
                 <div id="current-armor">
-                    <p>Shield: {heroArmor.name ? heroArmor.name : 'None'}</p>
+                    <p>Shield: {heroArmor.name ? `${heroArmor.name} (${heroArmor.defense} DEF)` : 'None'}</p>
                     {heroArmor.image && <img src={heroArmor.image} alt="" />}
                 </div>
-            {showAllEquipment()}
             </div>
             
+            {showAllEquipment()}
         </div>
     )
 }
