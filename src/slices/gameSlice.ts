@@ -10,10 +10,12 @@ const gameSlice = createSlice({
         showBackpack: false,
         showSpells: false,
         showStats: false,
+        showOptions: false,
         inAnimation: false,
         afterBattle: false,
         levelingUp: false,
-        newEquipment: false
+        newEquipment: false,
+        playingMusic: false
     },
     reducers: {
         resetGame: (state, action) => {
@@ -51,9 +53,12 @@ const gameSlice = createSlice({
         },
         setNewEquipment: (state, action) => {
             state.newEquipment = action.payload
+        },
+        setPlayingMusic: (state, action) => {
+            state.playingMusic = action.payload
         }
     }
 })
 
-export const {resetGame, setCurrentWorld, resetCurrentWorld, setGameOver, setShowEquipment, setShowBackpack, setShowSpells, setInAnimation, setAfterBattle, setShowStats, setLevelingUp, setNewEquipment} = gameSlice.actions;
+export const {resetGame, setCurrentWorld, resetCurrentWorld, setGameOver, setShowEquipment, setShowBackpack, setShowSpells, setInAnimation, setAfterBattle, setShowStats, setLevelingUp, setNewEquipment, setPlayingMusic} = gameSlice.actions;
 export default gameSlice.reducer

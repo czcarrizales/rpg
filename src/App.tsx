@@ -15,6 +15,8 @@ import { resetCurrentWorld, resetGame, setGameOver, setLevelingUp } from './slic
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
+import {Howl} from 'howler'
+import adventure from '../public/music/delightful_adventure.mp3'
 import ShopRoom from './ShopRoom'
 
 function App() {
@@ -27,7 +29,16 @@ function App() {
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy)
   const gameOver = useSelector((state: RootState) => state.game.gameOver)
+  const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
   const dispatch = useDispatch()
+
+  const playMusic = () => {
+    const sound = new Howl({
+      src: adventure,
+      preload: true
+    })
+    sound.play()
+  }
 
   const handleBossRoom = () => {
     dispatch(goToBossRoom())
@@ -83,6 +94,10 @@ function App() {
       console.log('game is over')
     }
   }, [currentWorld, currentEnemy.health])
+
+  useEffect(() => {
+    playMusic()
+  }, [playingMusic])
 
   return (
 <div className='board'>

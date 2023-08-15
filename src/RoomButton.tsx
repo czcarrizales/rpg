@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { goToRandomRoom, setInRoom } from './slices/roomSlice'
 import './RoomButton.css'
 import { RootState } from './store';
+import { setPlayingMusic } from './slices/gameSlice';
 
 interface RoomButtonProps {
   inRoom: boolean;
@@ -11,9 +12,13 @@ interface RoomButtonProps {
 const RoomButton: React.FC<RoomButtonProps> = ({inRoom}) => {
     const gameState = useSelector((state: RootState) => state.game)
     const resettingRooms = useSelector((state: RootState) => state.room.resettingRooms)
+    const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
     const dispatch = useDispatch()
     const [visited, setVisited] = useState(false)
     const handleRandomRoom = () => {
+      if (!playingMusic) {
+        dispatch(setPlayingMusic(true))
+      }
         dispatch(goToRandomRoom())
         dispatch(setInRoom(true))
         setVisited(true)
