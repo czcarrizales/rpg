@@ -1,0 +1,10 @@
+.stats-container-top {
+    display: flex;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.stats-container-back-button {
+    padding:  .6rem 1rem;
+    margin-left: auto;
+}
