@@ -27,13 +27,13 @@ const ShopRoom = () => {
   return (
     <div className='shop-room-container'>
         <h1>Shop</h1>
-        <button onClick={() => goBack()}>go back</button>
+        <button className='hero-button' onClick={() => goBack()}>go back</button>
         {shopItems.map(item => (
           <div className='shop-item-details'>
             <img className='shop-item-image' src={item.image} alt="" />
             <p>{item.name}</p>
             <p>Cost: {item.money}</p>
-            <button onClick={() => buyItem(item.money, item)}>Buy</button>
+            <button className='take-button' onClick={() => buyItem(item.money, item)}>Buy</button>
             </div>
         ))}
     </div>
