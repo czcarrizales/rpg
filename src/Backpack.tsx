@@ -48,25 +48,32 @@ const Backpack = () => {
     }
     return (
         <div id='backpack-container'>
-            <div>
+            <div className='backpack-container-top'>
             <h1>Backpack</h1>
-            <button className='hero-button' onClick={() => dispatch(setShowBackpack(false))}>Go Back</button>
+            <button className='hero-button backpack-back-button' onClick={() => dispatch(setShowBackpack(false))}>Back</button>
             </div>
+            <div className='backpack-all-items'>
             {
             heroBackpack.length > 0
             ?
             heroBackpack.map((item) => (
                 <div className='backpack-item-details'>
                     <img className='backpack-item-image' src={item.image} alt="" />
-                    <p>{item.name} (Value: {item.money})</p>
+                    <p className='backpack-item-description'>
+                        {item.name}</p>
+                        {item.type && <button onClick={() => handleItemUse(item)}>Use</button>}
+                        <p className='backpack-item-value'>(Value: {item.money})</p>
                     {inShop && <button onClick={() => handleSellItem(item, item.money)}>Sell</button>}
-                    {item.type && <button onClick={() => handleItemUse(item)}>Use</button>}
+                    
                 </div>
 
             ))
             :
             <p>No items</p>
+            
             }
+            </div>
+            
         </div>
     )
 }
