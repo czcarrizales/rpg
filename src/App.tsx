@@ -32,15 +32,10 @@ function App() {
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
   const dispatch = useDispatch()
 
-  
-
   const playMusic = () => {
-    const sound = new Howl({
-      src: adventure,
-      preload: true,
-      volume: 0.2
-    })
-    sound.play()
+    const audio = new Audio('/music/delightful_adventure.mp3')
+    audio.loop = true;
+    audio.play()
   }
 
   const handleBossRoom = () => {
@@ -61,6 +56,12 @@ function App() {
   useEffect(() => {
     dispatch(setRandomRooms())
   }, [])
+
+  useEffect(() => {
+    if (playingMusic) {
+      playMusic()
+    }
+  }, [playingMusic])
 
   useEffect(() => {
     if(heroStats.experience >= heroStats.experienceToLevelUp) {
@@ -98,11 +99,7 @@ function App() {
     }
   }, [currentWorld, currentEnemy.health])
 
-  useEffect(() => {
-    if (playingMusic) {
-      playMusic()
-    }
-  }, [playingMusic])
+  
 
   return (
 <div className='board'>
