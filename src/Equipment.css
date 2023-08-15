@@ -5,11 +5,13 @@
     color: white;
     margin-top: 16px;
     margin-bottom: 4px;
+    overflow: auto;
 }
 
 .equipment-details {
     display: flex;
     align-items: center;
+    margin-top: 8px;
 }
 
 .equipment-detail-image {
@@ -45,4 +47,13 @@
 .equipment-container-back-button {
     margin-left: auto;
     padding:  .6rem 1rem;
+}
+
+.equip-button {
+    padding: .8rem;
+    margin-left: auto;
+}
+
+.equipment-container-all-equipment {
+    overflow: auto;
 }

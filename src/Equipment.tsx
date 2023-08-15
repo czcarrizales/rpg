@@ -27,8 +27,8 @@ const Equipment = ({}) => {
                         <p>{item.name}</p>
                         {item.type === 'weapon' && 'damage' in item && <p>({item.damage} DMG)</p>}
                         {item.type === 'armor' && 'defense' in item &&  <p>({item.defense} DEF)</p>}
-                        {item.type == 'weapon' && <button  onClick={() => handleWeaponEquip(item)}>Equip</button>}
-                        {item.type == 'armor' && <button onClick={() => handleArmorEquip(item)}>Equip</button>}
+                        {item.type == 'weapon' && <button className='equip-button hero-button'  onClick={() => handleWeaponEquip(item)}>Equip</button>}
+                        {item.type == 'armor' && <button className='equip-button hero-button' onClick={() => handleArmorEquip(item)}>Equip</button>}
                         
                     </div>
     
@@ -57,8 +57,10 @@ const Equipment = ({}) => {
                     {heroArmor.image && <img src={heroArmor.image} alt="" />}
                 </div>
             </div>
+            <div className="equipment-container-all-equipment">
+                {showAllEquipment()}
+            </div>
             
-            {showAllEquipment()}
         </div>
     )
 }
