@@ -27,6 +27,10 @@ html {
   width: 100%;
 }
 
+body, html {
+  overscroll-behavior-y: contain;
+}
+
 #root {
   width: 100%;
 }
