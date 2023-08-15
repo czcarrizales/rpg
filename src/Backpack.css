@@ -1,14 +1,43 @@
 #backpack-container {
     color: white;
     width: 100%;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: auto;
 }
 
 .backpack-item-details {
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin-top: 4px;
 }
 
 .backpack-item-image {
-    width: 40px;
+    width: 20px;
+}
+
+.backpack-item-description {
+    margin-left: 8px;
+}
+
+.backpack-back-button {
+    padding:  .6rem 1rem;
+    margin-left: auto;
+}
+
+.backpack-container-top {
+    display: flex;
+    align-items: center;
+}
+
+.backpack-item-value {
+    margin-left: auto;
+}
+
+.backpack-all-items {
+    display: flex;
+    flex-grow: 1;
+    overflow: auto;
 }

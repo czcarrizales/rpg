@@ -1,8 +1,8 @@
 .board {
   padding: 20px;
   margin: auto;
-  flex-shrink: 0;
   max-width: 500px;
+  height: 100%;
 }
 
 #current-room {
@@ -65,4 +65,8 @@
 
 #map-shop-room-button {
   background-color: rgb(218, 124, 2);
+}
+
+.inRoom-display {
+  height: 100%;
 }
