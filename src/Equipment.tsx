@@ -8,7 +8,6 @@ const Equipment = ({}) => {
     const heroEquipment = useSelector((state: RootState) => state.hero.equipment)
     const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
     const heroArmor = useSelector((state: RootState) => state.hero.armor)
-    console.log(heroEquipment)
     const dispatch = useDispatch()
     const handleWeaponEquip = (weapon: any) => {
         dispatch(equipWeapon(weapon))
