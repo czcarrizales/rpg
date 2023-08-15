@@ -43,20 +43,7 @@ const Hero = () => {
 
   return (
     <div className={`hero-container ${heroIsAttacked ? 'hero-attacked' : ''}`}>
-      {
-        !showEquipment && !showBackpack && !showSpells && !showStats
-          ?
-          (
-            <div>
               <div id="hero-stats">
-                  {/* <>
-                  <h2>Stats</h2>
-                  <p>Health: {heroHealth}/{heroMaxHealth}</p>
-                  <p>Mana: {heroMana}/{heroMaxMana}</p>
-                  <p>Attack: {heroAttack} {heroWeapon.damage && `(+${heroWeapon.damage})` }</p>
-                  <p>Defense: {heroDefense} {heroArmor.defense && `(+${heroArmor.defense})`}</p>
-                  <button onClick={() => dispatch(setShowStats(false))}>Go back</button>
-                  </> */}
                   <div className="stats-grid">
                   <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
                 <p className='hero-mana-stat'>Mana: {heroMana}/{heroMaxMana}</p>
@@ -64,7 +51,11 @@ const Hero = () => {
                 <p className='hero-xp-stat'>XP: {heroExperience} / {heroExperienceToLevelUp}</p>
                   </div>
               </div>
-                <div id="hero-buttons">
+              {
+                !showEquipment && !showBackpack && !showSpells && !showStats
+                ?
+                (
+<div id="hero-buttons">
                   <button onClick={handleAttackEnemy} className='hero-button' disabled={!battleTurn || !inBattle || inAnimation}>
                     <p>Attack</p>
                     
@@ -74,9 +65,8 @@ const Hero = () => {
                 <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn || inAnimation}>Backpack</button>
                 <button className='hero-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
                 </div>
-            </div>
-          )
-          :
+                )
+                :
           showBackpack
           ?
           <Backpack />
@@ -94,7 +84,8 @@ const Hero = () => {
           <Stats />
           :
           null
-      }
+              }
+          
 
 
     </div>
