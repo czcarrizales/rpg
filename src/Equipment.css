@@ -3,40 +3,46 @@
     flex-direction: column;
     width: 100%;
     color: white;
-    margin-top: 4px;
+    margin-top: 16px;
     margin-bottom: 4px;
 }
 
 .equipment-details {
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 .equipment-detail-image {
-    width: 40px;
+    width: 28px;
 }
 
 #current-weapon {
     margin-top: 8px;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
 #current-armor {
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-top: 8px;
 }
 
 #current-weapon img {
-    width: 40px;
+    width: 28px;
     margin-left: 8px;
 }
 
 #current-armor img {
-    width: 40px;
+    width: 28px;
     margin-left: 8px;
+}
+
+.equipment-container-top {
+    display: flex;
+    align-items: center;
+}
+
+.equipment-container-back-button {
+    margin-left: auto;
+    padding:  .6rem 1rem;
 }
