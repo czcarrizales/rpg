@@ -5,6 +5,7 @@ import roomReducer from './slices/roomSlice'
 import battleReducer from './slices/battleSlice'
 import gameReducer from './slices/gameSlice'
 import shopReducer from './slices/shopSlice'
+import soundsReducer from './slices/soundsSlice'
 
 const store = configureStore({
     reducer: {
@@ -13,7 +14,8 @@ const store = configureStore({
         room: roomReducer,
         battle: battleReducer,
         game: gameReducer,
-        shop: shopReducer
+        shop: shopReducer,
+        sounds: soundsReducer
     }
 })
 
