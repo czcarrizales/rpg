@@ -35,7 +35,8 @@ function App() {
   const playMusic = () => {
     const sound = new Howl({
       src: adventure,
-      preload: true
+      preload: true,
+      volume: 0.5
     })
     sound.play()
   }
