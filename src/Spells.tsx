@@ -46,9 +46,6 @@ const Spells = () => {
         <div id='spell-buttons'>
             <button className='hero-button' onClick={() => dispatch(setShowSpells(false))}>Back</button>
             {heroSpells.map(spell => (<button className='hero-button' onClick={() => handleSpellUse(spell)} disabled={!battleTurn || !inBattle || inAnimation}>{spell.name}</button>))}
-            <button className='hero-button'>fireball</button>
-            <button className='hero-button'>light heal</button>
-            <button className='hero-button'>d</button>
         </div>
 
     )
