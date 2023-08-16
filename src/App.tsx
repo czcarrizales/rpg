@@ -11,7 +11,7 @@ import WeaponRoom from './WeaponRoom'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
 import { gainLevel } from './slices/heroSlice'
-import {  setGameOver, setLevelingUp } from './slices/gameSlice'
+import {  resetGame, setGameOver, setLevelingUp } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
@@ -35,6 +35,7 @@ function App() {
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
   const gameOver = useSelector((state: RootState) => state.game.gameOver)
+  const resettingGame = useSelector((state: RootState) => state.game.resettingGame)
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
   const randomEncounterAnimation = useSelector((state: RootState) => state.game.randomEncounterAnimation)
   const [currentMusic, setCurrentMusic] = useState<any>(null)
@@ -120,11 +121,11 @@ function App() {
   }, [heroStats])
 
   useEffect(() => {
-    if (gameOver) {
-      console.log(gameOver, 'is the game over?')
-      console.log('game is over')
+    if (resettingGame) {
+      dispatch(resetGame(false))
+      playMusic(adventure)
     }
-  }, [gameOver])
+  }, [resettingGame])
 
   
 
