@@ -42,8 +42,8 @@ const roomSlice = createSlice({
         setRandomRooms: (state) => {
             state.randomRooms = ['treasureRoom', 'spellRoom', 'weaponRoom', 'armorRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom', 'enemyRoom']
         },
-        setResettingRooms: (state) => {
-            state.resettingRooms = !state.resettingRooms
+        setResettingRooms: (state, action) => {
+            state.resettingRooms = action.payload
         },
         setInRoom: (state, action) => {
             state.inRoom = action.payload
