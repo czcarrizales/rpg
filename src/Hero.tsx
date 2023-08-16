@@ -37,7 +37,7 @@ const Hero = () => {
 
   const handleAttackEnemy = async ()  => {
     const audio = new Audio(playerAttackSound)
-    audio.volume = 0.1
+    audio.volume = 0.3
     audio.play()
     dispatch(setInAnimation(true))
     dispatch(enemyTakeDamage(heroAttack + heroWeapon.damage!))
