@@ -14,7 +14,7 @@ export const GameOver = () => {
         dispatch(goToMapRoom())
         dispatch(setRandomRooms())
         dispatch(setInRoom(false))
-        dispatch(setResettingRooms())
+        dispatch(setResettingRooms(true))
         dispatch(setBossBattle(false))
         dispatch(resetHero())
         dispatch(resetGame(true))
