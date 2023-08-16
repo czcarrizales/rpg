@@ -61,9 +61,9 @@ const Backpack = () => {
                     <img className='backpack-item-image' src={item.image} alt="" />
                     <p className='backpack-item-description'>
                         {item.name}</p>
-                        {item.type && <button onClick={() => handleItemUse(item)}>Use</button>}
+                        {item.type && <button className='take-button backpack-item-use-button' onClick={() => handleItemUse(item)}>Use</button>}
                         <p className='backpack-item-value'>(Value: {item.money})</p>
-                    {inShop && <button onClick={() => handleSellItem(item, item.money)}>Sell</button>}
+                    {inShop && <button className='take-button backpack-use-button' onClick={() => handleSellItem(item, item.money)}>Sell</button>}
                     
                 </div>
 
