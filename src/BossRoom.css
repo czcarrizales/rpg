@@ -15,6 +15,7 @@
 .boss-room-name {
     background-color: rgb(0, 0, 0, 0.7);
     font-size: 1.4rem;
+    padding: 8px;
 }
 .boss-room-details {
     background-color: rgb(0, 0, 0, 0.7);
