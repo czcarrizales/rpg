@@ -62,7 +62,6 @@ useEffect(() => {
                 dispatch(setInBattle(false))
                 dispatch(restockShop())
                 dispatch(resetIdOnAllShopItems())
-                console.log(currentRoom)
             }
         }
           
