@@ -1,4 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
+export const updateCurrentRoomState = createAsyncThunk('room/updateCurrentRoomState', async (newState) => {
+    return newState
+})
 
 
 
@@ -47,7 +51,22 @@ const roomSlice = createSlice({
         setBossBattle: (state, action) => {
             state.bossBattle = action.payload
         }
-    }
+    },
+    // extraReducers: (builder) => {
+    //     builder
+    //     .addCase(updateCurrentRoomState.fulfilled, (state) => {
+    //             const randomIndex = Math.floor(Math.random() * state.randomRooms.length)
+    //             state.currentRoom = state.randomRooms[randomIndex]
+    //             state.randomRooms = state.randomRooms.filter((_room, index) => index !== randomIndex)  
+    //             if (state.currentRoom == 'enemyRoom') {
+    //                 dispatch(setRandomEncounterAnimation(true))
+    //                 console.log('we console.log and now we wait for two seconds before doing anything else, like dispatching')
+    //                 setTimeout(resolve, 400)
+    //               } else {
+    //                 resolve(undefined)
+    //               }  
+    //     })
+    // }
 })
 
 export const {goToEnemyRoom, goToHealingRoom, goToMapRoom, goToTreasureRoom, goToBossRoom, goToShopRoom, goToRandomRoom, setRandomRooms, setResettingRooms, setInRoom, setBossBattle} = roomSlice.actions;
