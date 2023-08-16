@@ -4,7 +4,7 @@ import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import {  enemyReset, setBossType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
-import { setAfterBattle, setCurrentWorld, setGameOver } from './slices/gameSlice'
+import { setAfterBattle,  setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
 import { RootState } from './store'
 import AfterBattle from './AfterBattle'
@@ -56,16 +56,13 @@ useEffect(() => {
             if (!inAnimation) {
                 dispatch(setAfterBattle(true))
                 dispatch(gainExperience(currentEnemy.experience))
-                dispatch(setResettingRooms())
+                dispatch(setResettingRooms(true))
                 dispatch(setRandomRooms())
                 dispatch(setBossBattle(false))
-                dispatch(setCurrentWorld())
                 dispatch(setInBattle(false))
                 dispatch(restockShop())
                 dispatch(resetIdOnAllShopItems())
-                setTimeout(() => {
-                  dispatch(setResettingRooms())
-                }, 1000);
+                console.log(currentRoom)
             }
         }
           
@@ -119,7 +116,7 @@ useEffect(() => {
     !afterBattle
     ?
       <div className={`boss-room-container`}>
-          <h1 className='boss-room-name'>{currentEnemy.name}</h1>
+          <h1 className='boss-room-name'>{currentEnemy.name.toUpperCase()}</h1>
           <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
           <div className='boss-room-details'>
           <p>Health: {currentEnemy.health}</p>
