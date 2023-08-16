@@ -4,7 +4,7 @@ import Hero from './Hero'
 import TreasureRoom from './TreasureRoom'
 import HealingRoom from './HealingRoom'
 import BossRoom from './BossRoom'
-import { useEffect} from 'react'
+import { useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { goToBossRoom, goToHealingRoom, goToShopRoom, setBossBattle, setInRoom, setRandomRooms } from './slices/roomSlice'
 import WeaponRoom from './WeaponRoom'
@@ -16,6 +16,8 @@ import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
 import adventure from '../public/music/delightful_adventure.mp3'
+import woods from '../public/music/woods.mp3'
+import boss1 from '../public/music/boss1.mp3'
 import ShopRoom from './ShopRoom'
 
 function App() {
@@ -27,15 +29,22 @@ function App() {
   const heroStats = useSelector((state: RootState) => state.hero)
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy)
+  const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
   const gameOver = useSelector((state: RootState) => state.game.gameOver)
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
+  const randomEncounterAnimation = useSelector((state: RootState) => state.game.randomEncounterAnimation)
+  const [currentMusic, setCurrentMusic] = useState<any>(null)
   const dispatch = useDispatch()
 
-  const playMusic = () => {
-    const audio = new Audio(adventure)
-    audio.loop = true;
-    audio.volume = 0.1
-    audio.play()
+  const playMusic = (music: string) => {
+    if (currentMusic) {
+      currentMusic.pause()
+    }
+    const newAudio = new Audio(music)
+    setCurrentMusic(newAudio)
+    newAudio.loop = true;
+    newAudio.volume = 0.3
+    newAudio.play()
   }
 
   const handleBossRoom = () => {
@@ -59,9 +68,23 @@ function App() {
 
   useEffect(() => {
     if (playingMusic) {
-      playMusic()
+        playMusic(adventure)
     }
   }, [playingMusic])
+
+  useEffect(() => {
+    if (currentRoom === 'bossRoom' && currentWorld === 1) {
+      playMusic(boss1)
+    }
+  }, [currentRoom])
+
+  useEffect(() => {
+    if (currentWorld == 2) {
+      playMusic(woods)
+    } if (currentWorld === 3) {
+      
+    }
+  }, [currentWorld])
 
   useEffect(() => {
     if(heroStats.experience >= heroStats.experienceToLevelUp) {
@@ -76,7 +99,6 @@ function App() {
       dispatch(setBossBattle(true))
       console.log('boss room shows!')
     }
-    
   }, [randomRooms, inRoom])
 
   useEffect(() => {
@@ -109,6 +131,7 @@ function App() {
       !gameOver
       ?
       (
+        <>
         <div id='current-room' className='map'>
 <RoomButton inRoom={inRoom} />
           {bossBattle ? <button id='map-healing-room-button' className='room-button' onClick={handleHealingRoom} disabled={inRoom}>Rest</button> : <RoomButton inRoom={inRoom} />}
@@ -120,6 +143,8 @@ function App() {
           {bossBattle ? <button onClick={handleShopRoom} id='map-shop-room-button' className='room-button'>Shop</button> : <RoomButton inRoom={inRoom} />}
           <RoomButton inRoom={inRoom} />
           </div>
+          <div className={`overlay ${randomEncounterAnimation && 'flash-white'} `}></div>
+          </>
       )
           :
           <div id='current-room'>
