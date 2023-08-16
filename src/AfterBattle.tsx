@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { setAfterBattle, setLevelingUp } from "./slices/gameSlice"
+import { setAfterBattle, setCurrentWorld, setLevelingUp } from "./slices/gameSlice"
 import './AfterBattle.css'
 import { useState } from "react"
 import { RootState } from "./store"
@@ -14,6 +14,7 @@ const AfterBattle = (props: any) => {
   const [defensePoints, setDefensePoints] = useState(0)
   const heroStats = useSelector((state: RootState) => state.hero)
   const levelingUp = useSelector((state: RootState) => state.game.levelingUp)
+  const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
 
   const handlePointsChange = (type: any, value: any) => {
     if ((levelUpPoints > 0 && levelUpPoints <= 10) || value < 0) {
@@ -48,7 +49,6 @@ const AfterBattle = (props: any) => {
             setDefensePoints(prevPoints => prevPoints + value);
             setLevelUpPoints(prevLevelUpPoints => prevLevelUpPoints - value)
           }
-          
           break;
         default:
           break;
@@ -57,6 +57,9 @@ const AfterBattle = (props: any) => {
   };
 
   const handleLevelUp = (health: number, mana: number, attack: number, defense: number) => {
+    if (currentRoom === 'bossRoom') {
+      dispatch(setCurrentWorld())
+    }
     if (levelingUp) {
       dispatch(gainMaxHealth(health))
       dispatch(gainMaxMana(mana))
