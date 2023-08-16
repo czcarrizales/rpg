@@ -2,42 +2,72 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { goToRandomRoom, setInRoom } from './slices/roomSlice'
 import './RoomButton.css'
-import { RootState } from './store';
-import { setPlayingMusic } from './slices/gameSlice';
+import { AppDispatch, RootState } from './store';
+import { setPlayingMusic, setRandomEncounterAnimation } from './slices/gameSlice';
 
 interface RoomButtonProps {
   inRoom: boolean;
 }
 
-const RoomButton: React.FC<RoomButtonProps> = ({inRoom}) => {
-    const gameState = useSelector((state: RootState) => state.game)
-    const resettingRooms = useSelector((state: RootState) => state.room.resettingRooms)
-    const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
-    const dispatch = useDispatch()
-    const [visited, setVisited] = useState(false)
-    const handleRandomRoom = () => {
-      if (!playingMusic) {
-        dispatch(setPlayingMusic(true))
+const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
+  const gameState = useSelector((state: RootState) => state.game)
+  const resettingRooms = useSelector((state: RootState) => state.room.resettingRooms)
+  const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
+  const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
+  const dispatch = useDispatch<AppDispatch>()
+  const [visited, setVisited] = useState(false)
+  const handleRandomRoom = async () => {
+    dispatch(goToRandomRoom())
+    setVisited(true)
+  }
+
+  const waitForConsoleLog = () => {
+    return new Promise((resolve) => {
+      if (currentRoom == 'enemyRoom') {
+        dispatch(setRandomEncounterAnimation(true))
+        setTimeout(resolve, 400)
+      } else {
+        resolve(undefined)
       }
-        dispatch(goToRandomRoom())
+    })
+  }
+
+  useEffect(() => {
+    console.log('current room')
+    const checkCurrentRoom = async () => {
+      if (currentRoom === 'enemyRoom') {
+        await waitForConsoleLog()
+        if (!playingMusic) {
+          dispatch(setPlayingMusic(true))
+        }
+        dispatch(setRandomEncounterAnimation(false))
         dispatch(setInRoom(true))
-        setVisited(true)
+      } else if (currentRoom !== 'map') {
+        if (!playingMusic) {
+          dispatch(setPlayingMusic(true))
+        }
+        dispatch(setInRoom(true))
+        console.log(inRoom, 'in room')
       }
 
-    useEffect(() => {
-      if (gameState.resettingGame == true) {
-        console.log('resetting game is true!')
-        setVisited(false)
-      }
-    }, [gameState])
-    useEffect(() => {
-      if (resettingRooms == true) {
-        setVisited(false)
-      }
-    }, [resettingRooms])
+    }
+    checkCurrentRoom()
+  }, [currentRoom])
+
+  useEffect(() => {
+    if (gameState.resettingGame == true) {
+      console.log('resetting game is true!')
+      setVisited(false)
+    }
+  }, [gameState])
+  useEffect(() => {
+    if (resettingRooms == true) {
+      setVisited(false)
+    }
+  }, [resettingRooms])
   return (
     <div>
-        <button onClick={() => {handleRandomRoom(), setVisited(true)}} disabled={visited || inRoom} className='room-button'>?</button>
+      <button onClick={() => { handleRandomRoom(), setVisited(true) }} disabled={visited || inRoom} className='room-button'>?</button>
     </div>
   )
 }
