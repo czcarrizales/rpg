@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { goToRandomRoom, setInRoom } from './slices/roomSlice'
+import { goToRandomRoom, setInRoom, setResettingRooms } from './slices/roomSlice'
 import './RoomButton.css'
 import { AppDispatch, RootState } from './store';
-import { setPlayingMusic, setRandomEncounterAnimation } from './slices/gameSlice';
+import { resetGame, setPlayingMusic, setRandomEncounterAnimation } from './slices/gameSlice';
 
 interface RoomButtonProps {
   inRoom: boolean;
@@ -58,11 +58,13 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
     if (gameState.resettingGame == true) {
       console.log('resetting game is true!')
       setVisited(false)
+      dispatch(resetGame(false))
     }
   }, [gameState])
   useEffect(() => {
     if (resettingRooms == true) {
       setVisited(false)
+      dispatch(setResettingRooms(false))
     }
   }, [resettingRooms])
   return (
