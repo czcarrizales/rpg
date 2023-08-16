@@ -4,7 +4,7 @@ import { setInBattle, setPlayerTurn } from './slices/battleSlice'
 import {  enemyReset, setBossType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
-import { setAfterBattle,  setGameOver } from './slices/gameSlice'
+import {  setAfterBattle,  setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
 import { RootState } from './store'
 import AfterBattle from './AfterBattle'
@@ -50,8 +50,11 @@ useEffect(() => {
   useEffect(() => {
       if (bossTypeSet && currentEnemy.health <= 0 ) {
         if (currentWorld == 5 && currentRoom == 'bossRoom') {
+            dispatch(setBossBattle(false))
+            dispatch(setInBattle(false))
+            dispatch(setAfterBattle(true))
             dispatch(setGameOver(true))
-            console.log('game is over!')
+            console.log('game is over from defeating boss on world 5!')
         } else {
             if (!inAnimation) {
                 dispatch(setAfterBattle(true))
@@ -116,7 +119,7 @@ useEffect(() => {
     ?
       <div className={`boss-room-container`}>
           <h1 className='boss-room-name'>{currentEnemy.name.toUpperCase()}</h1>
-          <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image} alt="" />
+          <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''} boss-image`} src={currentEnemy.image} alt="" />
           <div className='boss-room-details'>
           <p>Health: {currentEnemy.health}</p>
           <p>Intent: Attack for {randomEnemyDamage} damage!</p>

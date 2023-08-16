@@ -10,14 +10,19 @@ import { goToBossRoom, goToHealingRoom, goToShopRoom, setBossBattle, setInRoom, 
 import WeaponRoom from './WeaponRoom'
 import SpellRoom from './SpellRoom'
 import RoomButton from './RoomButton'
-import { gainLevel, resetHero } from './slices/heroSlice'
-import { resetCurrentWorld, resetGame, setGameOver, setLevelingUp } from './slices/gameSlice'
+import { gainLevel } from './slices/heroSlice'
+import {  setGameOver, setLevelingUp } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
 import adventure from '../public/music/delightful_adventure.mp3'
-import woods from '../public/music/woods.mp3'
+import daemons from '../public/music/world/daemons.mp3'
 import boss1 from '../public/music/boss1.mp3'
+import boss2 from '../public/music/boss2.mp3'
+import lordOfTheCastle from '../public/music/boss/lord-of-the-castle.mp3'
+import theCorrupted from '../public/music/boss/the-corrupted.mp3'
+import edgeOfExistence from '../public/music/world/edge-of-existence.mp3'
+import danceToTheDeath from '../public/music/world/dance-to-the-death.mp3'
 import ShopRoom from './ShopRoom'
 
 function App() {
@@ -28,7 +33,6 @@ function App() {
   const inRoom = useSelector((state: RootState) => state.room.inRoom)
   const heroStats = useSelector((state: RootState) => state.hero)
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
-  const currentEnemy = useSelector((state: RootState) => state.enemy.currentEnemy)
   const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
   const gameOver = useSelector((state: RootState) => state.game.gameOver)
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
@@ -67,24 +71,30 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (playingMusic) {
-        playMusic(adventure)
-    }
-  }, [playingMusic])
-
-  useEffect(() => {
     if (currentRoom === 'bossRoom' && currentWorld === 1) {
       playMusic(boss1)
+    } else if (currentRoom === 'bossRoom' && currentWorld === 2) {
+      playMusic(boss2)
+    } else if (currentRoom === 'bossRoom' && currentWorld === 4) {
+      playMusic(theCorrupted)
+    } else if (currentRoom === 'bossRoom' && currentWorld === 5) {
+      playMusic(lordOfTheCastle)
     }
   }, [currentRoom])
 
   useEffect(() => {
-    if (currentWorld == 2) {
-      playMusic(woods)
-    } if (currentWorld === 3) {
-      
+    if (currentWorld === 1 && playingMusic) {
+      playMusic(adventure)
+    } else if (currentWorld === 2 && playingMusic) {
+      playMusic(daemons)
+    } else if (currentWorld === 3 && playingMusic) {
+      playMusic(daemons)
+    } else if (currentWorld === 4 && playingMusic) {
+      playMusic(danceToTheDeath)
+    } else if (currentWorld === 5 && playingMusic) {
+      playMusic(edgeOfExistence)
     }
-  }, [currentWorld])
+  }, [currentWorld, playingMusic])
 
   useEffect(() => {
     if(heroStats.experience >= heroStats.experienceToLevelUp) {
@@ -99,7 +109,7 @@ function App() {
       dispatch(setBossBattle(true))
       console.log('boss room shows!')
     }
-  }, [randomRooms, inRoom])
+  }, [inRoom])
 
   useEffect(() => {
     if (heroStats.health <= 0) {
@@ -110,16 +120,11 @@ function App() {
   }, [heroStats])
 
   useEffect(() => {
-    if (currentWorld == 5 && currentEnemy.health! <= 0 && currentEnemy.health !== null && roomState === 'bossRoom') {
-      dispatch(resetGame(true))
-      setTimeout(() => {
-        dispatch(resetGame(false))
-      }, 100);
-      dispatch(resetHero())
-      dispatch(resetCurrentWorld())
+    if (gameOver) {
+      console.log(gameOver, 'is the game over?')
       console.log('game is over')
     }
-  }, [currentWorld, currentEnemy.health])
+  }, [gameOver])
 
   
 
