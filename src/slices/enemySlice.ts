@@ -170,22 +170,22 @@ const bosses = [
         image: '/images/bosses/minotaur-boss.png'
     },
     {
-        name: 'witch',
+        name: 'the eye',
         health: 100,
         minAttack: 25,
         maxAttack: 30,
         experience: 60,
         world: 2,
-        image: '/images/bosses/witch.png'
+        image: '/images/bosses/creepyEye.png'
     },
     {
-        name: 'giant spider',
+        name: 'monster',
         health: 100,
         minAttack: 25,
         maxAttack: 30,
         experience: 200,
         world: 2,
-        image: '/images/bosses/spider-boss.png'
+        image: '/images/bosses/monster.png'
     },
     {
         name: 'ice dancer',
