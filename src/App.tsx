@@ -48,7 +48,7 @@ function App() {
     const newAudio = new Audio(music)
     setCurrentMusic(newAudio)
     newAudio.loop = true;
-    newAudio.volume = 0.3
+    newAudio.volume = 0.2
     newAudio.play()
   }
 
