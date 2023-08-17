@@ -6,10 +6,11 @@
     height: 100%;
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
-    color: white;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    padding: 2rem;
 }
 
 .boss-room-name {
@@ -18,8 +19,16 @@
     padding: 8px;
 }
 .boss-room-details {
-    background-color: rgb(0, 0, 0, 0.7);
-    padding: .5em;
+    border: 4px solid white;
+    display: flex;
+    flex-direction: column-reverse;
+    background-color: rgb(5, 5, 5);
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: 8px;
+    overflow-y: auto;
+    line-height: 1.5;
 }
 
 .boss-image {

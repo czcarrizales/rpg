@@ -77,10 +77,17 @@
     background-color: white;
     opacity: 70%;
   }
-  50%{
+  20% {
     background-color: transparent;
   }
-  75% {
+  40%{
+    background-color: white;
+    opacity: 70%;
+  }
+  60%{
+    background-color: transparent;
+  }
+  80% {
     background-color: white;
     opacity: 70%;
   }
@@ -90,7 +97,7 @@
 }
 
 .flash-white {
-  animation: flashWhite .4s 1 steps(1);
+  animation: flashWhite 1s 1 ease-in-out;
 }
 
 .overlay {
@@ -100,4 +107,26 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+@keyframes itemAppearing {
+  0% {
+      opacity: 0;
+      transform: scale(0);
+  }
+  95% {
+    transform: scale(1.5);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+.item-appearing {
+  animation: itemAppearing 1s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.item-appearing-hide-content {
+  opacity: 0;
 }

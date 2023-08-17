@@ -6,4 +6,10 @@
     color: white;
     height: 100%;
     background: radial-gradient(circle, hsla(238, 46%, 48%, 1) 0%, hsla(229, 44%, 13%, 1) 100%);
+    border: 5px solid orange;
+}
+
+.spell-room-image {
+    width: 20%;
+    margin-top: 16px;
 }
