@@ -21,6 +21,7 @@ interface Weapon {
     name: string | null;
     points: number | null;
     mana: number | null;
+    image: string | null;
   }
 
   interface Treasure {
@@ -51,7 +52,8 @@ interface Weapon {
     maxHealth: number;
     mana: number;
     maxMana: number;
-    attack: number;
+    minAttack: number;
+    maxAttack: number;
     defense: number;
     money: number;
     backpack: BackpackItem[];
@@ -67,12 +69,13 @@ const heroSlice = createSlice({
     initialState: {
         level: 1,
         experience: 0,
-        experienceToLevelUp: 10,
+        experienceToLevelUp: 20,
         health: 50,
         maxHealth: 50,
         mana: 20,
         maxMana: 20,
-        attack: 5,
+        minAttack: 3,
+        maxAttack:5,
         defense: 0,
         money: 0,
         backpack: [],
@@ -164,7 +167,8 @@ const heroSlice = createSlice({
             state.level += 1
         },
         gainAttack: (state, action) => {
-            state.attack += action.payload
+            state.minAttack += action.payload
+            state.maxAttack += action.payload
         },
         gainDefense: (state, action) => {
             state.defense += action.payload
@@ -186,8 +190,12 @@ const heroSlice = createSlice({
             state.maxHealth = 50
             state.mana = 20
             state.maxMana = 20
-            state.attack = 5
+            state.minAttack = 3
+            state.maxAttack = 5
             state.defense = 0
+            state.money = 0
+            state.experience = 0
+            state.experienceToLevelUp = 20
             state.backpack = []
             state.weapon = {
                 type: null,
