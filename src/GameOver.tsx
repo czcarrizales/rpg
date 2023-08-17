@@ -1,7 +1,7 @@
 import { resetCurrentWorld, resetGame, setGameOver, setNewEquipment } from './slices/gameSlice'
 import { useDispatch } from 'react-redux'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
-import { setInBattle } from './slices/battleSlice'
+import { setBattleDialogueToEmpty, setInBattle } from './slices/battleSlice'
 import { resetHero } from './slices/heroSlice'
 import './GameOver.css'
 
@@ -20,6 +20,7 @@ export const GameOver = () => {
         dispatch(resetGame(true))
         dispatch(setNewEquipment(false))
         dispatch(resetCurrentWorld())
+        dispatch(setBattleDialogueToEmpty())
         // setTimeout(() => {
         //     dispatch(resetGame(true))
         //     setTimeout(() => {
