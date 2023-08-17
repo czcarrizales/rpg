@@ -5,7 +5,7 @@ import { lowerMana, raiseHeroHealth } from './slices/heroSlice'
 import { RootState } from './store'
 import { enemyTakeDamage } from './slices/enemySlice'
 import { enemyTakeDamageFlash } from './utilities'
-import { setPlayerTurn } from './slices/battleSlice'
+import { addToBattleDialogue, setPlayerTurn } from './slices/battleSlice'
 
 const Spells = () => {
     const dispatch = useDispatch()
@@ -32,10 +32,12 @@ const Spells = () => {
             case 'HEAL':
                 dispatch(raiseHeroHealth(spell.points))
                 dispatch(lowerMana(spell.mana))
+                dispatch(addToBattleDialogue(`Hero healed for ${spell.points} HP!`))
                 break
             case 'DAMAGE':
                 handleAttackEnemy(spell.points!)
                 dispatch(lowerMana(spell.mana))
+                dispatch(addToBattleDialogue(`Hero used ${spell.name} for ${spell.points} damage!`))
                 break
             default:
                 break; 
