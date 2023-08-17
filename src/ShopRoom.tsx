@@ -5,6 +5,7 @@ import { RootState } from './store'
 import { buyItemForBackpack } from './slices/heroSlice'
 import { useEffect } from 'react'
 import { removeFromShop, setInShop } from './slices/shopSlice'
+import shopAppears from '../public/sounds/shopAppears.mp3'
 const ShopRoom = () => {
   const dispatch = useDispatch()
   const shopItems = useSelector((state: RootState) => state.shop.shopItems)
@@ -21,8 +22,15 @@ const ShopRoom = () => {
     }
   }
 
+  const playSound = () => {
+    const audio = new Audio(shopAppears)
+    audio.volume = 0.35
+    audio.play()
+  }
+
   useEffect(() => {
     dispatch(setInShop(true))
+    playSound()
   }, [])
   return (
     <div className='shop-room-container'>

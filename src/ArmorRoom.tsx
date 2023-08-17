@@ -5,6 +5,8 @@ import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './ArmorRoom.css'
 import { RootState } from './store'
 import { setNewEquipment } from './slices/gameSlice'
+import { playSound } from './utilities'
+import equipmentAppears from '../public/sounds/equipmentAppears.mp3'
 
 interface Armor {
   type: string | null,
@@ -15,6 +17,7 @@ interface Armor {
 
 const ArmorRoom = () => {
   const [currentArmor, setCurrentArmor] = useState<Armor | null>(null)
+  const [armorAppearing, setArmorAppearing] = useState(true)
   const currentWorld = useSelector((state: RootState) => state.game.currentWorld)
   const dispatch = useDispatch()
   const handleTakeArmor = () => {
@@ -72,13 +75,17 @@ const ArmorRoom = () => {
     const currentWorldArmorPool = randomArmor.filter(item => item.world == currentWorld)
     const randomIndex = Math.floor(Math.random() * currentWorldArmorPool.length)
     setCurrentArmor(currentWorldArmorPool[randomIndex])
+    setTimeout(() => {
+      setArmorAppearing(false)
+      playSound(equipmentAppears)
+    }, 1000);
   }, [])
   return (
     <div id='armor-room-container'>
       <h1>Armor Room</h1>
-      <img className='armor-room-image' src={currentArmor?.image!} alt="" />
-      <p>You found a {currentArmor?.name}!</p>
-      <button className='take-button' onClick={handleTakeArmor}>Take Armor</button>
+      <img className='armor-room-image item-appearing' src={currentArmor?.image!} alt="" />
+      <p className={armorAppearing ? 'item-appearing-hide-content' : ''}>You found a {currentArmor?.name}!</p>
+      <button className={`take-button ${armorAppearing ? 'item-appearing-hide-content' : ''}`} onClick={handleTakeArmor}>Take Armor</button>
     </div>
   )
 }
