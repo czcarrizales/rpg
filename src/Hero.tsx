@@ -1,15 +1,16 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { enemyTakeDamage } from './slices/enemySlice'
 import './Hero.css'
-import { setPlayerTurn } from './slices/battleSlice'
+import { addToBattleDialogue, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
 import Equipment from './Equipment'
 import Backpack from './Backpack'
 import { setInAnimation, setNewEquipment, setShowBackpack, setShowEquipment, setShowOptions, setShowSpells, setShowStats } from './slices/gameSlice'
 import Spells from './Spells'
-import { enemyTakeDamageFlash } from './utilities'
+import { enemyTakeDamageFlash, playSound } from './utilities'
 import Stats from './Stats'
 import Options from './Options'
+import select from '../public/sounds/select.mp3'
 
 const Hero = () => {
   // const heroLevel = useSelector((state: RootState) => state.hero.level)
@@ -19,7 +20,8 @@ const Hero = () => {
   const heroHealth = useSelector((state: RootState) => state.hero.health)
   const heroMana = useSelector((state: RootState) => state.hero.mana)
   const heroMaxMana = useSelector((state: RootState) => state.hero.maxMana)
-  const heroAttack = useSelector((state: RootState) => state.hero.attack)
+  const heroMinAttack = useSelector((state: RootState) => state.hero.minAttack)
+  const heroMaxAttack = useSelector((state: RootState) => state.hero.maxAttack)
   const heroMoney = useSelector((state: RootState) => state.hero.money)
   const heroWeapon = useSelector((state: RootState) => state.hero.weapon)
   const heroIsAttacked = useSelector((state: RootState) => state.hero.heroIsAttacked)
@@ -36,15 +38,43 @@ const Hero = () => {
   const dispatch = useDispatch()
 
   const handleAttackEnemy = async ()  => {
+    const randomHeroDamage = Math.floor(Math.random() * (heroMaxAttack - heroMinAttack + 1)) + heroMinAttack
     const audio = new Audio(playerAttackSound)
     audio.volume = 0.3
     audio.play()
     dispatch(setInAnimation(true))
-    dispatch(enemyTakeDamage(heroAttack + heroWeapon.damage!))
+    dispatch(enemyTakeDamage(randomHeroDamage + heroWeapon.damage!))
+    dispatch(addToBattleDialogue(`Hero attacked for ${randomHeroDamage} damage!`))
     enemyTakeDamageFlash(dispatch)
     await new Promise((resolve) => setTimeout(resolve, 500))
     dispatch(setPlayerTurn(false))
     dispatch(setInAnimation(false))
+  }
+
+  const handleGoToSpells = () => {
+    dispatch(setShowSpells(true))
+    playSound(select)
+  }
+
+  const handleGoToEquipment = () => {
+    dispatch(setShowEquipment(true))
+    dispatch(setNewEquipment(false))
+    playSound(select)
+  }
+
+  const handleGoToBackpack = () => {
+    dispatch(setShowBackpack(true))
+    playSound(select)
+  }
+
+  const handleGoToStats = () => {
+    dispatch(setShowStats(true))
+    playSound(select)
+  }
+
+  const handleGoToOptions = () => {
+    dispatch(setShowOptions(true))
+    playSound(select)
   }
 
   return (
@@ -66,11 +96,11 @@ const Hero = () => {
                     <p>Attack</p>
                     
                     </button>
-                <button className='hero-button' onClick={() => dispatch(setShowSpells(true))} disabled={!battleTurn || inAnimation}>Spells</button>
-                <button className={`hero-button ${newEquipment && 'new-equipment'}`} onClick={() => {dispatch(setShowEquipment(true)), dispatch(setNewEquipment(false))}} disabled={!battleTurn || inAnimation}>Equipment</button>
-                <button className='hero-button' onClick={() => dispatch(setShowBackpack(true))} disabled={!battleTurn || inAnimation}>Backpack</button>
-                <button className='hero-button' onClick={() => dispatch(setShowStats(true))}>Stats</button>
-                <button className='hero-button' onClick={() => dispatch(setShowOptions(true))}>Options</button>
+                <button className='hero-button' onClick={handleGoToSpells} disabled={!battleTurn || inAnimation}>Spells</button>
+                <button className={`hero-button ${newEquipment && 'new-equipment'}`} onClick={handleGoToEquipment} disabled={!battleTurn || inAnimation}>Equipment</button>
+                <button className='hero-button' onClick={handleGoToBackpack} disabled={!battleTurn || inAnimation}>Backpack</button>
+                <button className='hero-button' onClick={handleGoToStats}>Stats</button>
+                <button className='hero-button' onClick={handleGoToOptions}>Options</button>
                 </div>
                 )
                 :
