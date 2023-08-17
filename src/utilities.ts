@@ -45,3 +45,9 @@ export const heroTakeDamageFlash = (dispatch: DispatchFunction) => {
       
       }, 80); // Wait for 100 milliseconds before the first flash
 }
+
+export const playSound = (sound: any) => {
+    const audio = new Audio(sound)
+    audio.volume = 0.35
+    audio.play()
+}
