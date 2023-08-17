@@ -4,10 +4,11 @@ import './AfterBattle.css'
 import { useState } from "react"
 import { RootState } from "./store"
 import { gainAttack, gainDefense, gainMaxHealth, gainMaxMana, healToFull, resetExperience, setExperienceToLevelUp } from "./slices/heroSlice"
+import { setBattleDialogueToEmpty } from "./slices/battleSlice"
 
 const AfterBattle = (props: any) => {
   const dispatch = useDispatch()
-  const [levelUpPoints, setLevelUpPoints] = useState(10)
+  const [levelUpPoints, setLevelUpPoints] = useState(5)
   const [healthPoints, setHealthPoints] = useState(0)
   const [manaPoints, setManaPoints] = useState(0)
   const [attackPoints, setAttackPoints] = useState(0)
@@ -73,7 +74,7 @@ const AfterBattle = (props: any) => {
     } else {
       dispatch(setAfterBattle(false))
     }
-    
+    dispatch(setBattleDialogueToEmpty())
   }
 
   return (
