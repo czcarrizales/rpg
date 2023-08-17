@@ -1,6 +1,6 @@
 import  { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { setInBattle, setPlayerTurn } from './slices/battleSlice'
+import { addToBattleDialogue, setInBattle, setPlayerTurn } from './slices/battleSlice'
 import {  enemyReset, setBossType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
@@ -18,7 +18,9 @@ const BossRoom = () => {
   const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
   const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
   const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
+  const inBattle = useSelector((state: RootState) => state.battle.inBattle)
   const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
+  const battleDialogue = useSelector((state: RootState) => state.battle.battleDialogue)
   const randomEnemyDamage = useSelector((state: RootState) => state.enemy.randomEnemyDamage)
   const [bossTypeSet, setBossTypeSet] = useState(false)
   const [randomMoney, setRandomMoney] = useState(0)
@@ -42,6 +44,9 @@ useEffect(() => {
 }, [])
 
 useEffect(() => {
+    if (currentEnemy.name && inBattle) {
+        dispatch(addToBattleDialogue(`${currentEnemy.name} appears!`))
+    }
     dispatch(setRandomEnemyDamage(handleRandomDamage()))
 }, [currentEnemy.name])
 
@@ -118,11 +123,11 @@ useEffect(() => {
     !afterBattle
     ?
       <div className={`boss-room-container`}>
-          <h1 className='boss-room-name'>{currentEnemy.name.toUpperCase()}</h1>
+          <h1 className='boss-room-name'>{currentEnemy.name.toUpperCase()} (HP: {currentEnemy.health})</h1>
           <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''} boss-image`} src={currentEnemy.image} alt="" />
           <div className='boss-room-details'>
-          <p>Health: {currentEnemy.health}</p>
-          <p>Intent: Attack for {randomEnemyDamage} damage!</p>
+          
+          {battleDialogue.map((text) => (<p>{text}</p>))}
           </div>
           
       </div>

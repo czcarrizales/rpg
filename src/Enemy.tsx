@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import { enemyReset, setEnemyType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, gainMoney, heroTakeDamage} from './slices/heroSlice'
-import { setInBattle, setPlayerTurn } from './slices/battleSlice'
+import { addToBattleDialogue, setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
 import { heroTakeDamageFlash } from './utilities'
 import './Enemy.css'
@@ -19,7 +19,9 @@ const Enemy = () => {
     const enemyIsAttacked = useSelector((state: RootState) => state.enemy.enemyIsAttacked)
     const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
     const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
+    const inBattle = useSelector((state: RootState) => state.battle.inBattle)
     const randomEnemyDamage = useSelector((state: RootState) => state.enemy.randomEnemyDamage)
+    const battleDialogue = useSelector((state: RootState) => state.battle.battleDialogue)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
     const [randomMoney, setRandomMoney] = useState(0)
 
@@ -48,6 +50,9 @@ const Enemy = () => {
     }, [])
 
     useEffect(() => {
+        if (currentEnemy.name && inBattle) {
+            dispatch(addToBattleDialogue(`${currentEnemy.name} appears!`))
+        }
         dispatch(setRandomEnemyDamage(handleRandomDamage()))
     }, [currentEnemy.name])
 
@@ -79,6 +84,7 @@ const Enemy = () => {
     useEffect(() => {
         if (battleTurn === false && currentEnemy.health! > 0) {
                 dispatch(heroTakeDamage(randomEnemyDamage))
+                dispatch(addToBattleDialogue(`${currentEnemy.name} attacked for ${randomEnemyDamage} damage!`))
                 heroTakeDamageFlash(dispatch)
                 setTimeout(() => {
                     dispatch(setPlayerTurn(true))
@@ -94,11 +100,16 @@ const Enemy = () => {
         !afterBattle
         ?
         <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'world-2-enemy-background'} ${currentWorld === 3 && 'world-3-enemy-background'} ${currentWorld === 4 && 'world-4-enemy-background'} ${currentWorld === 5 && 'world-5-enemy-background'} }`}>
+            <div>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
+            <p className='enemy-health'>HP: {currentEnemy.health}</p>
+            </div>
+            
             <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image!} alt="" />
             <div className='enemy-details'>
-            <p>Health: {currentEnemy.health}</p>
-            <p>Intent: Attack for {randomEnemyDamage} damage!</p>
+            {/* <p>Health: {currentEnemy.health}</p>
+            <p>Intent: Attack for {randomEnemyDamage} damage!</p> */}
+            {battleDialogue.map((text) => (<p>{text}</p>))}
             </div>
         </div>
         :
