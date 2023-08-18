@@ -10,7 +10,7 @@ import Spells from './Spells'
 import { enemyTakeDamageFlash, playSound } from './utilities'
 import Stats from './Stats'
 import Options from './Options'
-import select from '../public/sounds/select.mp3'
+import { selectSound } from './audioUtils'
 
 const Hero = () => {
   // const heroLevel = useSelector((state: RootState) => state.hero.level)
@@ -53,28 +53,28 @@ const Hero = () => {
 
   const handleGoToSpells = () => {
     dispatch(setShowSpells(true))
-    playSound(select)
+    playSound(selectSound)
   }
 
   const handleGoToEquipment = () => {
     dispatch(setShowEquipment(true))
     dispatch(setNewEquipment(false))
-    playSound(select)
+    playSound(selectSound)
   }
 
   const handleGoToBackpack = () => {
     dispatch(setShowBackpack(true))
-    playSound(select)
+    playSound(selectSound)
   }
 
   const handleGoToStats = () => {
     dispatch(setShowStats(true))
-    playSound(select)
+    playSound(selectSound)
   }
 
   const handleGoToOptions = () => {
     dispatch(setShowOptions(true))
-    playSound(select)
+    playSound(selectSound)
   }
 
   return (
