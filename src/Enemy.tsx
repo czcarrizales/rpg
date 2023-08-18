@@ -22,6 +22,8 @@ const Enemy = () => {
     const inBattle = useSelector((state: RootState) => state.battle.inBattle)
     const randomEnemyDamage = useSelector((state: RootState) => state.enemy.randomEnemyDamage)
     const battleDialogue = useSelector((state: RootState) => state.battle.battleDialogue)
+    const heroDefense = useSelector((state: RootState) => state.hero.defense)
+    const heroArmor = useSelector((state: RootState) => state.hero.armor)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
     const [randomMoney, setRandomMoney] = useState(0)
 
@@ -33,8 +35,12 @@ const Enemy = () => {
     }
 
     const handleRandomDamage = () => {
-        const randomDamageNumber = Math.floor(Math.random() * (currentEnemy.maxAttack! - currentEnemy.minAttack! + 1)) + currentEnemy.minAttack!;
-        return randomDamageNumber
+        const randomDamageNumber = (Math.floor(Math.random() * (currentEnemy.maxAttack! - currentEnemy.minAttack! + 1)) + currentEnemy.minAttack!) - (heroDefense + heroArmor.defense!)
+        if (randomDamageNumber > heroDefense + heroArmor.defense!) {
+            return randomDamageNumber
+        } else {
+            return 0
+        }
     }
 
     const handleSetInBattle = () => {
@@ -58,7 +64,7 @@ const Enemy = () => {
 
     useEffect(() => {
         if (enemyTypeSet && currentEnemy.health! <= 0 ) {
-            if (currentWorld == 5 && currentRoom == 'bossRoom') {
+            if (currentWorld == 7 && currentRoom == 'bossRoom') {
                 console.log('game is over!')
             } else if (!inAnimation) {
                     dispatch(setAfterBattle(true))
@@ -99,7 +105,7 @@ const Enemy = () => {
     return (
         !afterBattle
         ?
-        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'world-2-enemy-background'} ${currentWorld === 3 && 'world-3-enemy-background'} ${currentWorld === 4 && 'world-4-enemy-background'} ${currentWorld === 5 && 'world-5-enemy-background'} }`}>
+        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'sea-background'} ${currentWorld === 3 && 'weird-background'} ${currentWorld === 4 && 'scary-background'} ${currentWorld === 5 && 'snowy-background'} ${currentWorld === 6 && 'fire-background'} ${currentWorld === 7 && 'end-background'}`} >
             <div>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
             <p className='enemy-health'>HP: {currentEnemy.health}</p>
