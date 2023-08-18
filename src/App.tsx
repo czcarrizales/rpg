@@ -49,10 +49,6 @@ function App() {
   const [currentMusic, setCurrentMusic] = useState<any>(null)
   const dispatch = useDispatch()
 
-  const preloadedSounds = {
-    select: new Audio(select)
-  }
-
   const playMusic = (music: string) => {
     if (currentMusic) {
       currentMusic.pause()

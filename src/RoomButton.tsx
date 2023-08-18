@@ -6,7 +6,6 @@ import { AppDispatch, RootState } from './store';
 import { resetGame, setPlayingMusic, setRandomEncounterAnimation } from './slices/gameSlice';
 import enemyEncounter from '../public/sounds/enemyEncounter.mp3'
 import select from '../public/sounds/select.mp3'
-import shopAppears from '../public/sounds/shopAppears.mp3'
 import { playSound } from './utilities';
 interface RoomButtonProps {
   inRoom: boolean;
