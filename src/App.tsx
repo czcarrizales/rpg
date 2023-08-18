@@ -29,7 +29,9 @@ import monstrousMonstro from '../public/music/world/monstrousMonstro.mp3'
 import tensionRising from '../public/music/boss/tensionRising.mp3'
 import scherzo from '../public/music/world/scherzo.mp3'
 import the13thReflection from '../public/music/boss/the13thReflection.mp3'
+import select from '../public/sounds/select.mp3'
 import ShopRoom from './ShopRoom'
+import { playSound } from './utilities'
 
 function App() {
 
@@ -47,6 +49,10 @@ function App() {
   const [currentMusic, setCurrentMusic] = useState<any>(null)
   const dispatch = useDispatch()
 
+  const preloadedSounds = {
+    select: new Audio(select)
+  }
+
   const playMusic = (music: string) => {
     if (currentMusic) {
       currentMusic.pause()
@@ -61,16 +67,19 @@ function App() {
   const handleBossRoom = () => {
     dispatch(goToBossRoom())
     dispatch(setInRoom(true))
+    playSound(select)
   }
 
   const handleShopRoom = () => {
     dispatch(goToShopRoom())
     dispatch(setInRoom(true))
+    playSound(select)
   }
 
   const handleHealingRoom = () => {
     dispatch(goToHealingRoom())
     dispatch(setInRoom(true))
+    playSound(select)
   }
 
   useEffect(() => {

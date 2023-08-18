@@ -19,8 +19,9 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
   const dispatch = useDispatch<AppDispatch>()
   const [visited, setVisited] = useState(false)
-  const [soundPlayed, setSoundPlayed] = useState(false)
+  const [soundShouldPlay, setSoundShouldPlay] = useState(false)
   const handleRandomRoom = async () => {
+    setSoundShouldPlay(true)
     dispatch(goToRandomRoom())
     setVisited(true)
   }
@@ -29,10 +30,9 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
     const audio = new Audio(sound)
     audio.volume = 0.35
     audio.play()
-    setSoundPlayed(true)
   }
 
-  const waitForConsoleLog = () => {
+  const waitForEnemyAnimation = () => {
     return new Promise((resolve) => {
       if (currentRoom == 'enemyRoom') {
         dispatch(setRandomEncounterAnimation(true))
@@ -46,14 +46,10 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
   useEffect(() => {
     console.log('current room')
     const checkCurrentRoom = async () => {
-      if (visited && !soundPlayed) {
-        if (currentRoom === 'shopRoom') {
-          playRoomSound(shopAppears)
-          playSound(select)
-        } else if (currentRoom === 'enemyRoom') {
-          console.log('playing enemyroom sound')
+      if (soundShouldPlay) {
+         if (currentRoom === 'enemyRoom') {
           playRoomSound(enemyEncounter)
-          await waitForConsoleLog()
+          await waitForEnemyAnimation()
           if (!playingMusic) {
             dispatch(setPlayingMusic(true))
           }
@@ -64,16 +60,14 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
             dispatch(setPlayingMusic(true))
           }
           playSound(select)
-          console.log('playing select sound')
           dispatch(setInRoom(true))
-          console.log(inRoom, 'in room')
         }
-      }
-      
-
+        console.log('playing sound')
+        setSoundShouldPlay(false)
+      }  
     }
     checkCurrentRoom()
-  }, [currentRoom, visited])
+  }, [currentRoom, soundShouldPlay])
 
   useEffect(() => {
     if (gameState.resettingGame == true) {
@@ -86,7 +80,7 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
   useEffect(() => {
     if (resettingRooms == true) {
       setVisited(false)
-      setSoundPlayed(false)
+      setSoundShouldPlay(false)
       dispatch(setResettingRooms(false))
     }
   }, [resettingRooms])
