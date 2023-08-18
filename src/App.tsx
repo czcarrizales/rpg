@@ -132,7 +132,6 @@ function App() {
     if (heroStats.health <= 0) {
       dispatch(setInRoom(false))
       dispatch(setGameOver(true))
-      console.log('game is over because hero died')
     }
   }, [heroStats])
 
