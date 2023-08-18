@@ -15,21 +15,7 @@ import { resetGame, setGameOver, setLevelingUp } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
-import adventure from '../public/music/delightful_adventure.mp3'
-import daemons from '../public/music/world/daemons.mp3'
-import boss1 from '../public/music/boss1.mp3'
-import boss2 from '../public/music/boss2.mp3'
-import lordOfTheCastle from '../public/music/boss/lord-of-the-castle.mp3'
-import theCorrupted from '../public/music/boss/the-corrupted.mp3'
-import edgeOfExistence from '../public/music/world/edge-of-existence.mp3'
-import danceToTheDeath from '../public/music/world/dance-to-the-death.mp3'
-import beach from '../public/music/world/beach.mp3'
-import squirmingEvil from '../public/music/boss/squirmingEvil.mp3'
-import monstrousMonstro from '../public/music/world/monstrousMonstro.mp3'
-import tensionRising from '../public/music/boss/tensionRising.mp3'
-import scherzo from '../public/music/world/scherzo.mp3'
-import the13thReflection from '../public/music/boss/the13thReflection.mp3'
-import select from '../public/sounds/select.mp3'
+import * as audioUtils from './audioUtils'
 import ShopRoom from './ShopRoom'
 import { playSound } from './utilities'
 
@@ -63,19 +49,19 @@ function App() {
   const handleBossRoom = () => {
     dispatch(goToBossRoom())
     dispatch(setInRoom(true))
-    playSound(select)
+    playSound(audioUtils.selectSound)
   }
 
   const handleShopRoom = () => {
     dispatch(goToShopRoom())
     dispatch(setInRoom(true))
-    playSound(select)
+    playSound(audioUtils.selectSound)
   }
 
   const handleHealingRoom = () => {
     dispatch(goToHealingRoom())
     dispatch(setInRoom(true))
-    playSound(select)
+    playSound(audioUtils.selectSound)
   }
 
   useEffect(() => {
@@ -84,37 +70,37 @@ function App() {
 
   useEffect(() => {
     if (currentRoom === 'bossRoom' && currentWorld === 1) {
-      playMusic(boss1)
+      playMusic(audioUtils.boss1Music.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 2) {
-      playMusic(squirmingEvil)
+      playMusic(audioUtils.squirmingEvilMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 3) {
-      playMusic(tensionRising)
+      playMusic(audioUtils.tensionRisingMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 4) {
-      playMusic(boss2)
+      playMusic(audioUtils.boss2Music.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 5) {
-      playMusic(the13thReflection)
+      playMusic(audioUtils.the13thReflectionMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 6) {
-      playMusic(theCorrupted)
+      playMusic(audioUtils.theCorruptedMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 7) {
-      playMusic(lordOfTheCastle)
+      playMusic(audioUtils.lordOfTheCastleMusic.src)
     }
   }, [currentRoom])
 
   useEffect(() => {
     if (currentWorld === 1 && playingMusic) {
-      playMusic(adventure)
+      playMusic(audioUtils.adventureMusic.src)
     } else if (currentWorld === 2 && playingMusic) {
-      playMusic(beach)
+      playMusic(audioUtils.beachMusic.src)
     } else if (currentWorld === 3 && playingMusic) {
-      playMusic(monstrousMonstro)
+      playMusic(audioUtils.monstrousMonstroMusic.src)
     } else if (currentWorld === 4 && playingMusic) {
-      playMusic(daemons)
+      playMusic(audioUtils.deamonsMusic.src)
     } else if (currentWorld === 5 && playingMusic) {
-      playMusic(scherzo)
+      playMusic(audioUtils.scherzoMusic.src)
     } else if (currentWorld === 6 && playingMusic) {
-      playMusic(danceToTheDeath)
+      playMusic(audioUtils.danceToTheDeathMusic.src)
     } else if (currentWorld === 7 && playingMusic) {
-      playMusic(edgeOfExistence)
+      playMusic(audioUtils.edgeOfExistenceMusic.src)
     }
   }, [currentWorld, playingMusic])
 
@@ -143,7 +129,7 @@ function App() {
   useEffect(() => {
     if (resettingGame) {
       dispatch(resetGame(false))
-      playMusic(adventure)
+      playMusic(audioUtils.adventureMusic.src)
     }
   }, [resettingGame])
 
