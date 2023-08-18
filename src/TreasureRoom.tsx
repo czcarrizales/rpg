@@ -6,6 +6,7 @@ import {v4 as uuidv4} from 'uuid';
 import { playSound } from './utilities';
 import treasureAppears from '../public/sounds/treasureAppears.mp3'
 import './TreasureRoom.css'
+import select from '../public/sounds/select.mp3'
 
 const TreasureRoom = () => {
   const [currentTreasure, setCurrentTreasure] = useState<any>('')
@@ -15,6 +16,7 @@ const TreasureRoom = () => {
     dispatch(takeTreasure(currentTreasure))
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
+    playSound(select)
   }
 
   useEffect(() => {

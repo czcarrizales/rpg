@@ -4,6 +4,8 @@ import { Spell, learnSpell } from "./slices/heroSlice"
 import { useDispatch } from "react-redux"
 import { setInRoom } from "./slices/roomSlice"
 import spellAppears from '../public/sounds/spellAppears.mp3'
+import select from '../public/sounds/select.mp3'
+import { playSound } from "./utilities"
 
 const SpellRoom = () => {
   const dispatch = useDispatch()
@@ -48,9 +50,10 @@ const SpellRoom = () => {
   const handleLearnSpell = () => {
     dispatch(learnSpell(randomSpell))
     dispatch(setInRoom(false))
+    playSound(select)
   }
 
-  const playSound = () => {
+  const playSpellAppearingSound = () => {
     const audio = new Audio(spellAppears)
     audio.volume = 0.35
     audio.play()
@@ -59,7 +62,7 @@ const SpellRoom = () => {
   useEffect(() => {
     setTimeout(() => {
       setSpellAppearing(false)
-      playSound()
+      playSpellAppearingSound()
     }, 1000);
     getRandomSpell()
   }, [])

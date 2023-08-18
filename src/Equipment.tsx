@@ -4,6 +4,8 @@ import './Equipment.css'
 import { RootState } from './store'
 import { setShowEquipment } from './slices/gameSlice'
 import equip from '../public/sounds/equip.mp3'
+import { playSound } from './utilities'
+import select from '../public/sounds/select.mp3'
 
 const Equipment = ({ }) => {
     const heroEquipment = useSelector((state: RootState) => state.hero.equipment)
@@ -21,6 +23,10 @@ const Equipment = ({ }) => {
         audio.volume = 0.3
         audio.play()
         dispatch(equipArmor(armor))
+    }
+    const goBack = () => {
+        dispatch(setShowEquipment(false))
+        playSound(select)
     }
     const showAllEquipment = () => {
         return (
@@ -49,7 +55,7 @@ const Equipment = ({ }) => {
         <div id='equipment-container'>
             <div className='equipment-container-top'>
                 <h1 className='equipment-container-title'>Equipment</h1>
-                <button className='equipment-container-back-button hero-button' onClick={() => dispatch(setShowEquipment(false))}>Back</button>
+                <button className='equipment-container-back-button hero-button' onClick={goBack}>Back</button>
             </div>
             {/* <h1>Equipment</h1>
             <button className='hero-button' onClick={() => dispatch(setShowEquipment(false))}>Go Back</button> */}
