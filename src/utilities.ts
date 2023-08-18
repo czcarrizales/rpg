@@ -49,5 +49,6 @@ export const heroTakeDamageFlash = (dispatch: DispatchFunction) => {
 export const playSound = (sound: any) => {
     const audio = new Audio(sound)
     audio.volume = 0.35
+    audio.preload = "auto"
     audio.play()
 }
