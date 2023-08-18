@@ -181,7 +181,7 @@ const heroSlice = createSlice({
             state.money -= money
             state.backpack.push(item)
         },
-        sellItemFromBackpack: (state, action) => {
+        removeItemFromBackpack: (state, action) => {
             state.backpack = state.backpack.filter(item => item.id !== action.payload.id)
         },
         resetHero: (state) => {
@@ -217,5 +217,5 @@ const heroSlice = createSlice({
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, sellItemFromBackpack, setMana, learnSpell} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, removeItemFromBackpack, setMana, learnSpell} = heroSlice.actions;
 export default heroSlice.reducer
