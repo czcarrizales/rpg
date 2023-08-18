@@ -54,7 +54,7 @@ useEffect(() => {
 
   useEffect(() => {
       if (bossTypeSet && currentEnemy.health <= 0 ) {
-        if (currentWorld == 5 && currentRoom == 'bossRoom') {
+        if (currentWorld == 7 && currentRoom == 'bossRoom') {
             dispatch(setBossBattle(false))
             dispatch(setInBattle(false))
             dispatch(setAfterBattle(true))
@@ -81,6 +81,7 @@ useEffect(() => {
   useEffect(() => {
       if (battleTurn === false && currentEnemy.health > 0) {
               dispatch(heroTakeDamage(randomEnemyDamage))
+              dispatch(addToBattleDialogue(`${currentEnemy.name} attacked for ${randomEnemyDamage} damage!`))
               setTimeout(() => {
                 dispatch(setHeroIsAttacked(true));
                 
