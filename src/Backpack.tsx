@@ -2,7 +2,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import './Backpack.css'
 import { RootState } from './store'
 import { setShowBackpack } from './slices/gameSlice'
-import { gainMoney, healToFull, raiseHeroHealth, raiseMana, sellItemFromBackpack, setMana } from './slices/heroSlice'
+import { gainMoney, healToFull, raiseHeroHealth, raiseMana, removeItemFromBackpack, setMana } from './slices/heroSlice'
+import { playSound } from './utilities'
+import select from '../public/sounds/select.mp3'
 
 const Backpack = () => {
     const heroBackpack = useSelector((state: RootState) => state.hero.backpack)
@@ -23,6 +25,7 @@ const Backpack = () => {
                     } else {
                         dispatch(raiseHeroHealth(item.points))
                     }
+                    dispatch(removeItemFromBackpack(item))
                     break;
                 case 'RAISEMANA':
                     const newMana = currentMana + item.points;
@@ -37,20 +40,24 @@ const Backpack = () => {
                     break;
             }
         } else if (item.type == 'TREASURE') {
-            dispatch(sellItemFromBackpack(item))
+            dispatch(removeItemFromBackpack(item))
             dispatch(gainMoney(item.money))
         }
     }
 
     const handleSellItem = (item: any, money: any) => {
-        dispatch(sellItemFromBackpack(item))
+        dispatch(removeItemFromBackpack(item))
         dispatch(gainMoney(money))
     }
+    const goBack = () => {
+        dispatch(setShowBackpack(false))
+        playSound(select)
+      }
     return (
         <div id='backpack-container'>
             <div className='backpack-container-top'>
             <h1>Backpack</h1>
-            <button className='hero-button backpack-back-button' onClick={() => dispatch(setShowBackpack(false))}>Back</button>
+            <button className='hero-button backpack-back-button' onClick={goBack}>Back</button>
             </div>
             <div className='backpack-all-items'>
             {
