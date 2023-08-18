@@ -52,8 +52,8 @@ const Hero = () => {
   }
 
   const handleGoToSpells = () => {
-    dispatch(setShowSpells(true))
     playSound(selectSound)
+    dispatch(setShowSpells(true))
   }
 
   const handleGoToEquipment = () => {
