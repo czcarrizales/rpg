@@ -38,12 +38,12 @@ const Hero = () => {
   const dispatch = useDispatch()
 
   const handleAttackEnemy = async ()  => {
-    const randomHeroDamage = Math.floor(Math.random() * (heroMaxAttack - heroMinAttack + 1)) + heroMinAttack
+    const randomHeroDamage = (Math.floor(Math.random() * (heroMaxAttack - heroMinAttack + 1)) + heroMinAttack) + heroWeapon.damage!
     const audio = new Audio(playerAttackSound)
     audio.volume = 0.3
     audio.play()
     dispatch(setInAnimation(true))
-    dispatch(enemyTakeDamage(randomHeroDamage + heroWeapon.damage!))
+    dispatch(enemyTakeDamage(randomHeroDamage))
     dispatch(addToBattleDialogue(`Hero attacked for ${randomHeroDamage} damage!`))
     enemyTakeDamageFlash(dispatch)
     await new Promise((resolve) => setTimeout(resolve, 500))
