@@ -35,6 +35,24 @@ function App() {
   const [currentMusic, setCurrentMusic] = useState<any>(null)
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    if (currentWorld === 1 && playingMusic) {
+      playMusic(audioUtils.adventureMusic.src)
+    } else if (currentWorld === 2 && playingMusic) {
+      playMusic(audioUtils.beachMusic.src)
+    } else if (currentWorld === 3 && playingMusic) {
+      playMusic(audioUtils.monstrousMonstroMusic.src)
+    } else if (currentWorld === 4 && playingMusic) {
+      playMusic(audioUtils.deamonsMusic.src)
+    } else if (currentWorld === 5 && playingMusic) {
+      playMusic(audioUtils.scherzoMusic.src)
+    } else if (currentWorld === 6 && playingMusic) {
+      playMusic(audioUtils.danceToTheDeathMusic.src)
+    } else if (currentWorld === 7 && playingMusic) {
+      playMusic(audioUtils.edgeOfExistenceMusic.src)
+    }
+  }, [currentWorld, playingMusic])
+
   const playMusic = (music: string) => {
     if (currentMusic) {
       currentMusic.pause()
@@ -86,23 +104,7 @@ function App() {
     }
   }, [currentRoom])
 
-  useEffect(() => {
-    if (currentWorld === 1 && playingMusic) {
-      playMusic(audioUtils.adventureMusic.src)
-    } else if (currentWorld === 2 && playingMusic) {
-      playMusic(audioUtils.beachMusic.src)
-    } else if (currentWorld === 3 && playingMusic) {
-      playMusic(audioUtils.monstrousMonstroMusic.src)
-    } else if (currentWorld === 4 && playingMusic) {
-      playMusic(audioUtils.deamonsMusic.src)
-    } else if (currentWorld === 5 && playingMusic) {
-      playMusic(audioUtils.scherzoMusic.src)
-    } else if (currentWorld === 6 && playingMusic) {
-      playMusic(audioUtils.danceToTheDeathMusic.src)
-    } else if (currentWorld === 7 && playingMusic) {
-      playMusic(audioUtils.edgeOfExistenceMusic.src)
-    }
-  }, [currentWorld, playingMusic])
+  
 
   useEffect(() => {
     if (heroStats.experience >= heroStats.experienceToLevelUp) {
