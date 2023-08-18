@@ -40,9 +40,7 @@
 
 .enemy-image {
     margin-top: 20px;
-    width: 50%;
-    max-width: 120px;
-    max-height: auto;
+    max-height: 140px;
     margin-bottom: 20px;
 }
 
@@ -50,18 +48,26 @@
     background-image: url('/images/backgrounds/grassBackground.png');
 }
 
-.world-2-enemy-background {
+.sea-background {
+    background-image: url('/images/backgrounds/seaBackground.png');
+}
+
+.weird-background {
+    background-image: url('/images/backgrounds/weirdBackground.png');
+}
+
+.scary-background {
     background-image: url('/images/backgrounds/scaryBackground.png');
 }
 
-.world-3-enemy-background {
+.snowy-background {
     background-image: url('/images/backgrounds/snowyBackground.png');
 }
 
-.world-4-enemy-background {
+.fire-background {
     background-image: url('/images/backgrounds/fireBackground.png');
 }
 
-.world-5-enemy-background {
-    background-image: url('images/backgrounds/testBackground.png');
+.end-background {
+    background-image: url('images/backgrounds/endBackground.png');
 }
