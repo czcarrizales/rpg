@@ -44,6 +44,10 @@
     text-align: right;
 }
 
+.level-up-buttons button:hover {
+    cursor: pointer;
+}
+
 .continue-button {
     margin-top: 4px;
     padding: 10px 20px;
