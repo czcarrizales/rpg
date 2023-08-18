@@ -4,8 +4,9 @@ import './Spells.css'
 import { lowerMana, raiseHeroHealth } from './slices/heroSlice'
 import { RootState } from './store'
 import { enemyTakeDamage } from './slices/enemySlice'
-import { enemyTakeDamageFlash } from './utilities'
+import { enemyTakeDamageFlash, playSound } from './utilities'
 import { addToBattleDialogue, setPlayerTurn } from './slices/battleSlice'
+import select from '../public/sounds/select.mp3'
 
 const Spells = () => {
     const dispatch = useDispatch()
@@ -33,22 +34,29 @@ const Spells = () => {
                 dispatch(raiseHeroHealth(spell.points))
                 dispatch(lowerMana(spell.mana))
                 dispatch(addToBattleDialogue(`Hero healed for ${spell.points} HP!`))
+                dispatch(setPlayerTurn(false))
                 break
             case 'DAMAGE':
                 handleAttackEnemy(spell.points!)
                 dispatch(lowerMana(spell.mana))
                 dispatch(addToBattleDialogue(`Hero used ${spell.name} for ${spell.points} damage!`))
+                dispatch(setPlayerTurn(false))
                 break
             default:
                 break; 
         }
+      }
+
+      const goBack = () => {
+        dispatch(setShowSpells(false))
+        playSound(select)
       }
   
     return (
         <div>
             <div className="spells-container-top">
                 <h1>Spells</h1>
-            <button className='hero-button spells-container-back-button' onClick={() => dispatch(setShowSpells(false))}>Back</button>
+            <button className='hero-button spells-container-back-button' onClick={goBack}>Back</button>
             </div>
 <div id='spell-buttons'>
             
