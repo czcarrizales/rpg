@@ -7,6 +7,7 @@ import { RootState } from './store'
 import { setNewEquipment } from './slices/gameSlice'
 import { playSound } from './utilities'
 import equipmentAppears from '../public/sounds/equipmentAppears.mp3'
+import select from '../public/sounds/select.mp3'
 
 interface Armor {
   type: string | null,
@@ -25,6 +26,7 @@ const ArmorRoom = () => {
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
     dispatch(setNewEquipment(true))
+    playSound(select)
   }
 
   useEffect(() => {
@@ -69,6 +71,20 @@ const ArmorRoom = () => {
         name: 'gold shield',
         defense: 12,
         world: 3,
+        image: '/images/armor/gold-shield.png'
+      },
+      {
+        type: 'armor',
+        name: 'gold shield',
+        defense: 12,
+        world: 4,
+        image: '/images/armor/gold-shield.png'
+      },
+      {
+        type: 'armor',
+        name: 'gold shield',
+        defense: 12,
+        world: 5,
         image: '/images/armor/gold-shield.png'
       }
     ]
