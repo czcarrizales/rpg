@@ -4,9 +4,9 @@ import { takeTreasure } from './slices/heroSlice'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import {v4 as uuidv4} from 'uuid';
 import { playSound } from './utilities';
-import treasureAppears from '../public/sounds/treasureAppears.mp3'
 import './TreasureRoom.css'
-import select from '../public/sounds/select.mp3'
+import soundsAndMusic from './audioUtils';
+
 
 const TreasureRoom = () => {
   const [currentTreasure, setCurrentTreasure] = useState<any>('')
@@ -16,7 +16,7 @@ const TreasureRoom = () => {
     dispatch(takeTreasure(currentTreasure))
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
-    playSound(select)
+    playSound(soundsAndMusic.selectSound)
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const TreasureRoom = () => {
     setCurrentTreasure(randomTreasure)
     setTimeout(() => {
       setTreasureAppearing(false)
-      playSound(treasureAppears)
+      playSound(soundsAndMusic.treasureAppearsSound)
     }, 1000);
   }, [])
   return (

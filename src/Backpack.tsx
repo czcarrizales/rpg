@@ -3,8 +3,7 @@ import './Backpack.css'
 import { RootState } from './store'
 import { setShowBackpack } from './slices/gameSlice'
 import { gainMoney, healToFull, raiseHeroHealth, raiseMana, removeItemFromBackpack, setMana } from './slices/heroSlice'
-import { playSound } from './utilities'
-import select from '../public/sounds/select.mp3'
+import { playSelectSound} from './utilities'
 
 const Backpack = () => {
     const heroBackpack = useSelector((state: RootState) => state.hero.backpack)
@@ -51,7 +50,7 @@ const Backpack = () => {
     }
     const goBack = () => {
         dispatch(setShowBackpack(false))
-        playSound(select)
+        playSelectSound()
       }
     return (
         <div id='backpack-container'>

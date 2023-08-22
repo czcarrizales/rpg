@@ -4,8 +4,7 @@ import './Equipment.css'
 import { RootState } from './store'
 import { setShowEquipment } from './slices/gameSlice'
 import equip from '../public/sounds/equip.mp3'
-import { playSound } from './utilities'
-import select from '../public/sounds/select.mp3'
+import { playSelectSound } from './utilities'
 
 const Equipment = ({ }) => {
     const heroEquipment = useSelector((state: RootState) => state.hero.equipment)
@@ -26,7 +25,7 @@ const Equipment = ({ }) => {
     }
     const goBack = () => {
         dispatch(setShowEquipment(false))
-        playSound(select)
+        playSelectSound()
     }
     const showAllEquipment = () => {
         return (

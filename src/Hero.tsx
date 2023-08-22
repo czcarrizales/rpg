@@ -7,10 +7,9 @@ import Equipment from './Equipment'
 import Backpack from './Backpack'
 import { setInAnimation, setNewEquipment, setShowBackpack, setShowEquipment, setShowOptions, setShowSpells, setShowStats } from './slices/gameSlice'
 import Spells from './Spells'
-import { enemyTakeDamageFlash, playSound } from './utilities'
+import { enemyTakeDamageFlash, playErrorSound, playSelectSound } from './utilities'
 import Stats from './Stats'
 import Options from './Options'
-import { selectSound } from './audioUtils'
 
 const Hero = () => {
   // const heroLevel = useSelector((state: RootState) => state.hero.level)
@@ -52,29 +51,47 @@ const Hero = () => {
   }
 
   const handleGoToSpells = () => {
-    playSound(selectSound)
-    dispatch(setShowSpells(true))
+    if (inAnimation) {
+      playErrorSound()
+    } else {
+      playSelectSound()
+      dispatch(setShowSpells(true))
+      console.log('playing sound')
+    }
+    
   }
 
   const handleGoToEquipment = () => {
-    dispatch(setShowEquipment(true))
-    dispatch(setNewEquipment(false))
-    playSound(selectSound)
+    if (inAnimation) {
+      playErrorSound()
+    } else {
+      dispatch(setShowEquipment(true))
+      dispatch(setNewEquipment(false))
+      playSelectSound()
+    }
+    
   }
 
   const handleGoToBackpack = () => {
-    dispatch(setShowBackpack(true))
-    playSound(selectSound)
+    if (inAnimation) {
+      playErrorSound()
+    } else {
+      dispatch(setShowBackpack(true))
+      playSelectSound()
+    }
+    
   }
 
   const handleGoToStats = () => {
-    dispatch(setShowStats(true))
-    playSound(selectSound)
+      dispatch(setShowStats(true))
+      playSelectSound()
+    
   }
 
   const handleGoToOptions = () => {
-    dispatch(setShowOptions(true))
-    playSound(selectSound)
+      dispatch(setShowOptions(true))
+      playSelectSound()
+    
   }
 
   return (

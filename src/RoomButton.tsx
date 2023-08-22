@@ -3,16 +3,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import { goToRandomRoom, setInRoom, setResettingRooms } from './slices/roomSlice'
 import './RoomButton.css'
 import { AppDispatch, RootState } from './store';
-import { resetGame, setPlayingMusic, setRandomEncounterAnimation } from './slices/gameSlice';
+import { setPlayingMusic, setRandomEncounterAnimation } from './slices/gameSlice';
 import enemyEncounter from '../public/sounds/enemyEncounter.mp3'
-import select from '../public/sounds/select.mp3'
-import { playSound } from './utilities';
+import { playSelectSound } from './utilities';
 interface RoomButtonProps {
   inRoom: boolean;
 }
 
 const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
-  const gameState = useSelector((state: RootState) => state.game)
   const resettingRooms = useSelector((state: RootState) => state.room.resettingRooms)
   const currentRoom = useSelector((state: RootState) => state.room.currentRoom)
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
@@ -58,7 +56,7 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
           if (!playingMusic) {
             dispatch(setPlayingMusic(true))
           }
-          playSound(select)
+          playSelectSound()
           dispatch(setInRoom(true))
         }
         console.log('playing sound')
@@ -67,14 +65,6 @@ const RoomButton: React.FC<RoomButtonProps> = ({ inRoom }) => {
     }
     checkCurrentRoom()
   }, [currentRoom, soundShouldPlay])
-
-  useEffect(() => {
-    if (gameState.resettingGame == true) {
-      console.log('resetting game is true!')
-      setVisited(false)
-      dispatch(resetGame(false))
-    }
-  }, [gameState])
 
   useEffect(() => {
     if (resettingRooms == true) {

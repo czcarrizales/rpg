@@ -6,8 +6,7 @@ import './ArmorRoom.css'
 import { RootState } from './store'
 import { setNewEquipment } from './slices/gameSlice'
 import { playSound } from './utilities'
-import equipmentAppears from '../public/sounds/equipmentAppears.mp3'
-import select from '../public/sounds/select.mp3'
+import soundsAndMusic from './audioUtils'
 
 interface Armor {
   type: string | null,
@@ -26,7 +25,7 @@ const ArmorRoom = () => {
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
     dispatch(setNewEquipment(true))
-    playSound(select)
+    playSound(soundsAndMusic.selectSound)
   }
 
   useEffect(() => {
@@ -93,7 +92,7 @@ const ArmorRoom = () => {
     setCurrentArmor(currentWorldArmorPool[randomIndex])
     setTimeout(() => {
       setArmorAppearing(false)
-      playSound(equipmentAppears)
+      playSound(soundsAndMusic.equipmentAppearsSound)
     }, 1000);
   }, [])
   return (
