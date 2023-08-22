@@ -15,9 +15,10 @@ import { resetGame, setGameOver, setLevelingUp } from './slices/gameSlice'
 import { GameOver } from './GameOver'
 import ArmorRoom from './ArmorRoom'
 import { RootState } from './store'
-import * as audioUtils from './audioUtils'
+
 import ShopRoom from './ShopRoom'
-import { playSound } from './utilities'
+import { playSelectSound } from './utilities'
+import soundsAndMusic from './audioUtils'
 
 function App() {
 
@@ -34,22 +35,22 @@ function App() {
   const randomEncounterAnimation = useSelector((state: RootState) => state.game.randomEncounterAnimation)
   const [currentMusic, setCurrentMusic] = useState<any>(null)
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
     if (currentWorld === 1 && playingMusic) {
-      playMusic(audioUtils.adventureMusic.src)
+      playMusic(soundsAndMusic.adventureMusic.src)
     } else if (currentWorld === 2 && playingMusic) {
-      playMusic(audioUtils.beachMusic.src)
+      playMusic(soundsAndMusic.beachMusic.src)
     } else if (currentWorld === 3 && playingMusic) {
-      playMusic(audioUtils.monstrousMonstroMusic.src)
+      playMusic(soundsAndMusic.monstrousMonstroMusic.src)
     } else if (currentWorld === 4 && playingMusic) {
-      playMusic(audioUtils.deamonsMusic.src)
+      playMusic(soundsAndMusic.deamonsMusic.src)
     } else if (currentWorld === 5 && playingMusic) {
-      playMusic(audioUtils.scherzoMusic.src)
+      playMusic(soundsAndMusic.scherzoMusic.src)
     } else if (currentWorld === 6 && playingMusic) {
-      playMusic(audioUtils.danceToTheDeathMusic.src)
+      playMusic(soundsAndMusic.danceToTheDeathMusic.src)
     } else if (currentWorld === 7 && playingMusic) {
-      playMusic(audioUtils.edgeOfExistenceMusic.src)
+      playMusic(soundsAndMusic.edgeOfExistenceMusic.src)
     }
   }, [currentWorld, playingMusic])
 
@@ -67,19 +68,19 @@ function App() {
   const handleBossRoom = () => {
     dispatch(goToBossRoom())
     dispatch(setInRoom(true))
-    playSound(audioUtils.selectSound)
+    playSelectSound()
   }
 
   const handleShopRoom = () => {
     dispatch(goToShopRoom())
     dispatch(setInRoom(true))
-    playSound(audioUtils.selectSound)
+    playSelectSound()
   }
 
   const handleHealingRoom = () => {
     dispatch(goToHealingRoom())
     dispatch(setInRoom(true))
-    playSound(audioUtils.selectSound)
+    playSelectSound()
   }
 
   useEffect(() => {
@@ -88,19 +89,19 @@ function App() {
 
   useEffect(() => {
     if (currentRoom === 'bossRoom' && currentWorld === 1) {
-      playMusic(audioUtils.boss1Music.src)
+      playMusic(soundsAndMusic.boss1Music.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 2) {
-      playMusic(audioUtils.squirmingEvilMusic.src)
+      playMusic(soundsAndMusic.squirmingEvilMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 3) {
-      playMusic(audioUtils.tensionRisingMusic.src)
+      playMusic(soundsAndMusic.tensionRisingMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 4) {
-      playMusic(audioUtils.boss2Music.src)
+      playMusic(soundsAndMusic.boss2Music.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 5) {
-      playMusic(audioUtils.the13thReflectionMusic.src)
+      playMusic(soundsAndMusic.the13thReflectionMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 6) {
-      playMusic(audioUtils.theCorruptedMusic.src)
+      playMusic(soundsAndMusic.theCorruptedMusic.src)
     } else if (currentRoom === 'bossRoom' && currentWorld === 7) {
-      playMusic(audioUtils.lordOfTheCastleMusic.src)
+      playMusic(soundsAndMusic.lordOfTheCastleMusic.src)
     }
   }, [currentRoom])
 
@@ -131,7 +132,7 @@ function App() {
   useEffect(() => {
     if (resettingGame) {
       dispatch(resetGame(false))
-      playMusic(audioUtils.adventureMusic.src)
+      playMusic(soundsAndMusic.adventureMusic.src)
     }
   }, [resettingGame])
 
