@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
-import { enemyReset, setEnemyType, setRandomEnemyDamage } from './slices/enemySlice'
-import { gainExperience, gainMoney, heroTakeDamage} from './slices/heroSlice'
+import { enemyReset, enemyTakeDamage, setEnemyStatus, setEnemyStatusPoints, setEnemyType, setRandomEnemyDamage } from './slices/enemySlice'
+import { gainExperience, gainMoney, heroTakeDamage, setHeroStatusPoints} from './slices/heroSlice'
 import { addToBattleDialogue, setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
 import { heroTakeDamageFlash } from './utilities'
@@ -24,6 +24,7 @@ const Enemy = () => {
     const battleDialogue = useSelector((state: RootState) => state.battle.battleDialogue)
     const heroDefense = useSelector((state: RootState) => state.hero.defense)
     const heroArmor = useSelector((state: RootState) => state.hero.armor)
+    const heroStats = useSelector((state: RootState) => state.hero)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
     const [randomMoney, setRandomMoney] = useState(0)
 
@@ -87,16 +88,44 @@ const Enemy = () => {
         }
     }, [afterBattle])
 
+    const checkEnemyStatusEffect = () => {
+        if (currentEnemy.status?.name! === 'Stop' && currentEnemy.status?.points! > 0) {
+            dispatch(addToBattleDialogue(`${currentEnemy.name} is frozen and can not attack for ${currentEnemy.status?.points!} turn(s)!`))
+            dispatch(setPlayerTurn(true))
+            dispatch(setEnemyStatusPoints(-1))
+            return true
+        } else if (currentEnemy.status?.name! === 'Poison' && currentEnemy.status?.points! > 0) {
+            dispatch(enemyTakeDamage(10))
+            dispatch(addToBattleDialogue(`${currentEnemy.name} took 10 poison damage!`))
+            dispatch(setPlayerTurn(true))
+            dispatch(setEnemyStatusPoints(-1))
+        }
+    }
+
+    const checkHeroStatusEffect = () => {
+            if (heroStats.status.name === 'Protect' && heroStats.status.points! > 0) {
+                dispatch(addToBattleDialogue(`Hero has Protect! No damage taken!`))
+                dispatch(setPlayerTurn(true))
+                dispatch(setHeroStatusPoints(-1))
+                return true
+            }
+    }
+
     useEffect(() => {
         if (battleTurn === false && currentEnemy.health! > 0) {
+                if (checkEnemyStatusEffect()) {
+                    return
+                }
+                if (checkHeroStatusEffect()) {
+                    return
+                }
                 dispatch(heroTakeDamage(randomEnemyDamage))
                 dispatch(addToBattleDialogue(`${currentEnemy.name} attacked for ${randomEnemyDamage} damage!`))
                 heroTakeDamageFlash(dispatch)
                 setTimeout(() => {
                     dispatch(setPlayerTurn(true))
                     dispatch(setRandomEnemyDamage(handleRandomDamage()))
-                }, 500);
-                
+                }, 500);  
         } else {
             dispatch(setPlayerTurn(true))
         }
@@ -109,6 +138,7 @@ const Enemy = () => {
             <div>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
             <p className='enemy-health'>HP: {currentEnemy.health}</p>
+            {currentEnemy.status && <p>Status: {currentEnemy.status!.name!}</p>}
             </div>
             
             <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image!} alt="" />
