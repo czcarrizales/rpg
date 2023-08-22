@@ -1,69 +1,105 @@
 import { setInAnimation, setShowSpells } from './slices/gameSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import './Spells.css'
-import { lowerMana, raiseHeroHealth } from './slices/heroSlice'
+import { healToFull, lowerMana, raiseHeroHealth, setHeroStatus } from './slices/heroSlice'
 import { RootState } from './store'
-import { enemyTakeDamage } from './slices/enemySlice'
-import { enemyTakeDamageFlash, playSound } from './utilities'
+import { enemyTakeDamage, setEnemyStatus } from './slices/enemySlice'
+import { enemyTakeDamageFlash, playErrorSound, playHealSound, playSelectSound } from './utilities'
 import { addToBattleDialogue, setPlayerTurn } from './slices/battleSlice'
-import select from '../public/sounds/select.mp3'
 
 const Spells = () => {
     const dispatch = useDispatch()
     const inBattle = useSelector((state: RootState) => state.battle.inBattle)
     const inAnimation = useSelector((state: RootState) => state.game.inAnimation)
     const battleTurn = useSelector((state: RootState) => state.battle.playerTurn)
+    const heroStats = useSelector((state: RootState) => state.hero)
     interface Spell {
         type: string | null;
         name: string | null;
         points: number | null;
         mana: number | null;
-      }
-      const heroSpells = useSelector((state: RootState) => state.hero.spells)
-      const handleAttackEnemy = async (spellDamage: number)  => {
+    }
+    const heroSpells = useSelector((state: RootState) => state.hero.spells)
+
+    const handleAttackEnemy = async (spellDamage: number) => {
         dispatch(setInAnimation(true))
         dispatch(enemyTakeDamage(spellDamage))
         enemyTakeDamageFlash(dispatch)
         await new Promise((resolve) => setTimeout(resolve, 500))
         dispatch(setPlayerTurn(false))
         dispatch(setInAnimation(false))
-      }
-      const handleSpellUse = (spell: Spell) => {
+    }
+
+    const handleSpellUse = async (spell: Spell) => {
         switch (spell.type) {
             case 'HEAL':
-                dispatch(raiseHeroHealth(spell.points))
-                dispatch(lowerMana(spell.mana))
-                dispatch(addToBattleDialogue(`Hero healed for ${spell.points} HP!`))
-                dispatch(setPlayerTurn(false))
+                if (heroStats.mana - spell.mana! >= 0) {
+                    if (heroStats.health + spell.points! >= heroStats.maxHealth) {
+                        dispatch(healToFull())
+                        dispatch(addToBattleDialogue(`Hero healed to full HP!`))
+                    } else {
+                        dispatch(raiseHeroHealth(spell.points))
+                        dispatch(addToBattleDialogue(`Hero healed for ${spell.points} HP!`))
+                    }
+                    playHealSound()
+                    dispatch(lowerMana(spell.mana))
+                    dispatch(setPlayerTurn(false))
+                    dispatch(setInAnimation(false))
+                } else {
+                    playErrorSound()
+                }
                 break
             case 'DAMAGE':
-                handleAttackEnemy(spell.points!)
-                dispatch(lowerMana(spell.mana))
-                dispatch(addToBattleDialogue(`Hero used ${spell.name} for ${spell.points} damage!`))
-                dispatch(setPlayerTurn(false))
+                if (heroStats.mana - spell.mana! >= 0) {
+                    handleAttackEnemy(spell.points!)
+                    dispatch(lowerMana(spell.mana))
+                    dispatch(addToBattleDialogue(`Hero used ${spell.name} for ${spell.points} damage!`))
+                } else {
+                    playErrorSound()
+                }
+                break
+            case 'ENEMYDEBUFF':
+                if (heroStats.mana - spell.mana! >= 0) {
+                    dispatch(lowerMana(spell.mana))
+                    dispatch(setEnemyStatus({name: spell.name, points: spell.points}))
+                    dispatch(setPlayerTurn(false))
+                    dispatch(setInAnimation(false))
+                } else {
+                    playErrorSound()
+                }
+                break
+            case 'HEROBUFF':
+                if (heroStats.mana - spell.mana! >= 0) {
+                    dispatch(lowerMana(spell.mana))
+                    dispatch(setHeroStatus({name: spell.name, points: spell.points}))
+                    dispatch(setPlayerTurn(false))
+                    dispatch(setInAnimation(false))
+                } else {
+                    playErrorSound()
+                }
                 break
             default:
-                break; 
+                break;
         }
-      }
+    }
 
-      const goBack = () => {
+    const goBack = () => {
         dispatch(setShowSpells(false))
-        playSound(select)
-      }
-  
+        playSelectSound()
+    }
+
     return (
         <div>
             <div className="spells-container-top">
                 <h1>Spells</h1>
-            <button className='hero-button spells-container-back-button' onClick={goBack}>Back</button>
+                <button className='hero-button spells-container-back-button' onClick={goBack}>Back</button>
             </div>
-<div id='spell-buttons'>
-            
-            {heroSpells.map(spell => (<button className='hero-button' onClick={() => handleSpellUse(spell)} disabled={!battleTurn || !inBattle || inAnimation}>{spell.name}</button>))}
+            <div id='spell-buttons'>
+
+                {heroSpells.map(spell => (<button className='hero-button' onClick={() => handleSpellUse(spell)} disabled={!battleTurn || !inBattle || inAnimation}>{spell.name}</button>))}
+            </div>
         </div>
-        </div>
-        
+
 
     )
 }
