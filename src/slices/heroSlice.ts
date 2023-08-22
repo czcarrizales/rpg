@@ -223,6 +223,7 @@ const heroSlice = createSlice({
                 image: undefined
             }
             state.equipment = []
+            state.spells = []
         },
         setHeroIsAttacked: (state, action) => {
             state.heroIsAttacked = action.payload
