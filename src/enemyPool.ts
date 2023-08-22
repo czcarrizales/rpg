@@ -4,9 +4,13 @@ export const allEnemiesPool = [
         health: 10,
         minAttack: 1,
         maxAttack: 2,
-        experience:2,
+        experience: 2,
         world: 1,
-        image: '/images/enemies/world1/plant.png'
+        image: '/images/enemies/world1/plant.png',
+        status: {
+            name: null,
+            points: null
+        }
     },
     {
         name: 'Goblin',
@@ -15,7 +19,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 4,
         world: 1,
-        image: '/images/enemies/world1/goblin.png'
+        image: '/images/enemies/world1/goblin.png',
+        status: {
+            name: null,
+            points: null
+        }
     },
     {
         name: 'Wolf',
@@ -24,7 +32,11 @@ export const allEnemiesPool = [
         maxAttack: 5,
         experience: 5,
         world: 1,
-        image: '/images/enemies/world1/basicWolf.png'
+        image: '/images/enemies/world1/basicWolf.png',
+        status: {
+            name: null,
+            points: null
+        }
     },
     {
         name: 'Snake',
@@ -33,7 +45,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 1,
-        image: '/images/enemies/world1/snake.png'
+        image: '/images/enemies/world1/snake.png',
+        status: {
+            name: null,
+            points: null
+        }
     },
     {
         name: 'Bird',
@@ -42,7 +58,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 1,
-        image: '/images/enemies/world1/bird.png'
+        image: '/images/enemies/world1/bird.png',
+        status: {
+            name: null,
+            points: null
+        }
     },
     {
         name: 'Killer Fish',
@@ -51,7 +71,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 2,
-        image: '/images/enemies/world2/killerFish.png'
+        image: '/images/enemies/world2/killerFish.png',
+        status: {
+            name: null,
+            points: null
+        }
     },
     {
         name: 'Pirate',
@@ -60,16 +84,23 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 2,
-        image: '/images/enemies/world2/pirate.png'
-    },{
+        image: '/images/enemies/world2/pirate.png',
+        status: {
+            name: null,
+            points: null
+        }
+    }, {
         name: 'Shark',
         health: 15,
         minAttack: 2,
         maxAttack: 4,
         experience: 3,
         world: 2,
-        image: '/images/enemies/world2/shark.png'
-    },
+        image: '/images/enemies/world2/shark.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Sea Creature',
         health: 15,
@@ -77,8 +108,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 2,
-        image: '/images/enemies/world2/seaCreature.png'
-    },
+        image: '/images/enemies/world2/seaCreature.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Butterfly',
         health: 15,
@@ -86,8 +120,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 3,
-        image: '/images/enemies/world3/butterfly.png'
-    },
+        image: '/images/enemies/world3/butterfly.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Fat Bird',
         health: 15,
@@ -95,8 +132,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 3,
-        image: '/images/enemies/world3/fatBird.png'
-    },
+        image: '/images/enemies/world3/fatBird.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Puppeteer',
         health: 15,
@@ -104,8 +144,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 3,
-        image: '/images/enemies/world3/puppeteer.png'
-    },
+        image: '/images/enemies/world3/puppeteer.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Treasure Monster',
         health: 15,
@@ -113,8 +156,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 3,
-        image: '/images/enemies/world3/treasureMonster.png'
-    },
+        image: '/images/enemies/world3/treasureMonster.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Unicorn',
         health: 15,
@@ -122,8 +168,11 @@ export const allEnemiesPool = [
         maxAttack: 4,
         experience: 3,
         world: 3,
-        image: '/images/enemies/world3/unicorn.png'
-    },
+        image: '/images/enemies/world3/unicorn.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Pumpkin',
         health: 20,
@@ -131,8 +180,11 @@ export const allEnemiesPool = [
         maxAttack: 6,
         experience: 8,
         world: 4,
-        image: '/images/enemies/world4/pumpkinEnemy.png'
-    },
+        image: '/images/enemies/world4/pumpkinEnemy.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Reaper',
         health: 40,
@@ -140,8 +192,11 @@ export const allEnemiesPool = [
         maxAttack: 8,
         experience: 12,
         world: 4,
-        image: '/images/enemies/world4/reaper.png'
-    },
+        image: '/images/enemies/world4/reaper.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Zombie',
         health: 40,
@@ -149,8 +204,11 @@ export const allEnemiesPool = [
         maxAttack: 7,
         experience: 12,
         world: 4,
-        image: '/images/enemies/world4/zombie.png'
-    },
+        image: '/images/enemies/world4/zombie.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Twin Eyes',
         health: 20,
@@ -158,8 +216,11 @@ export const allEnemiesPool = [
         maxAttack: 8,
         experience: 12,
         world: 4,
-        image: '/images/enemies/world4/eyes.png'
-    },
+        image: '/images/enemies/world4/eyes.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Snow Wolf',
         health: 35,
@@ -167,8 +228,11 @@ export const allEnemiesPool = [
         maxAttack: 10,
         experience: 60,
         world: 5,
-        image: '/images/enemies/world5/iceWolf.png'
-    },
+        image: '/images/enemies/world5/iceWolf.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Frost Orc',
         health: 50,
@@ -176,8 +240,11 @@ export const allEnemiesPool = [
         maxAttack: 15,
         experience: 60,
         world: 5,
-        image: '/images/enemies/world5/iceOrc.png'
-    },
+        image: '/images/enemies/world5/iceOrc.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Cold Beast',
         health: 50,
@@ -185,8 +252,11 @@ export const allEnemiesPool = [
         maxAttack: 15,
         experience: 60,
         world: 5,
-        image: '/images/enemies/world5/coldBeast.png'
-    },
+        image: '/images/enemies/world5/coldBeast.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Ice Lizard',
         health: 50,
@@ -194,8 +264,11 @@ export const allEnemiesPool = [
         maxAttack: 15,
         experience: 60,
         world: 5,
-        image: '/images/enemies/world5/iceLizard.png'
-    },
+        image: '/images/enemies/world5/iceLizard.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Demon',
         health: 40,
@@ -203,8 +276,11 @@ export const allEnemiesPool = [
         maxAttack: 10,
         experience: 80,
         world: 6,
-        image: '/images/enemies/world6/demon.png'
-    },
+        image: '/images/enemies/world6/demon.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Fire Blob',
         health: 30,
@@ -212,8 +288,11 @@ export const allEnemiesPool = [
         maxAttack: 9,
         experience: 80,
         world: 6,
-        image: '/images/enemies/world6/fireBlob.png'
-    },
+        image: '/images/enemies/world6/fireBlob.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Lava Bird',
         health: 25,
@@ -221,8 +300,11 @@ export const allEnemiesPool = [
         maxAttack: 11,
         experience: 80,
         world: 6,
-        image: '/images/enemies/world6/lavaBird.png'
-    },
+        image: '/images/enemies/world6/lavaBird.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Hell Soul',
         health: 20,
@@ -230,8 +312,11 @@ export const allEnemiesPool = [
         maxAttack: 8,
         experience: 80,
         world: 6,
-        image: '/images/enemies/world6/soul.png'
-    },
+        image: '/images/enemies/world6/soul.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Disciple',
         health: 60,
@@ -239,8 +324,11 @@ export const allEnemiesPool = [
         maxAttack: 12,
         experience: 100,
         world: 7,
-        image: '/images/enemies/world7/disciple.png'
-    },
+        image: '/images/enemies/world7/disciple.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Mirage',
         health: 60,
@@ -248,8 +336,11 @@ export const allEnemiesPool = [
         maxAttack: 12,
         experience: 100,
         world: 7,
-        image: '/images/enemies/world7/shadow.png'
-    },
+        image: '/images/enemies/world7/shadow.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Shadow Sphere',
         health: 60,
@@ -257,8 +348,11 @@ export const allEnemiesPool = [
         maxAttack: 12,
         experience: 100,
         world: 7,
-        image: '/images/enemies/world7/shadowBall.png'
-    },
+        image: '/images/enemies/world7/shadowBall.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Wrath',
         health: 60,
@@ -266,8 +360,11 @@ export const allEnemiesPool = [
         maxAttack: 12,
         experience: 100,
         world: 7,
-        image: '/images/enemies/world7/wrath.png'
-    },
+        image: '/images/enemies/world7/wrath.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Agony',
         health: 80,
@@ -275,8 +372,11 @@ export const allEnemiesPool = [
         maxAttack: 15,
         experience: 100,
         world: 7,
-        image: '/images/enemies/world7/agony.png'
-    }
+        image: '/images/enemies/world7/agony.png',
+        status: {
+            name: null,
+            points: null
+        }    }
 ]
 
 export const allBossesPool = [
@@ -287,8 +387,11 @@ export const allBossesPool = [
         maxAttack: 10,
         experience: 40,
         world: 1,
-        image: '/images/bosses/world1/dragon.png'
-    },
+        image: '/images/bosses/world1/dragon.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Giant',
         health: 50,
@@ -296,8 +399,11 @@ export const allBossesPool = [
         maxAttack: 9,
         experience: 30,
         world: 1,
-        image: '/images/bosses/world1/giant.png'
-    },
+        image: '/images/bosses/world1/giant.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Pirate Queen',
         health: 100,
@@ -305,8 +411,11 @@ export const allBossesPool = [
         maxAttack: 14,
         experience: 60,
         world: 2,
-        image: '/images/bosses/world2/pirateQueen.png'
-    },
+        image: '/images/bosses/world2/pirateQueen.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Squid Lord',
         health: 100,
@@ -314,8 +423,11 @@ export const allBossesPool = [
         maxAttack: 14,
         experience: 60,
         world: 2,
-        image: '/images/bosses/world2/squidLord.png'
-    },
+        image: '/images/bosses/world2/squidLord.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'King Slime',
         health: 100,
@@ -323,8 +435,11 @@ export const allBossesPool = [
         maxAttack: 14,
         experience: 60,
         world: 3,
-        image: '/images/bosses/world3/kingSlime.png'
-    },
+        image: '/images/bosses/world3/kingSlime.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Cuddles',
         health: 100,
@@ -332,8 +447,11 @@ export const allBossesPool = [
         maxAttack: 14,
         experience: 60,
         world: 3,
-        image: '/images/bosses/world3/cuddles.png'
-    },
+        image: '/images/bosses/world3/cuddles.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'The Eye',
         health: 100,
@@ -341,8 +459,11 @@ export const allBossesPool = [
         maxAttack: 14,
         experience: 60,
         world: 4,
-        image: '/images/bosses/creepyEye.png'
-    },
+        image: '/images/bosses/creepyEye.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Abomination',
         health: 120,
@@ -350,8 +471,11 @@ export const allBossesPool = [
         maxAttack: 13,
         experience: 200,
         world: 4,
-        image: '/images/bosses/monster.png'
-    },
+        image: '/images/bosses/monster.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Ice Dancer',
         health: 150,
@@ -359,8 +483,11 @@ export const allBossesPool = [
         maxAttack: 20,
         experience: 300,
         world: 5,
-        image: '/images/bosses/iceDancer.png'
-    },
+        image: '/images/bosses/iceDancer.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Ice Golem',
         health: 150,
@@ -368,8 +495,11 @@ export const allBossesPool = [
         maxAttack: 21,
         experience: 300,
         world: 5,
-        image: '/images/bosses/iceGolem.png'
-    },
+        image: '/images/bosses/iceGolem.png',
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Blaze Dragon',
         health: 200,
@@ -377,8 +507,11 @@ export const allBossesPool = [
         maxAttack: 21,
         experience: 400,
         world: 6,
-        image: null
-    },
+        image: null,
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Magma Horror',
         health: 200,
@@ -386,8 +519,11 @@ export const allBossesPool = [
         maxAttack: 21,
         experience: 400,
         world: 6,
-        image: null
-    },
+        image: null,
+        status: {
+            name: null,
+            points: null
+        }    },
     {
         name: 'Oblivion',
         health: 300,
@@ -395,6 +531,9 @@ export const allBossesPool = [
         maxAttack: 25,
         experience: 500,
         world: 7,
-        image: '/images/bosses/finalBoss.png'
-    }
+        image: '/images/bosses/finalBoss.png',
+        status: {
+            name: null,
+            points: null
+        }    }
 ]
