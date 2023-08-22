@@ -32,6 +32,11 @@ interface Weapon {
     image: string;
   }
 
+  interface Status {
+    name: string | null;
+    points: number | null;
+  }
+
   export interface Potion {
     id: string;
     type: string;
@@ -55,6 +60,7 @@ interface Weapon {
     minAttack: number;
     maxAttack: number;
     defense: number;
+    status: Status;
     money: number;
     backpack: BackpackItem[];
     weapon: Weapon;
@@ -75,8 +81,12 @@ const heroSlice = createSlice({
         mana: 20,
         maxMana: 20,
         minAttack: 3,
-        maxAttack:5,
+        maxAttack: 5,
         defense: 0,
+        status: {
+            name: null,
+            points: null
+        },
         money: 0,
         backpack: [],
         weapon: {
@@ -121,6 +131,9 @@ const heroSlice = createSlice({
         },
         healToFull: (state) => {
             state.health = state.maxHealth
+        },
+        manaToFull: (state) => {
+            state.mana = state.maxMana
         },
         gainMaxHealth: (state, action) => {
             state.maxHealth += action.payload
@@ -214,8 +227,14 @@ const heroSlice = createSlice({
         setHeroIsAttacked: (state, action) => {
             state.heroIsAttacked = action.payload
         },
+        setHeroStatus: (state, action) => {
+            state.status = action.payload
+        },
+        setHeroStatusPoints: (state, action) => {
+            state.status.points += action.payload
+        }
     }
 })
 
-export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, removeItemFromBackpack, setMana, learnSpell} = heroSlice.actions;
+export const {heroTakeDamage, lowerMana, healToFull, takeTreasure, takeWeapon, equipWeapon, gainExperience, setExperienceToLevelUp, gainLevel, resetExperience, gainMaxHealth, gainMoney, resetHero, takeArmor, equipArmor, setHeroIsAttacked, raiseHeroHealth, buyItemForBackpack, gainAttack, gainDefense, gainMaxMana, raiseMana, removeItemFromBackpack, setMana, learnSpell, manaToFull, setHeroStatus, setHeroStatusPoints} = heroSlice.actions;
 export default heroSlice.reducer
