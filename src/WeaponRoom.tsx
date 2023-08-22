@@ -5,10 +5,9 @@ import { goToMapRoom, setInRoom } from './slices/roomSlice'
 import './WeaponRoom.css'
 import { setNewEquipment } from './slices/gameSlice'
 import { playSound } from './utilities'
-import equipmentAppears from '../public/sounds/equipmentAppears.mp3'
-import select from '../public/sounds/select.mp3'
 import { RootState } from './store'
 import { removeFromCurrentWeaponPool } from './slices/weaponsSlice'
+import soundsAndMusic from './audioUtils'
 
 interface Weapon {
   type: string;
@@ -28,7 +27,7 @@ const WeaponRoom = () => {
     dispatch(setInRoom(false))
     dispatch(setNewEquipment(true))
     dispatch(removeFromCurrentWeaponPool(currentWeapon))
-    playSound(select)
+    playSound(soundsAndMusic.selectSound)
   }
 
   useEffect(() => {
@@ -48,7 +47,7 @@ const WeaponRoom = () => {
       image: newWeapon.image
     }))
     setTimeout(() => {
-      playSound(equipmentAppears)
+      playSound(soundsAndMusic.equipmentAppearsSound)
       setWeaponAppearing(false)
     }, 1000);
   }, [])
