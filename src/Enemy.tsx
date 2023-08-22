@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { goToMapRoom, setInRoom } from './slices/roomSlice'
-import { enemyReset, enemyTakeDamage, setEnemyStatus, setEnemyStatusPoints, setEnemyType, setRandomEnemyDamage } from './slices/enemySlice'
+import { enemyReset, enemyTakeDamage, setEnemyStatusPoints, setEnemyType, setRandomEnemyDamage } from './slices/enemySlice'
 import { gainExperience, gainMoney, heroTakeDamage, setHeroStatusPoints} from './slices/heroSlice'
 import { addToBattleDialogue, setInBattle, setPlayerTurn } from './slices/battleSlice'
 import { RootState } from './store'
