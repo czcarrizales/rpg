@@ -2,6 +2,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { allEnemiesPool } from "../enemyPool";
 import { allBossesPool } from "../enemyPool";
 
+interface EnemyStatus {
+    name: string | null;
+    points: number | null;
+}
+
 interface Enemy {
     name: string | null;
     health: number | null;
@@ -10,6 +15,7 @@ interface Enemy {
     experience: number | null;
     world: number | null;
     image: string | null;
+    status: EnemyStatus | null;
 }
 
 const getRandomEnemy = (world: number) => {
@@ -42,7 +48,8 @@ const enemySlice = createSlice({
             maxAttack: null,
             experience: null,
             world: null,
-            image: null
+            image: null,
+            status: null
         } as Enemy,
         currentBoss: {
             name: null,
@@ -50,7 +57,11 @@ const enemySlice = createSlice({
             attack: null,
             experience: null,
             world: null,
-            image: null
+            image: null,
+            status: {
+                name: null,
+                points: null
+            }
         },
         enemyIsAttacked: false,
         bossIsAttacked: false,
@@ -79,11 +90,17 @@ const enemySlice = createSlice({
         },
         setRandomEnemyDamage: (state, action) => {
             state.randomEnemyDamage = action.payload
+        },
+        setEnemyStatus: (state, action) => {
+            state.currentEnemy.status = action.payload
+        },
+        setEnemyStatusPoints: (state, action) => {
+            state.currentEnemy.status!.points += action.payload
         }
     }
 })
 
 
 
-export const {enemyTakeDamage, enemyReset, setEnemyType, setBossType, setEnemyIsAttacked, setBossIsAttacked, setRandomEnemyDamage} = enemySlice.actions;
+export const {enemyTakeDamage, enemyReset, setEnemyType, setBossType, setEnemyIsAttacked, setBossIsAttacked, setRandomEnemyDamage, setEnemyStatus, setEnemyStatusPoints} = enemySlice.actions;
 export default enemySlice.reducer
