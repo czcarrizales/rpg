@@ -13,19 +13,27 @@ import monstrousMonstro from '../public/music/world/monstrousMonstro.mp3'
 import tensionRising from '../public/music/boss/tensionRising.mp3'
 import scherzo from '../public/music/world/scherzo.mp3'
 import the13thReflection from '../public/music/boss/the13thReflection.mp3'
+import equipmentAppears from '../public/sounds/equipmentAppears.mp3'
+import treasureAppears from '../public/sounds/treasureAppears.mp3'
 
-export const selectSound = new Audio(select)
-export const adventureMusic = new Audio(adventure)
-export const deamonsMusic = new Audio(daemons)
-export const boss1Music = new Audio(boss1)
-export const boss2Music = new Audio(boss2)
-export const lordOfTheCastleMusic = new Audio(lordOfTheCastle)
-export const theCorruptedMusic = new Audio(theCorrupted)
-export const edgeOfExistenceMusic = new Audio(edgeOfExistence)
-export const danceToTheDeathMusic = new Audio(danceToTheDeath)
-export const beachMusic = new Audio(beach)
-export const squirmingEvilMusic = new Audio(squirmingEvil)
-export const monstrousMonstroMusic = new Audio(monstrousMonstro)
-export const tensionRisingMusic = new Audio(tensionRising)
-export const scherzoMusic = new Audio(scherzo)
-export const the13thReflectionMusic = new Audio(the13thReflection)
+const soundsAndMusic = {
+    selectSound: new Audio(select),
+    adventureMusic:new Audio(adventure),
+    deamonsMusic: new Audio(daemons),
+    boss1Music: new Audio(boss1),
+    boss2Music: new Audio(boss2),
+    lordOfTheCastleMusic: new Audio(lordOfTheCastle),
+    theCorruptedMusic: new Audio(theCorrupted),
+    edgeOfExistenceMusic: new Audio(edgeOfExistence),
+    danceToTheDeathMusic: new Audio(danceToTheDeath),
+    beachMusic: new Audio(beach),
+    squirmingEvilMusic: new Audio(squirmingEvil),
+    monstrousMonstroMusic: new Audio(monstrousMonstro),
+    tensionRisingMusic: new Audio(tensionRising),
+    scherzoMusic: new Audio(scherzo),
+    the13thReflectionMusic: new Audio(the13thReflection),
+    equipmentAppearsSound: new Audio(equipmentAppears),
+    treasureAppearsSound: new Audio(treasureAppears)
+}
+
+export default soundsAndMusic
