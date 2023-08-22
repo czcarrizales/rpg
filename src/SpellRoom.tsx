@@ -1,39 +1,18 @@
 import { useEffect, useState } from "react"
 import './SpellRoom.css'
 import { Spell, learnSpell } from "./slices/heroSlice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { setInRoom } from "./slices/roomSlice"
 import spellAppears from '../public/sounds/spellAppears.mp3'
-import select from '../public/sounds/select.mp3'
 import { playSound } from "./utilities"
+import soundsAndMusic from "./audioUtils"
+import { RootState } from "./store"
+import { removeFromCurrentSpellPool } from "./slices/spellsSlice"
 
 const SpellRoom = () => {
   const dispatch = useDispatch()
   const [spellAppearing, setSpellAppearing] = useState(true)
-  const allSpells = [
-    {
-      type: 'HEAL',
-      name: 'Cure',
-      points: 20,
-      mana: 5,
-      image: '/images/spells/cure.png'
-    },
-    {
-      type: 'DAMAGE',
-      name: 'Fire',
-      points: 25,
-      mana: 5,
-      image: '/images/spells/fire.png'
-    },
-    {
-      type: 'DAMAGE',
-      name: 'Blizzard',
-      points: 10,
-      mana: 2,
-      image: '/images/spells/blizzard.png'
-    }
-  ]
-
+  const currentSpellPool = useSelector((state: RootState) => state.spells.currentSpellPool)
   const [randomSpell, setRandomSpell] = useState<Spell>({
     type: null,
     name: null,
@@ -43,14 +22,15 @@ const SpellRoom = () => {
   })
 
   const getRandomSpell = () => {
-    const randomIndex = Math.floor(Math.random() * allSpells.length)
-    setRandomSpell(allSpells[randomIndex])
+    const randomIndex = Math.floor(Math.random() * currentSpellPool.length)
+    setRandomSpell(currentSpellPool[randomIndex])
   }
 
   const handleLearnSpell = () => {
     dispatch(learnSpell(randomSpell))
     dispatch(setInRoom(false))
-    playSound(select)
+    dispatch(removeFromCurrentSpellPool(randomSpell))
+    playSound(soundsAndMusic.selectSound)
   }
 
   const playSpellAppearingSound = () => {
