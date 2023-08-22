@@ -3,10 +3,10 @@ import { setAfterBattle, setCurrentWorld, setLevelingUp } from "./slices/gameSli
 import './AfterBattle.css'
 import { useState } from "react"
 import { RootState } from "./store"
-import { gainAttack, gainDefense, gainMaxHealth, gainMaxMana, healToFull, resetExperience, setExperienceToLevelUp } from "./slices/heroSlice"
+import { gainAttack, gainDefense, gainMaxHealth, gainMaxMana, healToFull, manaToFull, resetExperience, setExperienceToLevelUp  } from "./slices/heroSlice"
 import { setBattleDialogueToEmpty } from "./slices/battleSlice"
 import { playSound } from "./utilities"
-import select from '../public/sounds/select.mp3'
+import soundsAndMusic from "./audioUtils"
 
 const AfterBattle = (props: any) => {
   const dispatch = useDispatch()
@@ -71,13 +71,14 @@ const AfterBattle = (props: any) => {
       dispatch(setAfterBattle(false))
       dispatch(setLevelingUp(false))
       dispatch(healToFull())
+      dispatch(manaToFull())
       dispatch(resetExperience())
       dispatch(setExperienceToLevelUp(heroStats.experienceToLevelUp + 10))
     } else {
       dispatch(setAfterBattle(false))
     }
     dispatch(setBattleDialogueToEmpty())
-    playSound(select)
+    playSound(soundsAndMusic.selectSound)
   }
 
   return (
