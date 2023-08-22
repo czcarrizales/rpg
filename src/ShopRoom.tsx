@@ -6,6 +6,7 @@ import { buyItemForBackpack } from './slices/heroSlice'
 import { useEffect } from 'react'
 import { removeFromShop, setInShop } from './slices/shopSlice'
 import shopAppears from '../public/sounds/shopAppears.mp3'
+import { playBuySound, playErrorSound, playSelectSound } from './utilities'
 const ShopRoom = () => {
   const dispatch = useDispatch()
   const shopItems = useSelector((state: RootState) => state.shop.shopItems)
@@ -14,11 +15,15 @@ const ShopRoom = () => {
     dispatch(goToMapRoom())
     dispatch(setInRoom(false))
     dispatch(setInShop(false))
+    playSelectSound()
   }
   const buyItem = (money: any, item: any) => {
     if (heroMoney - money >= 0) {
       dispatch(buyItemForBackpack({money: money, item: item}))
       dispatch(removeFromShop(item.id))
+      playBuySound()
+    } else {
+      playErrorSound()
     }
   }
 
@@ -31,6 +36,7 @@ const ShopRoom = () => {
   useEffect(() => {
     dispatch(setInShop(true))
     playSound()
+    console.log('playing sound')
   }, [])
   return (
     <div className='shop-room-container'>
