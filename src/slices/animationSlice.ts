@@ -5,7 +5,13 @@ const animationSlice = createSlice({
     initialState: {
         stopAnimation: false,
         healAnimation: false,
-        fireAnimation: false
+        fireAnimation: false,
+        blizzardAnimation: false,
+        thunderAnimation: false,
+        quakeAnimation: false,
+        poisonAnimation: false,
+        protectAnimation: false,
+
     },
     reducers: {
         setStopAnimation: (state, action) => {
@@ -16,9 +22,24 @@ const animationSlice = createSlice({
         },
         setFireAnimation: (state, action) => {
             state.fireAnimation = action.payload
+        },
+        setBlizzardAnimation: (state, action) => {
+            state.blizzardAnimation = action.payload
+        },
+        setThunderAnimation: (state, action) => {
+            state.thunderAnimation = action.payload
+        },
+        setQuakeAnimation: (state, action) => {
+            state.quakeAnimation = action.payload
+        },
+        setPoisonAnimation: (state, action) => {
+            state.poisonAnimation = action.payload
+        },
+        setProtectAnimation: (state, action) => {
+            state.protectAnimation = action.payload
         }
     }
 })
 
-export const {setStopAnimation, setHealAnimation, setFireAnimation} = animationSlice.actions;
+export const {setStopAnimation, setHealAnimation, setFireAnimation, setBlizzardAnimation, setThunderAnimation, setQuakeAnimation, setPoisonAnimation, setProtectAnimation} = animationSlice.actions;
 export default animationSlice.reducer
