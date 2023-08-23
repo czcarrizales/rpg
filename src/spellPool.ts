@@ -9,7 +9,7 @@ export const allSpellsPool = [
     {
       type: 'DAMAGE',
       name: 'Fire',
-      points: 25,
+      points: 15,
       mana: 5,
       image: '/images/spells/fire.png'
     },
@@ -35,7 +35,7 @@ export const allSpellsPool = [
         image: '/images/spells/quake.png'
     },
     {
-        type: 'STATUS',
+        type: 'ENEMYDEBUFF',
         name: 'Poison',
         mana: 5,
         points: 2,
@@ -49,7 +49,7 @@ export const allSpellsPool = [
         image: '/images/spells/protect.png'
     },
     {
-        type: 'STATUS',
+        type: 'ENEMYDEBUFF',
         name: 'Stop',
         mana: 1,
         points: 2,
