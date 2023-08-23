@@ -19,6 +19,7 @@ import { RootState } from './store'
 import ShopRoom from './ShopRoom'
 import { playSelectSound } from './utilities'
 import soundsAndMusic from './audioUtils'
+import { resetIdOnAllShopItems, restockShop } from './slices/shopSlice'
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
   const resettingGame = useSelector((state: RootState) => state.game.resettingGame)
   const playingMusic = useSelector((state: RootState) => state.game.playingMusic)
   const randomEncounterAnimation = useSelector((state: RootState) => state.game.randomEncounterAnimation)
+  const musicVolume = useSelector((state: RootState) => state.sounds.musicVolume)
   const [currentMusic, setCurrentMusic] = useState<any>(null)
   const dispatch = useDispatch()
   
@@ -61,7 +63,7 @@ function App() {
     const newAudio = new Audio(music)
     setCurrentMusic(newAudio)
     newAudio.loop = true;
-    newAudio.volume = 0.2
+    newAudio.volume = musicVolume
     newAudio.play()
   }
 
@@ -126,6 +128,8 @@ function App() {
     if (heroStats.health <= 0) {
       dispatch(setInRoom(false))
       dispatch(setGameOver(true))
+      dispatch(restockShop())
+      dispatch(resetIdOnAllShopItems())
     }
   }, [heroStats])
 
@@ -136,7 +140,19 @@ function App() {
     }
   }, [resettingGame])
 
+  useEffect(() => {
+    if (currentMusic) {
+      currentMusic.pause()
+    } else if (currentMusic) {
+      currentMusic.play()
+    }
+  }, [playingMusic])
 
+  useEffect(() => {
+    if (currentMusic) {
+      currentMusic.volume = musicVolume
+    }
+  }, [musicVolume])
 
   return (
     <div className='board'>
@@ -158,7 +174,7 @@ function App() {
                   {bossBattle ? <button onClick={handleShopRoom} id='map-shop-room-button' className='room-button'>Shop</button> : <RoomButton inRoom={inRoom} />}
                   <RoomButton inRoom={inRoom} />
                 </div>
-                <div className={`overlay ${randomEncounterAnimation && 'flash-white'} `}></div>
+                <div className={`overlay ${randomEncounterAnimation && 'flash-white'}`}></div>
               </>
             )
             :
