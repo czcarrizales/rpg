@@ -7,7 +7,7 @@ import Equipment from './Equipment'
 import Backpack from './Backpack'
 import { setInAnimation, setNewEquipment, setShowBackpack, setShowEquipment, setShowOptions, setShowSpells, setShowStats } from './slices/gameSlice'
 import Spells from './Spells'
-import { enemyTakeDamageFlash, playErrorSound, playSelectSound } from './utilities'
+import { enemyTakeDamageFlash, playAttackSound, playErrorSound, playSelectSound } from './utilities'
 import Stats from './Stats'
 import Options from './Options'
 
@@ -33,14 +33,12 @@ const Hero = () => {
   const showStats = useSelector((state: RootState) => state.game.showStats)
   const showOptions = useSelector((state: RootState) => state.game.showOptions)
   const newEquipment = useSelector((state: RootState) => state.game.newEquipment)
-  const playerAttackSound = useSelector((state: RootState) => state.sounds.playerAttackSound)
+  const animation = useSelector((state: RootState) => state.animation)
   const dispatch = useDispatch()
 
   const handleAttackEnemy = async ()  => {
     const randomHeroDamage = (Math.floor(Math.random() * (heroMaxAttack - heroMinAttack + 1)) + heroMinAttack) + heroWeapon.damage!
-    const audio = new Audio(playerAttackSound)
-    audio.volume = 0.3
-    audio.play()
+    playAttackSound()
     dispatch(setInAnimation(true))
     dispatch(enemyTakeDamage(randomHeroDamage))
     dispatch(addToBattleDialogue(`Hero attacked for ${randomHeroDamage} damage!`))
@@ -95,7 +93,7 @@ const Hero = () => {
   }
 
   return (
-    <div className={`hero-container ${heroIsAttacked ? 'hero-attacked' : ''}`}>
+    <div className={`hero-container ${animation.healAnimation ? 'heal-animation' : ''} ${heroIsAttacked ? 'hero-attacked' : ''}`}>
               <div id="hero-stats">
                   <div className="stats-grid">
                   <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>

@@ -1,4 +1,5 @@
 .hero-container {
+    position: relative;
     background: linear-gradient(180deg, hsla(229, 51%, 51%, 1) 2%, hsla(249, 84%, 7%, 1) 100%);
     border: 5px solid #fff;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
@@ -8,6 +9,18 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+}
+
+.hero-container.heal-animation::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent; /* Change the color and opacity as needed */
+    animation: healAnimation .4s ease-in-out;
+    z-index: 1; /* Place the overlay behind the content */
 }
 
 .hero-button {
@@ -84,3 +97,25 @@
         background-color: darkblue;
     }
 }
+
+@keyframes healAnimation {
+    0% {
+      background-color: rgba(13, 194, 22, 0.5);
+    }
+
+    25% {
+        background-color: rgba(6, 134, 17, 0.5);
+    }
+
+    50% {
+        background-color: rgba(13, 194, 22, 0.5);
+    }
+
+    75% {
+        background-color: rgba(6, 134, 17, 0.5);;
+    }
+
+    100% {
+        background-color: rgba(13, 194, 22, 0.5);
+    }
+  }
