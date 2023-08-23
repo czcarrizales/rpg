@@ -13,7 +13,7 @@ export const allEnemiesPool = [
         }
     },
     {
-        name: 'Goblin',
+        name: 'Mischievous Goblin',
         health: 20,
         minAttack: 1,
         maxAttack: 4,
@@ -26,7 +26,7 @@ export const allEnemiesPool = [
         }
     },
     {
-        name: 'Wolf',
+        name: 'Rabid Wolf',
         health: 20,
         minAttack: 3,
         maxAttack: 5,
@@ -39,7 +39,7 @@ export const allEnemiesPool = [
         }
     },
     {
-        name: 'Snake',
+        name: 'Venomous Snake',
         health: 15,
         minAttack: 2,
         maxAttack: 4,
@@ -52,7 +52,7 @@ export const allEnemiesPool = [
         }
     },
     {
-        name: 'Bird',
+        name: 'Hawk',
         health: 15,
         minAttack: 2,
         maxAttack: 4,
@@ -381,7 +381,7 @@ export const allEnemiesPool = [
 
 export const allBossesPool = [
     {
-        name: 'Dragon',
+        name: 'Vicious Dragon',
         health: 60,
         minAttack: 7,
         maxAttack: 10,
@@ -417,7 +417,7 @@ export const allBossesPool = [
             points: null
         }    },
     {
-        name: 'Squid Lord',
+        name: 'Lord of the Sea',
         health: 100,
         minAttack: 10,
         maxAttack: 14,
