@@ -25,8 +25,10 @@ const Enemy = () => {
     const heroDefense = useSelector((state: RootState) => state.hero.defense)
     const heroArmor = useSelector((state: RootState) => state.hero.armor)
     const heroStats = useSelector((state: RootState) => state.hero)
+    const animation = useSelector((state: RootState) => state.animation)
     const [enemyTypeSet, setEnemyTypeSet] = useState(false)
     const [randomMoney, setRandomMoney] = useState(0)
+
 
     const handleRandomMoney = (x: number) => {
         const min = 5;
@@ -134,11 +136,12 @@ const Enemy = () => {
     return (
         !afterBattle
         ?
-        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'sea-background'} ${currentWorld === 3 && 'weird-background'} ${currentWorld === 4 && 'scary-background'} ${currentWorld === 5 && 'snowy-background'} ${currentWorld === 6 && 'fire-background'} ${currentWorld === 7 && 'end-background'}`} >
+        <>
+        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'sea-background'} ${currentWorld === 3 && 'weird-background'} ${currentWorld === 4 && 'scary-background'} ${currentWorld === 5 && 'snowy-background'} ${currentWorld === 6 && 'fire-background'} ${currentWorld === 7 && 'end-background'} ${animation.stopAnimation ? 'stop-overlay' : ''} ${animation.fireAnimation ? 'fire-overlay' : ''}`} >
             <div>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
             <p className='enemy-health'>HP: {currentEnemy.health}</p>
-            {currentEnemy.status && <p>Status: {currentEnemy.status!.name!}</p>}
+            {currentEnemy.status?.name && <p>Status: {currentEnemy.status!.name!}</p>}
             </div>
             
             <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''}`} src={currentEnemy.image!} alt="" />
@@ -148,6 +151,7 @@ const Enemy = () => {
             {battleDialogue.map((text) => (<p>{text}</p>))}
             </div>
         </div>
+        </>
         :
         <AfterBattle name={currentEnemy.name} xp={currentEnemy.experience} money={randomMoney} />
     )
