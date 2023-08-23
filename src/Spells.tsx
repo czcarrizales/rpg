@@ -6,7 +6,7 @@ import { RootState } from './store'
 import { enemyTakeDamage, setEnemyStatus } from './slices/enemySlice'
 import { enemyTakeDamageFlash, playBlizzardSound, playErrorSound, playFireSound, playHealSound, playPoisonSound, playProtectSound, playQuakeSound, playSelectSound, playStopSound, playThunderSound } from './utilities'
 import { addToBattleDialogue, setPlayerTurn } from './slices/battleSlice'
-import { setFireAnimation, setHealAnimation, setStopAnimation } from './slices/animationSlice'
+import { setBlizzardAnimation, setFireAnimation, setHealAnimation, setProtectAnimation, setQuakeAnimation, setStopAnimation, setThunderAnimation } from './slices/animationSlice'
 
 const Spells = () => {
     const dispatch = useDispatch()
@@ -58,17 +58,26 @@ const Spells = () => {
             case 'DAMAGE':
                 if (heroStats.mana - spell.mana! >= 0) {
                     dispatch(setInAnimation(true))
-                    if(spell.name === 'Fire') {
-                        dispatch(setFireAnimation(true))
-                        playFireSound()
-                        await new Promise((resolve) => setTimeout(resolve, 500))
-                        dispatch(setFireAnimation(false))
+                    if (spell.name === 'Fire') {
+                        dispatch(setFireAnimation(true));
+                        playFireSound();
+                        await new Promise((resolve) => setTimeout(resolve, 500));
+                        dispatch(setFireAnimation(false));
                     } else if (spell.name === 'Quake') {
-                        playQuakeSound()
+                        dispatch(setQuakeAnimation(true));
+                        playQuakeSound();
+                        await new Promise((resolve) => setTimeout(resolve, 500));
+                        dispatch(setQuakeAnimation(false));
                     } else if (spell.name === 'Thunder') {
-                        playThunderSound()
+                        dispatch(setThunderAnimation(true));
+                        playThunderSound();
+                        await new Promise((resolve) => setTimeout(resolve, 500));
+                        dispatch(setThunderAnimation(false));
                     } else if (spell.name === 'Blizzard') {
-                        playBlizzardSound()
+                        dispatch(setBlizzardAnimation(true));
+                        playBlizzardSound();
+                        await new Promise((resolve) => setTimeout(resolve, 500));
+                        dispatch(setBlizzardAnimation(false));
                     }
                     handleAttackEnemy(spell.points!)
                     dispatch(lowerMana(spell.mana))
@@ -100,6 +109,9 @@ const Spells = () => {
                 if (heroStats.mana - spell.mana! >= 0) {
                     if (spell.name === 'Protect') {
                         playProtectSound()
+                        dispatch(setProtectAnimation(true))
+                        await new Promise((resolve) => setTimeout(resolve, 1000))
+                        dispatch(setProtectAnimation(false))
                     }
                     dispatch(lowerMana(spell.mana))
                     dispatch(setHeroStatus({name: spell.name, points: spell.points}))
