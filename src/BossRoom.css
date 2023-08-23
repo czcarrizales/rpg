@@ -1,5 +1,6 @@
 .boss-room-container {
     position: relative;
+    background-image: url('/images/backgrounds/forestEveningBackground.png');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -11,21 +12,79 @@
     justify-content: center;
     color: rgb(255, 255, 255);
     padding: 2rem;
-    animation: bossRoomAnimation infinite ease-in-out;
 }
 
-.boss-room-container::before {
+.boss-room-container.stop-overlay::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
-    width: 100px;
-    height: 100px;
-    /* Change the color and opacity as needed */
+    width: 100%;
+    height: 100%;
     background-color: transparent;
-    animation: bossRoomAnimation infinite ease-in-out;
+    /* Change the color and opacity as needed */
+    animation: stopAnimation .5s ease-in-out;
     z-index: 1;
-    border: 1px solid red;
+    /* Place the overlay behind the content */
+}
+
+.boss-room-container.fire-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: fireAnimation .5s ease-in-out;
+    z-index: 1;
+    /* Place the overlay behind the content */
+}
+
+.boss-room-container.thunder-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: thunderAnimation .5s ease-in-out;
+    z-index: 1;
+    /* Place the overlay behind the content */
+}
+
+.boss-room-container.blizzard-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: blizzardAnimation .5s ease-in-out;
+    z-index: 1;
+    /* Place the overlay behind the content */
+}
+
+.boss-room-container.quake-overlay {
+    animation: quakeAnimation .5s ease-in-out;
+}
+
+.boss-room-container.poison-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: poisonAnimation .5s ease-in-out;
+    z-index: 1;
     /* Place the overlay behind the content */
 }
 
@@ -52,13 +111,3 @@
     max-height: 140px;
 }
 
-@keyframes bossRoomAnimation {
-    0% {
-        background: red;
-    }
-
-    100% {
-        background: blue;
-    }
-
-}

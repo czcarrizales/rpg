@@ -1,8 +1,8 @@
 import  { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToBattleDialogue, setInBattle, setPlayerTurn } from './slices/battleSlice'
-import {  enemyReset, setBossType, setRandomEnemyDamage } from './slices/enemySlice'
-import { gainExperience, heroTakeDamage, setHeroIsAttacked } from './slices/heroSlice'
+import {  enemyReset, enemyTakeDamage, setBossType, setEnemyStatusPoints, setRandomEnemyDamage } from './slices/enemySlice'
+import { gainExperience, heroTakeDamage, setHeroIsAttacked, setHeroStatusPoints } from './slices/heroSlice'
 import { goToMapRoom, setBossBattle, setInRoom, setRandomRooms, setResettingRooms } from './slices/roomSlice'
 import {  setAfterBattle,  setGameOver } from './slices/gameSlice'
 import './BossRoom.css'
@@ -22,6 +22,8 @@ const BossRoom = () => {
   const afterBattle = useSelector((state: RootState) => state.game.afterBattle)
   const battleDialogue = useSelector((state: RootState) => state.battle.battleDialogue)
   const randomEnemyDamage = useSelector((state: RootState) => state.enemy.randomEnemyDamage)
+  const animation = useSelector((state: RootState) => state.animation)
+  const heroStats = useSelector((state: RootState) => state.hero)
   const [bossTypeSet, setBossTypeSet] = useState(false)
   const [randomMoney, setRandomMoney] = useState(0)
 
@@ -36,6 +38,30 @@ const handleRandomDamage = () => {
     const randomDamageNumber = Math.floor(Math.random() * (currentEnemy.maxAttack! - currentEnemy.minAttack! + 1)) + currentEnemy.minAttack!;
     return randomDamageNumber
 }
+
+const checkEnemyStatusEffect = () => {
+    if (currentEnemy.status?.name! === 'Stop' && currentEnemy.status?.points! > 0) {
+        dispatch(addToBattleDialogue(`${currentEnemy.name} is frozen and can not attack for ${currentEnemy.status?.points!} turn(s)!`))
+        dispatch(setPlayerTurn(true))
+        dispatch(setEnemyStatusPoints(-1))
+        return true
+    } else if (currentEnemy.status?.name! === 'Poison' && currentEnemy.status?.points! > 0) {
+        dispatch(enemyTakeDamage(10))
+        dispatch(addToBattleDialogue(`${currentEnemy.name} took 10 poison damage!`))
+        dispatch(setPlayerTurn(true))
+        dispatch(setEnemyStatusPoints(-1))
+    }
+}
+
+const checkHeroStatusEffect = () => {
+        if (heroStats.status.name === 'Protect' && heroStats.status.points! > 0) {
+            dispatch(addToBattleDialogue(`Hero has Protect! No damage taken!`))
+            dispatch(setPlayerTurn(true))
+            dispatch(setHeroStatusPoints(-1))
+            return true
+        }
+}
+
 useEffect(() => {
     dispatch(setBossType(currentWorld))
     setBossTypeSet(true)
@@ -80,6 +106,12 @@ useEffect(() => {
 
   useEffect(() => {
       if (battleTurn === false && currentEnemy.health > 0) {
+        if (checkEnemyStatusEffect()) {
+            return
+        }
+        if (checkHeroStatusEffect()) {
+            return
+        }
               dispatch(heroTakeDamage(randomEnemyDamage))
               dispatch(addToBattleDialogue(`${currentEnemy.name} attacked for ${randomEnemyDamage} damage!`))
               setTimeout(() => {
@@ -123,7 +155,7 @@ useEffect(() => {
   return (
     !afterBattle
     ?
-      <div className={`boss-room-container`}>
+      <div className={`boss-room-container ${animation.stopAnimation ? 'stop-overlay' : ''} ${animation.fireAnimation ? 'fire-overlay' : ''}  ${animation.thunderAnimation ? 'thunder-overlay' : ''} ${animation.poisonAnimation ? 'poison-overlay' : ''} ${animation.quakeAnimation ? 'quake-overlay' : ''} ${animation.blizzardAnimation ? 'blizzard-overlay' : ''}`}>
           <h1 className='boss-room-name'>{currentEnemy.name.toUpperCase()} (HP: {currentEnemy.health})</h1>
           <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''} boss-image`} src={currentEnemy.image} alt="" />
           <div className='boss-room-details'>
