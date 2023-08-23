@@ -5,6 +5,7 @@ interface Weapon {
     name: string | null;
     damage: number | null;
     image: string | undefined;
+    isNew: boolean | null;
   }
   
   interface Armor {
@@ -12,6 +13,7 @@ interface Weapon {
     name: string | null;
     defense: number | null;
     image: string | undefined;
+    isNew: boolean | null;
   }
   
   type EquipmentItem = Weapon | Armor;
@@ -93,13 +95,15 @@ const heroSlice = createSlice({
             type: null,
             name: null,
             damage: null,
-            image: undefined
+            image: undefined,
+            isNew: null
         },
         armor: {
             type: null,
             name: null,
             defense: null,
-            image: undefined
+            image: undefined,
+            isNew: null
         } ,
         equipment: [
 
@@ -153,6 +157,13 @@ const heroSlice = createSlice({
             }
             state.weapon = action.payload
             state.equipment = state.equipment.filter(item => item.name !== action.payload.name)
+        },
+        setEquipmentIsNew: (state, action) => {
+            const { itemName, isNew } = action.payload;
+            const equipmentItem = state.equipment.find(item => item.name === itemName);
+            if (equipmentItem) {
+              equipmentItem.isNew = isNew;
+            }
         },
         takeArmor: (state, action) => {
             state.equipment.push(action.payload)
@@ -214,13 +225,15 @@ const heroSlice = createSlice({
                 type: null,
                 name: null,
                 damage: null,
-                image: undefined
+                image: undefined,
+                isNew: null
             }
             state.armor = {
                 type: null,
                 name: null,
                 defense: null,
-                image: undefined
+                image: undefined,
+                isNew: null
             }
             state.equipment = []
             state.spells = []
