@@ -93,7 +93,7 @@ const Hero = () => {
   }
 
   return (
-    <div className={`hero-container ${animation.healAnimation ? 'heal-animation' : ''} ${heroIsAttacked ? 'hero-attacked' : ''}`}>
+    <div className={`hero-container ${animation.healAnimation ? 'heal-animation' : ''} ${animation.protectAnimation ? 'protect-animation' : ''} ${heroIsAttacked ? 'hero-attacked' : ''}`}>
               <div id="hero-stats">
                   <div className="stats-grid">
                   <p className='hero-health-stat'>Health: {heroHealth}/{heroMaxHealth}</p>
