@@ -507,7 +507,7 @@ export const allBossesPool = [
         maxAttack: 21,
         experience: 400,
         world: 6,
-        image: '/images/bosses/devilKnight.png',
+        image: '/images/bosses/world6/devilKnight.png',
         status: {
             name: null,
             points: null
@@ -519,7 +519,7 @@ export const allBossesPool = [
         maxAttack: 21,
         experience: 400,
         world: 6,
-        image: '/images/bosses/flameElemental.png',
+        image: '/images/bosses/world6/flameElemental.png',
         status: {
             name: null,
             points: null
