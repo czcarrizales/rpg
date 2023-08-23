@@ -155,7 +155,7 @@ useEffect(() => {
   return (
     !afterBattle
     ?
-      <div className={`boss-room-container ${animation.stopAnimation ? 'stop-overlay' : ''} ${animation.fireAnimation ? 'fire-overlay' : ''}  ${animation.thunderAnimation ? 'thunder-overlay' : ''} ${animation.poisonAnimation ? 'poison-overlay' : ''} ${animation.quakeAnimation ? 'quake-overlay' : ''} ${animation.blizzardAnimation ? 'blizzard-overlay' : ''}`}>
+      <div className={`boss-room-container boss-overlay ${animation.stopAnimation ? 'stop-overlay' : ''} ${animation.fireAnimation ? 'fire-overlay' : ''}  ${animation.thunderAnimation ? 'thunder-overlay' : ''} ${animation.poisonAnimation ? 'poison-overlay' : ''} ${animation.quakeAnimation ? 'quake-overlay' : ''} ${animation.blizzardAnimation ? 'blizzard-overlay' : ''}`}>
           <h1 className='boss-room-name'>{currentEnemy.name.toUpperCase()} (HP: {currentEnemy.health})</h1>
           <img className={`enemy-image ${enemyIsAttacked ? 'enemy-attacked':''} boss-image`} src={currentEnemy.image} alt="" />
           <div className='boss-room-details'>
