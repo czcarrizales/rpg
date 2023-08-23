@@ -35,56 +35,80 @@ const ArmorRoom = () => {
         name: 'wooden shield',
         defense: 2,
         world: 1,
-        image: '/images/armor/wooden-shield.png'
+        image: '/images/armor/wooden-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'bronze shield',
         defense: 4,
         world: 1,
-        image: '/images/armor/bronze-shield.png'
+        image: '/images/armor/bronze-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'iron shield',
         defense: 6,
         world: 2,
-        image: '/images/armor/iron-shield.png'
+        image: '/images/armor/iron-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'marble shield',
         defense: 8,
         world: 2,
-        image: '/images/armor/marble-shield.png'
+        image: '/images/armor/marble-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'obsidian shield',
         defense: 10,
         world: 3,
-        image: '/images/armor/obsidian-shield.png'
+        image: '/images/armor/obsidian-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'gold shield',
         defense: 12,
         world: 3,
-        image: '/images/armor/gold-shield.png'
+        image: '/images/armor/gold-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'gold shield',
         defense: 12,
         world: 4,
-        image: '/images/armor/gold-shield.png'
+        image: '/images/armor/gold-shield.png',
+        isNew: false
       },
       {
         type: 'armor',
         name: 'gold shield',
         defense: 12,
         world: 5,
-        image: '/images/armor/gold-shield.png'
+        image: '/images/armor/gold-shield.png',
+        isNew: false
+      },
+      {
+        type: 'armor',
+        name: 'gold shield',
+        defense: 12,
+        world: 6,
+        image: '/images/armor/gold-shield.png',
+        isNew: false
+      },
+      {
+        type: 'armor',
+        name: 'gold shield',
+        defense: 12,
+        world: 7,
+        image: '/images/armor/gold-shield.png',
+        isNew: false
       }
     ]
     const currentWorldArmorPool = randomArmor.filter(item => item.world == currentWorld)
