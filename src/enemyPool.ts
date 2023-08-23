@@ -501,25 +501,25 @@ export const allBossesPool = [
             points: null
         }    },
     {
-        name: 'Blaze Dragon',
+        name: 'Devil Knight',
         health: 200,
         minAttack: 18,
         maxAttack: 21,
         experience: 400,
         world: 6,
-        image: null,
+        image: '/images/bosses/devilKnight.png',
         status: {
             name: null,
             points: null
         }    },
     {
-        name: 'Magma Horror',
+        name: 'Flame Elemental',
         health: 200,
         minAttack: 18,
         maxAttack: 21,
         experience: 400,
         world: 6,
-        image: null,
+        image: '/images/bosses/flameElemental.png',
         status: {
             name: null,
             points: null
