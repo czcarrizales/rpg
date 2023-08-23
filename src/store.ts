@@ -8,6 +8,7 @@ import shopReducer from './slices/shopSlice'
 import soundsReducer from './slices/soundsSlice'
 import weaponsReducer from './slices/weaponsSlice'
 import spellsReducer from './slices/spellsSlice'
+import animationReducer from './slices/animationSlice'
 
 const store = configureStore({
     reducer: {
@@ -19,7 +20,8 @@ const store = configureStore({
         shop: shopReducer,
         sounds: soundsReducer,
         weapons: weaponsReducer,
-        spells: spellsReducer
+        spells: spellsReducer,
+        animation: animationReducer
     }
 })
 
