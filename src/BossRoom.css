@@ -1,5 +1,5 @@
 .boss-room-container {
-    background-image: url('/images/backgrounds/forestEveningBackground.png');
+    position: relative;
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -11,6 +11,22 @@
     justify-content: center;
     color: rgb(255, 255, 255);
     padding: 2rem;
+    animation: bossRoomAnimation infinite ease-in-out;
+}
+
+.boss-room-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    /* Change the color and opacity as needed */
+    background-color: transparent;
+    animation: bossRoomAnimation infinite ease-in-out;
+    z-index: 1;
+    border: 1px solid red;
+    /* Place the overlay behind the content */
 }
 
 .boss-room-name {
@@ -29,8 +45,20 @@
     padding: 8px;
     overflow-y: auto;
     line-height: 1.5;
+    min-height: 80px;
 }
 
 .boss-image {
-    max-width: 160px;
+    max-height: 140px;
+}
+
+@keyframes bossRoomAnimation {
+    0% {
+        background: red;
+    }
+
+    100% {
+        background: blue;
+    }
+
 }
