@@ -137,7 +137,7 @@ const Enemy = () => {
         !afterBattle
         ?
         <>
-        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'sea-background'} ${currentWorld === 3 && 'weird-background'} ${currentWorld === 4 && 'scary-background'} ${currentWorld === 5 && 'snowy-background'} ${currentWorld === 6 && 'fire-background'} ${currentWorld === 7 && 'end-background'} ${animation.stopAnimation ? 'stop-overlay' : ''} ${animation.fireAnimation ? 'fire-overlay' : ''}`} >
+        <div className={`enemy-container ${currentWorld === 1 && 'world-1-enemy-background'} ${currentWorld === 2 && 'sea-background'} ${currentWorld === 3 && 'weird-background'} ${currentWorld === 4 && 'scary-background'} ${currentWorld === 5 && 'snowy-background'} ${currentWorld === 6 && 'fire-background'} ${currentWorld === 7 && 'end-background'} ${animation.stopAnimation ? 'stop-overlay' : ''} ${animation.fireAnimation ? 'fire-overlay' : ''}  ${animation.thunderAnimation ? 'thunder-overlay' : ''} ${animation.poisonAnimation ? 'poison-overlay' : ''} ${animation.quakeAnimation ? 'quake-overlay' : ''} ${animation.blizzardAnimation ? 'blizzard-overlay' : ''}`} >
             <div>
             <h1 className='enemy-name'>{currentEnemy.name?.toUpperCase()}</h1>
             <p className='enemy-health'>HP: {currentEnemy.health}</p>

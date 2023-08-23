@@ -50,7 +50,7 @@
     height: 100%;
     background-color: transparent;
     /* Change the color and opacity as needed */
-    animation: stopAnimation 1s ease-in-out;
+    animation: stopAnimation .5s ease-in-out;
     z-index: 1;
     /* Place the overlay behind the content */
 }
@@ -65,6 +65,52 @@
     background-color: transparent;
     /* Change the color and opacity as needed */
     animation: fireAnimation .5s ease-in-out;
+    z-index: 1;
+    /* Place the overlay behind the content */
+}
+
+.enemy-container.thunder-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: thunderAnimation .5s ease-in-out;
+    z-index: 1;
+    /* Place the overlay behind the content */
+}
+
+.enemy-container.blizzard-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: blizzardAnimation .5s ease-in-out;
+    z-index: 1;
+    /* Place the overlay behind the content */
+}
+
+.enemy-container.quake-overlay {
+    animation: quakeAnimation 1.5s steps(5) forwards;
+}
+
+.enemy-container.poison-overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    /* Change the color and opacity as needed */
+    animation: poisonAnimation .5s ease-in-out;
     z-index: 1;
     /* Place the overlay behind the content */
 }
@@ -149,5 +195,117 @@
 
     100% {
         background-color: rgba(247, 71, 17, 0.5);
+    }
+}
+
+@keyframes blizzardAnimation {
+    0% {
+        background-color: rgba(200, 220, 255, 0.7); /* Pale blue with high opacity */
+    }
+
+    25% {
+        background-color: rgba(150, 190, 255, 0.7); /* Lighter blue with high opacity */
+    }
+
+    50% {
+        background-color: rgba(120, 170, 255, 0.7); /* Icy blue with high opacity */
+    }
+
+    75% {
+        background-color: rgba(150, 190, 255, 0.7); /* Lighter blue with high opacity */
+    }
+
+    100% {
+        background-color: rgba(200, 220, 255, 0.7); /* Pale blue with high opacity */
+    }
+}
+
+@keyframes thunderAnimation {
+    0% {
+        background-color: rgba(255, 255, 100, 0.5); /* Yellow */
+    }
+
+    25% {
+        background-color: rgba(255, 255, 100, 0.1); /* Faint yellow */
+    }
+
+    50% {
+        background-color: rgba(255, 255, 100, 0.5); /* Yellow */
+    }
+
+    75% {
+        background-color: rgba(255, 255, 100, 0.1); /* Faint yellow */
+    }
+
+    100% {
+        background-color: rgba(255, 255, 100, 0.5); /* Yellow */
+    }
+}
+
+@keyframes quakeAnimation {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-8px, -8px);
+    }
+
+    20% {
+        transform: translate(8px, 8px);
+    }
+
+    30% {
+        transform: translate(-8px, -8px);
+    }
+
+    40% {
+        transform: translate(8px, 8px);
+    }
+
+    50% {
+        transform: translate(-8px, -8px);
+    }
+
+    60% {
+        transform: translate(8px, 8px);
+    }
+
+    70% {
+        transform: translate(-8px, -8px);
+    }
+
+    80% {
+        transform: translate(8px, 8px);
+    }
+
+    90% {
+        transform: translate(-8px, -8px);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes poisonAnimation {
+    0% {
+        background-color: rgba(0, 128, 0, 0.7); /* Dark green with high opacity */
+    }
+
+    25% {
+        background-color: rgba(0, 64, 0, 0.7); /* Deeper dark green with high opacity */
+    }
+
+    50% {
+        background-color: rgba(0, 128, 0, 0.7); /* Dark green with high opacity */
+    }
+
+    75% {
+        background-color: rgba(0, 64, 0, 0.7); /* Deeper dark green with high opacity */
+    }
+
+    100% {
+        background-color: rgba(0, 128, 0, 0.7); /* Dark green with high opacity */
     }
 }
