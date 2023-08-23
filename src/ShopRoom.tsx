@@ -47,7 +47,7 @@ const ShopRoom = () => {
             <img className='shop-item-image' src={item.image} alt="" />
             <p>{item.name}</p>
             <p>Cost: {item.money}</p>
-            <button className='take-button' onClick={() => buyItem(item.money, item)}>Buy</button>
+            <button className='take-button shop-buy-button' onClick={() => buyItem(item.money, item)}>Buy</button>
             </div>
         ))}
     </div>

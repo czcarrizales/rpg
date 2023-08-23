@@ -15,4 +15,10 @@
 
 .shop-item-image {
     width: 32px;
+    margin-right: 4px;
+}
+
+.shop-buy-button {
+    margin: 0;
+    margin-left: 4px;
 }
